@@ -13,7 +13,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?= $this->config->item('nama_aplikasi')?> | Dashboard</title>
+  <title><?= $this->config->item('nama_aplikasi')?> | <?=$title?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -106,13 +106,16 @@
 	var url2 = get_url[5];
 	var url3 = get_url[6];
 	console.log(url+","+url2+","+url3);
+  
   //route
   url2 = url2.replace("#","");
-	if (url2 == "portfolio") {
-		pagination("datatabel", base_url+"/admin/portfolio/getdata", []);
-	} else if (url2 == "pengguna") {
+	if (url2 == "pengguna") {
 		pagination("datatabel", base_url+"/admin/pengguna/getdata", []);
-  }
+  }else if (url2 == "blog") {
+		pagination("datatabel", base_url+"/admin/blog/getdata", []);
+	}else if (url2 == "blog-kategori") {
+		pagination("datatabel", base_url+"/admin/kategori/getdata", []);
+	} 
   
   function pagination(indentifier, url, config) {
     $('#'+indentifier).DataTable({

@@ -7,7 +7,7 @@
 
     });
 
-    $('#f_portfolio').submit(function(e){
+    $('#f_blog').submit(function(e){
         e.preventDefault();
         
         var table = $('#datatabel').DataTable();
@@ -17,7 +17,7 @@
         var fd = new FormData(this);
         fd.append('cDeskripsi',cDeskripsi);
         $.ajax({
-            url:'<?php echo base_url();?>/admin/portfolio/save',
+            url:'<?php echo base_url();?>/admin/blog/save',
             type:"post",
             data:fd,
             processData:false,
@@ -25,7 +25,7 @@
             cache:false,
             async:false,
             success: function(data){
-                $("#modalPortfolio").modal('hide');
+                $("#modalBlog").modal('hide');
                 table.ajax.reload();
         }
         });
@@ -35,7 +35,7 @@
         var table = $('#datatabel').DataTable();
         e.preventDefault(); 
         $.ajax({
-            url:'<?php echo base_url();?>/admin/portfolio/delete',
+            url:'<?php echo base_url();?>/admin/blog/delete',
             type:"post",
             data:new FormData(this),
             processData:false,
@@ -49,11 +49,11 @@
         });
     }); 
 
-    function portfolio_edit(id) {
-        $("#modalPortfolio").modal('show');
+    function blog_edit(id) {
+        $("#modalBlog").modal('show');
         $.ajax({
         type: "GET",
-        url: base_url+"admin/portfolio/detail/"+id,
+        url: base_url+"admin/blog/detail/"+id,
         success: function(data) {
             $("#nID").val(data.ID);
             $("#cJudul").val(data.Judul);
@@ -64,11 +64,11 @@
         return false;
     }
 
-    function portfolio_hapus(id){
+    function blog_hapus(id){
         $("#modalHapus").modal('show');
         $.ajax({
         type: "GET",
-        url: base_url+"admin/portfolio/detail/"+id,
+        url: base_url+"admin/blog/detail/"+id,
         success: function(data) {
             console.log(data);            
             $("#nIDHapus").val(data.ID);

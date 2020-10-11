@@ -1,21 +1,21 @@
 <?php
-class Portfolio extends CI_Controller{
+class Blog extends CI_Controller{
     function __construct(){
 		parent::__construct();
 		if($this->session->userdata('masuk') !=TRUE){
             $url=base_url('administrator');
             redirect($url);
         };
-		$this->load->model('Portfolio_model');
+		$this->load->model('Blog_model');
 		$this->load->library('upload');
     }
     
     public function index()
     {
-        // $a['vaData'] = $this->Portfolio_model->getAllPortfolio();
-        $a['p']          = 'portfolio/v_portfolio';
-        $a['title']      = "Portfolio";
-        $a['vaKategori'] = $this->Portfolio_model->getAllKategoriPortfolio();
+        // $a['vaData'] = $this->blog_model->getAllblog();
+        $a['p']          = 'blog/v_blog';
+        $a['title']      = "Blog";
+        $a['vaKategori'] = $this->Blog_model->getAllKategoriBlog();
         $this->load->view('admin/index',$a);
     }
 
@@ -27,7 +27,7 @@ class Portfolio extends CI_Controller{
         $cDraw      = $va['draw'];
         $cSearch    = $va['search'];
 
-        $vaData = $this->Portfolio_model->getDataPortfolio($nStart,$nLength,$cDraw,$cSearch);
+        $vaData = $this->Blog_model->getDataBlog($nStart,$nLength,$cDraw,$cSearch);
         // print_r($vaData);
         // exit;
         $data = array();
@@ -35,13 +35,13 @@ class Portfolio extends CI_Controller{
         foreach ($vaData['data'] as $d) {
             $data_ok = array();
             $data_ok[] = $no++;
+            $data_ok[] = "<img src=".base_url().'assets/images/blog/'.$d['Image']." style='width:100px;height:100px'>";
             $data_ok[] = $d['Judul'];
             $data_ok[] = $d['Deskripsi'];
-            $data_ok[] = "<img src=".base_url().'assets/images/portfolio/'.$d['Foto']." style='width:300px;'>";
             $data_ok[] = $d['Kategori'];
             $data_ok[] = '<div class="btn-group">
-                      <a href="#" onclick="return portfolio_edit('.$d['ID'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
-                      <a href="#" onclick="return portfolio_hapus('.$d['ID'].');" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
+                      <a href="#" onclick="return blog_edit('.$d['ID'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
+                      <a href="#" onclick="return blog_hapus('.$d['ID'].');" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
                      ';
      	   $data[] = $data_ok;
         }
@@ -62,7 +62,7 @@ class Portfolio extends CI_Controller{
         $uri4 = $this->uri->segment(4);
         $id   = $uri4;
         $data = array();
-        $vaData = $this->Portfolio_model->getDetailPortfolio($id);
+        $vaData = $this->Blog_model->getDetailBlog($id);
         if(count($vaData) > 0){
             $data=$vaData;
         }
@@ -76,7 +76,7 @@ class Portfolio extends CI_Controller{
         $cJudul      = $va['cJudul'];
         $cDeskripsi  = $va['cDeskripsi'];
         $optKategori = $va['optKategori'];
-        $config['upload_path'] = './assets/images/portfolio/'; //path folder
+        $config['upload_path'] = './assets/images/blog/'; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
         $cGambar     = "";
@@ -86,7 +86,7 @@ class Portfolio extends CI_Controller{
                     $gbr = $this->upload->data();
                     //Compress Image
                     $config['image_library']='gd2';
-                    $config['source_image']='./assets/images/portfolio/'.$gbr['file_name'];
+                    $config['source_image']='./assets/images/blog/'.$gbr['file_name'];
                     $config['create_thumb']= FALSE;
                     $config['maintain_ratio']= FALSE;
                     $config['quality']= '60%';
@@ -99,22 +99,22 @@ class Portfolio extends CI_Controller{
                     $cGambar    = $gbr['file_name'];
             }else{
                 echo $this->session->set_flashdata('msg','warning');
-                redirect('admin/portfolio');
+                redirect('admin/blog');
             }
         }
-        $this->Portfolio_model->save($cJudul,$cDeskripsi,$optKategori,$cGambar,$nID);
+        $this->Blog_model->save($cJudul,$cDeskripsi,$optKategori,$cGambar,$nID);
         echo $this->session->set_flashdata('msg','success');
-        redirect('admin/portfolio');
+        // redirect('admin/Blog');
     
     }
 
     public function delete(){
         $nID    = $this->input->post('nIDHapus');
-        $vaData = $this->Portfolio_model->getDetailPortfolio($nID);
+        $vaData = $this->Blog_model->getDetailBlog($nID);
         $cFoto  = $vaData['Foto'];
-        $cPath   = base_url().'assets/images/portfolio/'.$cFoto;
+        $cPath   = base_url().'assets/images/blog/'.$cFoto;
         delete_files($cPath);
-        $this->Portfolio_model->delete($nID);
+        $this->Blog_model->delete($nID);
         echo $this->session->set_flashdata('msg','success-hapus');
         
     }
