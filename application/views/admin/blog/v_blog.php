@@ -1,13 +1,13 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
       <h1>
-        Data Portfolio
+        Data Postingan
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Portfolio</a></li>
-        <li class="active">Data Portfolio</li>
+        <li><a href="#">Blog</a></li>
+        <li class="active">Data Postingan</li>
       </ol>
     </section>
 
@@ -19,7 +19,7 @@
 
           <div class="box">
             <div class="box-header">
-              <a class="btn btn-success btn-flat" onclick="portfolio_edit(0)"><span class="fa fa-user-plus"></span> Add Portfolio</a>
+              <a class="btn btn-success btn-flat" onclick="blog_edit(0)"><span class="fa fa-user-plus"></span> Tambah Postingan</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -27,9 +27,9 @@
                 <thead>
                 <tr>
                     <th>No</th>
+                    <th>Foto</th>
                     <th>Judul</th>
                     <th>Deskripsi</th>
-                    <th>Foto</th>
                     <th>Kategori</th>
                     <th style="text-align:center;">Aksi</th>
                 </tr>
@@ -50,14 +50,14 @@
 
     
 
-    <div class="modal fade" id="modalPortfolio" tabindex="-1" role="dialog" aria-labelledby="modalPortfolioLabel">
+    <div class="modal fade" id="modalBlog" tabindex="-1" role="dialog" aria-labelledby="modalBlogLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                    <h4 class="modal-title" id="modalPortfolioLabel">Add/Edit Portfolio</h4>
+                    <h4 class="modal-title" id="modalBlogLabel">Add/Edit Postingan</h4>
                 </div>
-                <form class="form-horizontal" method="post" id="f_portfolio">
+                <form class="form-horizontal" method="post" id="f_blog">
                 <div class="modal-body">
                     <input type="hidden" id="nID" name="nID" value="0">
                     <input type="hidden" id="cTipe">
@@ -117,7 +117,7 @@
                 <form class="form-horizontal" method="post" id="f_submit_hapus">
                 <div class="modal-body">
                         <input type="hidden" id="nIDHapus" name="nIDHapus" value="0"/>
-                        <p>Apakah Anda yakin mau menghapus Portfolio <b><span id="cJudulHapus"></span></b> ?</p>
+                        <p>Apakah Anda yakin mau menghapus Blog <b><span id="cJudulHapus"></span></b> ?</p>
 
                 </div>
                 <div class="modal-footer">
