@@ -1,13 +1,6 @@
 <?php
 class Blog_model extends CI_Model{
 	public function __construct() {
-<<<<<<< HEAD
-        parent::__construct();
-        $this->load->model('FuncDB_model');
-        $this->dbd = $this->FuncDB_model;
-    }
-
-=======
       parent::__construct();
       $this->load->model('FuncDB_model');
       $this->dbd = $this->FuncDB_model;
@@ -93,5 +86,4 @@ class Blog_model extends CI_Model{
 		$dbd = $this->dbd->delete("tbl_blog","ID='$nID'");
 		return $dbd;
 	}
->>>>>>> cecd6c64f515f10aa1fa03b52730532a739ca14d
 }
