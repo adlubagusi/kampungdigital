@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="<?=base_url()?>template/vendors/owl-carousel/owl.carousel.min.css">
 
   <link rel="stylesheet" href="<?=base_url()?>template/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
 </head>
 <body>
   <!--================Header Menu Area =================-->
@@ -28,12 +31,22 @@
   <!--================ Start Footer Area =================-->
   <?php $this->load->view('frontend/v_footer');?>
   <!--================ End Footer Area =================-->
-
   <script src="<?=base_url()?>template/vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="<?=base_url()?>template/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="<?=base_url()?>template/vendors/owl-carousel/owl.carousel.min.js"></script>
   <script src="<?=base_url()?>template/js/jquery.ajaxchimp.min.js"></script>
   <script src="<?=base_url()?>template/js/mail-script.js"></script>
   <script src="<?=base_url()?>template/js/main.js"></script>
+  <script>
+    var base_url = '<?=base_url()?>';
+  </script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+  <script src="<?=base_url()?>assets/plugins/leaflet/leaflet.ajax.js"></script>
+   <?php 
+    //load javascript
+    $this->load->view($p."-js",$a);    
+?>
 </body>
 </html>

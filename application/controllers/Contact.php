@@ -11,7 +11,6 @@ class Contact extends CI_Controller{
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
 		$a['cAbout_Deskripsi'] = getCfg("msAboutUs_Deskripsi");
 		$a['p']				   = 'frontend/contact/v_contact';
-		$a['js']			   = 'frontend/contact/v_contact-js';
 		$this->load->view('frontend/v_index', $a);
 	}
 	public function sendMail()
