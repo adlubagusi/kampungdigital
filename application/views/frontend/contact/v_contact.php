@@ -16,7 +16,7 @@
             {elementType: 'labels.text.fill', stylers: [{color: '#A3A3A3'}]}
           ];
           var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -31.197, lng: 150.744},
+            center: {lat: -7.9615524, lng: 112.6087305},
             zoom: 9,
             styles: grayStyles,
             scrollwheel:  false

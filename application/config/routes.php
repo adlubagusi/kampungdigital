@@ -53,5 +53,6 @@ $route['default_controller'] = 'Home';
 $route['administrator']      = 'admin/Login';
 $route['admin/logout']       = 'admin/login/logout';
 $route['admin/blog-kategori']= 'admin/kategori';
+$route['admin/suratmasuk-list']    = 'admin/suratmasuk';
 $route['404_override']       = '';
 $route['translate_uri_dashes'] = FALSE;

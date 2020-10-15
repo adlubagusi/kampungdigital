@@ -1,10 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['nama_aplikasi'] = "Banatech";
-$config['nama_aplikasi_mini'] = "BTID";
-$config['lokasi'] = "Indonesia";
+$config['nama_aplikasi'] = "Kampung Digital";
+$config['nama_aplikasi_mini'] = "KD";
+$config['lokasi'] = "";
 $config['copyright'] = "Banatech Indonesia";
+$config['upload_dokumen_dir'] = "assets/doc/";
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
