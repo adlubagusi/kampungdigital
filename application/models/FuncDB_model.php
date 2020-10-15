@@ -129,11 +129,11 @@ class FuncDB_model extends CI_Model{
 	}
 
 	public function saveconfig($key, $val=''){
-		$this->update("sys_config", array("title"=>$key, "val"=>$val), "title = " . $this->escape($key), "id") ;
+		$this->update("tbl_config", array("Kode"=>$key, "Keterangan"=>$val), "Kode = " . $this->escape($key), "id") ;
 	}
 
 	public function getconfig($key){
-		return $this->getval('val', "title = ". $this->escape($key), "sys_config") ;
+		return $this->getval('Keterangan', "Kode = ". $this->escape($key), "tbl_config") ;
 	}
 
 	public function getincrement($k,$l=true,$n=0 ){
@@ -209,6 +209,31 @@ class FuncDB_model extends CI_Model{
 				PRIMARY KEY (`ID`)
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_inbox',$cSQL);
+
+		$cSQL = "CREATE TABLE `tbl_surat_masuk` (
+			`ID` int(9) NOT NULL AUTO_INCREMENT,
+			`Kode` varchar(255) DEFAULT NULL,
+			`NoSurat` varchar(255) DEFAULT NULL,
+			`Dari` varchar(255) DEFAULT NULL,
+			`Disposisi` text,
+			`Tgl` date DEFAULT NULL,
+			`UserName` varchar(255) DEFAULT NULL,
+			`DateTime` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+			`Perihal` varchar(255) DEFAULT '',
+			`Deskripsi` text,
+			PRIMARY KEY (`ID`)
+		   ) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1";
+		$this->AddTable('tbl_surat_masuk',$cSQL);
+		
+		$cSQL = "CREATE TABLE `tbl_surat_masuk_file` (
+			`ID` int(9) NOT NULL AUTO_INCREMENT,
+			`Kode` varchar(255) DEFAULT NULL,
+			`FilePath` text,
+			`UserName` varchar(255) DEFAULT NULL,
+			`DateTime` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+			PRIMARY KEY (`ID`) USING BTREE
+		   ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1";
+		$this->AddTable('tbl_surat_masuk_file',$cSQL);
     }
 }
 ?>
