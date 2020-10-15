@@ -31,7 +31,8 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/skins/_all-skins.min.css'?>">
-
+  <script src="<?php echo base_url().'assets/plugins/sweetalert2/dist/sweetalert2.min.js'?>"></script>
+  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/sweetalert2/dist/sweetalert2.min.css'?>">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -115,7 +116,9 @@
 		pagination("datatabel", base_url+"/admin/blog/getdata", []);
 	}else if (url2 == "blog-kategori") {
 		pagination("datatabel", base_url+"/admin/kategori/getdata", []);
-	} 
+	}else if (url2 == "suratmasuk-list") {
+		pagination("datatabel", base_url+"/admin/suratmasuk/getdata", []);
+	}
   
   function pagination(indentifier, url, config) {
     $('#'+indentifier).DataTable({

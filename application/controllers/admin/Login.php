@@ -17,20 +17,19 @@ class Login extends CI_Controller{
         if(count($vaAdmin) > 0){
             $this->session->set_userdata('masuk',true);
             $this->session->set_userdata('user',$cUserName);
+            
+            $cIdAdmin   = $vaAdmin['pengguna_id'];
+            $cNamaUser  = $vaAdmin['pengguna_nama'];
+            $cUser      = $vaAdmin['pengguna_username'];
+            $this->session->set_userdata('idadmin',$cIdAdmin);
+            $this->session->set_userdata('nama',$cNamaUser);
+            $this->session->set_userdata('username',$cUser);
             if($vaAdmin['pengguna_level']=='1'){
                 $this->dbd->CheckDatabase();
                 $this->session->set_userdata('akses','1');
-                $cIdAdmin    = $vaAdmin['pengguna_id'];
-                $cNamaUser  = $vaAdmin['pengguna_nama'];
-                $this->session->set_userdata('idadmin',$cIdAdmin);
-                $this->session->set_userdata('nama',$cNamaUser);
                 redirect('admin/dashboard');
             }else{
                 $this->session->set_userdata('akses','2');
-                $cIdAdmin    = $vaAdmin['pengguna_id'];
-                $cNamaUser  = $vaAdmin['pengguna_nama'];
-                $this->session->set_userdata('idadmin',$cIdAdmin);
-                $this->session->set_userdata('nama',$cNamaUser);
                 redirect('admin/dashboard');
             }
 

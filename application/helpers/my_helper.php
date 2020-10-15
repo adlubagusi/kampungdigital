@@ -51,6 +51,9 @@ function gen_menu_admin(){
   $menu = array(
       ["icon"=>"fa-home", "url"=>"dashboard", "text"=>"Dashboard"], //menu biasa
       ["icon"=>"fa-users", "url"=>"pengguna", "text"=>"Pengguna"],
+      ["icon"=>"fa-envelope", "url"=>"suratmasuk", "text"=>"Surat Masuk", "submenu"=>[            
+        ["icon"=>"fa-envelope-o", "url"=>"suratmasuk-list", "text"=>"List Surat Masuk"]  
+      ]],                                                                       
       ["icon"=>"fa-newspaper-o", "url"=>"blog", "text"=>"Blog", "submenu"=>[      //menu spesial    
           ["icon"=>"fa-list", "url"=>"blog", "text"=>"List Postingan"], //
           ["icon"=>"fa-wrench", "url"=>"blog-kategori", "text"=>"Kategori"] //
@@ -80,7 +83,8 @@ function gen_menu_admin(){
             <span>'.$cText.'</span>';
     echo '  <span class="pull-right-container">
               '.$cIconRight.'
-            </span>';        
+            </span>';                  
+    echo '  </a>';
     if(isset($m['submenu'])){
       $vaSubmenu = $m['submenu'];
       echo '<ul class="treeview-menu">';
@@ -89,7 +93,6 @@ function gen_menu_admin(){
       }
       echo '</ul>';
     }      
-    echo '</a>';
     echo '</li>';
   }
 }
@@ -106,5 +109,35 @@ function getCfg($cKode,$cDefault=""){
 
 function saveCfg($cKode,$cKeterangan){
   $CI 	=& get_instance();
-  $dbd  = $CI->db->query("UPDATE tbl_config SET Keterangan='$cKeterangan' WHERE Kode='$cKode'");  
+  $dbData = $CI->db->query("SELECT * FROM tbl_config WHERE Kode='$cKode'");
+  if($dbRow = $dbData->row()){
+    $dbd  = $CI->db->query("UPDATE tbl_config SET Keterangan='$cKeterangan' WHERE Kode='$cKode'"); 
+  }else{
+    $dbd  = $CI->db->query("INSERT INTO tbl_config Kode, Keterangan VALUES('$cKode',$cKeterangan)"); 
+  }
+   
+}
+
+function savesession($cKey, $cVal)
+{
+  $CI 	=& get_instance();
+  $CI->session->set_userdata($cKey, $cVal);
+}
+
+
+function formatSizeUnits($bytes){
+  if ($bytes >= 1073741824){
+      $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+  }else if ($bytes >= 1048576){
+      $bytes = number_format($bytes / 1048576, 2) . ' MB';
+  }else if ($bytes >= 1024){
+      $bytes = number_format($bytes / 1024, 2) . ' KB';
+  }else if ($bytes > 1){
+      $bytes = $bytes . ' bytes';
+  }else if ($bytes == 1){
+      $bytes = $bytes . ' byte';
+  }else{
+      $bytes = '0 bytes';
+  }
+  return $bytes;  
 }
