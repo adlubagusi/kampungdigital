@@ -7,8 +7,13 @@ class Home extends CI_Controller{
 
     public function index()
     {
-        $a['vaData'] = $this->Home_model->getDataPortofolio();
+        $a['vaData'] = $this->Home_model->getDataBlog();
         $a['p']      = 'frontend/home/v_home';
         $this->load->view('frontend/v_index', $a);
+    }
+
+    public function GetData()
+    {
+      
     }
 }
