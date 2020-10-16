@@ -46,7 +46,7 @@
   <script src="<?=base_url()?>assets/plugins/leaflet/leaflet.ajax.js"></script>
    <?php 
     //load javascript
-    $this->load->view($p."-js",$a);    
+    $this->load->view($p."-js");    
 ?>
 </body>
 </html>
