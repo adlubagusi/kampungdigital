@@ -27,5 +27,13 @@ class Home_model extends CI_Model{
   		return $vaArray;
   	}
 
+		function getCountDatatBlog(){
+			$cField = "tbl_blog.*";
+			$dbData = $this->dbd->select("tbl_blog",$cField);
+			$dbCount = $dbData->num_rows();
+
+			return $dbCount;
+		}
+
 }
 ?>

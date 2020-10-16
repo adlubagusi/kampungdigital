@@ -22,7 +22,7 @@
         </a>
         <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>
         <p><?php echo $cBlog_deskripsi;?></p>
-        <a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>
+        <a class="button" href="#">Read More <?php echo $nCountDataBlog;?><i class="ti-arrow-right"></i></a>
         </div>
     </div>
     <?php endforeach;?>
