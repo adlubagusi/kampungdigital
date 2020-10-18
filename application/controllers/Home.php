@@ -22,7 +22,7 @@ class Home extends CI_Controller{
         $page = ($va['page'])? $va['page'] : 1;
 
       }
-      $limit = 5;
+      $limit = 4;
       $limit_start = ($page - 1) * $limit;
       $no = $limit_start + 1;
       $nCountDataBlog = $this->Home_model->getCountDataBlog();
@@ -89,12 +89,12 @@ class Home extends CI_Controller{
 
       for($i =$start_number; $i <=$end_number; $i++){
         $link_active = ($page == $i)? ' active' : '';
-        $html .= '<li class="page-item halaman '.$link_active.'" id="'.$i.'"><a href="#" class="page-link">'.$i.'</a></li>';
+        $html .= '<li class="page-item halaman '.$link_active.'" id="'.$i.'"><a href="#blog-post-area" class="page-link">'.$i.'</a></li>';
       }
 
       if($page == $jumlah_page){
         $html .= '<li class="page-item disabled">';
-        $html .= '<a href="#" class="page-link" aria-label="Next">';
+        $html .= '<a href="#blog-post-area" class="page-link" aria-label="Next">';
         $html .= '<span aria-hidden="true">';
         $html .= '<i class="ti-angle-right"></i>';
         $html .= '</span>';
@@ -103,7 +103,7 @@ class Home extends CI_Controller{
       } else {
         $link_next = ($page < $jumlah_page)? $page + 1 : $jumlah_page;
         $html .= '<li class="page-item halaman" id="'.$link_next.'"">';
-        $html .= '<a href="#" class="page-link" aria-label="Next">';
+        $html .= '<a href="#blog-post-area" class="page-link" aria-label="Next">';
         $html .= '<span aria-hidden="true">';
         $html .= '<i class="ti-angle-right"></i>';
         $html .= '</span>';
