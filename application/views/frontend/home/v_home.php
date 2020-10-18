@@ -8,7 +8,7 @@
 <!--================ Blog slider end =================-->  
 
 <!--================ Start Blog Post Area =================-->
-<section class="blog-post-area section-margin mt-4">
+<section class="blog-post-area section-margin mt-4" id="blog-post-area">
     <div class="container">
         <div class="row">
         <?php $this->load->view('frontend/home/v_blog_post')?>

@@ -47,6 +47,6 @@
    <?php 
     //load javascript
     $this->load->view($p."-js");    
-?>
+  ?>
 </body>
 </html>
