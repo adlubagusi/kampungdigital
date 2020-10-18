@@ -27,13 +27,25 @@ class Home_model extends CI_Model{
   		return $vaArray;
   	}
 
-		function getCountDatatBlog(){
+		function getCountDataBlog(){
 			$cField = "tbl_blog.*";
 			$dbData = $this->dbd->select("tbl_blog",$cField);
-			$dbCount = $dbData->num_rows();
+			$nCount = $this->dbd->rows($dbData);
 
-			return $dbCount;
+			return $nCount;
 		}
+
+		function getDataBlogPagination($limit_start, $limit){
+  		$vaArray = [];
+  		$cField = "tbl_blog.*";
+			$cOrder = "ID";
+			$nLimit = "$limit_start, $limit";
+  		$dbData = $this->dbd->select("tbl_blog",$cField,"","","",$cOrder,$nLimit);
+  		while($dbRow = $this->dbd->getrow($dbData)){
+  			$vaArray[] = $dbRow;
+  		}
+  		return $vaArray;
+  	}
 
 }
 ?>
