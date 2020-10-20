@@ -38,6 +38,8 @@ class Home extends CI_Controller{
           $cBlog_image = $i['Image'];
           $cBlog_author = $i['Author'];
 
+          $cDeskripsi = substr($cBlog_deskripsi,0, 200);
+
           $html .= '<div class="single-recent-blog-post">';
           $html .= '<div class="thumb">';
           $html .= '<img class="img-fluid" src="'.base_url().'assets/images/blog/'.$cBlog_image.'" alt="">';
@@ -52,7 +54,7 @@ class Home extends CI_Controller{
           $html .= '<h3><?php echo $cBlog_judul;?></h3>';
           $html .= '</a>';
           $html .= '<p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>';
-          $html .= '<p>'.$cBlog_deskripsi.'</p>';
+          $html .= '<p>'.$cDeskripsi.'......</p>';
           $html .= '<a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>';
           $html .= '</div>';
           $html .= '</div>';
