@@ -58,8 +58,9 @@ function gen_menu_admin(){
           ["icon"=>"fa-list", "url"=>"blog", "text"=>"List Postingan"], //
           ["icon"=>"fa-wrench", "url"=>"blog-kategori", "text"=>"Kategori"] //
       ]],                                                                    //
-      ["icon"=>"fa-gear", "url"=>"about", "text"=>"Setting", "submenu"=>[            
-          ["icon"=>"fa-file-o", "url"=>"about", "text"=>"Teks About Us"]  
+      ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[            
+          ["icon"=>"fa-file-o", "url"=>"setting-general", "text"=>"Pengaturan Umum"], 
+          ["icon"=>"fa-file-o", "url"=>"setting-about", "text"=>"Teks About Us"]  
       ]],                                                                       
       ["icon"=>"fa-sign-out", "url"=>"logout", "text"=>"Logout"],
   );
@@ -113,7 +114,7 @@ function saveCfg($cKode,$cKeterangan){
   if($dbRow = $dbData->row()){
     $dbd  = $CI->db->query("UPDATE tbl_config SET Keterangan='$cKeterangan' WHERE Kode='$cKode'"); 
   }else{
-    $dbd  = $CI->db->query("INSERT INTO tbl_config Kode, Keterangan VALUES('$cKode',$cKeterangan)"); 
+    $dbd  = $CI->db->query("INSERT INTO tbl_config (Kode, Keterangan) VALUES('$cKode','$cKeterangan')"); 
   }
    
 }
