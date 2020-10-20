@@ -10,10 +10,9 @@ class Blog_model extends CI_Model{
   {
       $vaData = [];
       $vaArr  = [];
-      $cField = "b.ID, b.Judul, b.Deskripsi, b.Image, b.DateTime , k.Keterangan as Kategori";
+      $cField = "b.ID, b.Judul, b.Image, b.DateTime, k.Keterangan as Kategori";
       $cWhere = "b.Judul like '%".$cSearch['value']."%'
-                  OR b.Deskripsi like '%".$cSearch['value']."%'
-                  OR Kategori like '%".$cSearch['value']."%'";
+                OR Kategori like '%".$cSearch['value']."%'";
       $cJoin  = "left join tbl_kategori k on k.Kode=b.Kategori";
       $cOrder = "b.DateTime DESC";
       $nLimit = "$nStart,$nLength";
@@ -43,6 +42,7 @@ class Blog_model extends CI_Model{
     $dbRow  = [];
     $dbData = $this->dbd->select("tbl_blog", "*", "ID='$nID'");
     $dbRow  = $this->dbd->getrow($dbData);
+    $dbRow['KeteranganKategori'] = $this->getKeteranganKategori($dbRow['Kategori']);
     return $dbRow;
   }
 
@@ -67,23 +67,33 @@ class Blog_model extends CI_Model{
 
 	public function saveImage($cGambar,$nID)
 	{
-		$cWhere = "ID='$nID'";
-		$vaUpd = array("Image"=>$cGambar);
-		$this->dbd->edit("tbl_blog",$vaUpd,$cWhere);
-    }
+    $cWhere = "ID='$nID'";
+    $vaUpd = array("Image"=>$cGambar);
+    $this->dbd->edit("tbl_blog",$vaUpd,$cWhere);
+  }
 
-    public function getAllKategoriBlog()
-    {
-        $vaData = [];
-        $dbData = $this->dbd->select("tbl_kategori","*");
-        while($dbRow  = $this->dbd->getrow($dbData)){
-            $vaData[] = $dbRow;
-        }
-        return $vaData;
-    }
+  public function getAllKategoriBlog()
+  {
+      $vaData = [];
+      $dbData = $this->dbd->select("tbl_kategori","*");
+      while($dbRow  = $this->dbd->getrow($dbData)){
+          $vaData[] = $dbRow;
+      }
+      return $vaData;
+  }
 
   function delete($nID){
 		$dbd = $this->dbd->delete("tbl_blog","ID='$nID'");
 		return $dbd;
-	}
+  }
+  
+  public function getKeteranganKategori($cKode)
+  {
+    $cKeterangan  = "";
+    $dbData = $this->dbd->select("tbl_kategori", "*", "Kode='$cKode'");
+    if($dbRow  = $this->dbd->getrow($dbData)){
+      $cKeterangan = $dbRow['Keterangan'];
+    }
+    return $cKeterangan;
+  }
 }

@@ -29,7 +29,6 @@
                     <th>No</th>
                     <th>Foto</th>
                     <th>Judul</th>
-                    <th>Deskripsi</th>
                     <th>Kategori</th>
                     <th style="text-align:center;">Aksi</th>
                 </tr>
@@ -105,6 +104,50 @@
         </div>
     </div>
     
+    <div class="modal fade" id="modalBlogShow" tabindex="-1" role="dialog" aria-labelledby="modalBlogLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+                    <h4 class="modal-title" id="modalBlogLabel">Show Postingan</h4>
+                </div>
+                <form class="form-horizontal" method="post" id="f_blog">
+                <div class="modal-body">
+                    <input type="hidden" id="nIDShow" name="nIDShow" value="0">
+                    <div class="form-group">
+                        <label for="cJudul" class="col-sm-2 control-label">Judul</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="cJudulShow" class="form-control" id="cJudulShow" placeholder="Judul" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cEmail" class="col-sm-2 control-label">Deskripsi</label>
+                        <div class="col-sm-10">
+                            <div id="cDeskripsiShow"> 
+                            </div>
+                            <!-- <textarea id="cDeskripsiShow" name="cDeskripsiShow" required rows="20" cols="5"></textarea> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="optKategoriShow" class="col-sm-2 control-label">Kategori</label>
+                        <div class="col-sm-10">
+                            <label for="" id="optKategoriShow"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="imgShow" class="col-sm-2 control-label">Photo</label>
+                        <div class="col-sm-10">
+                            <img src="" alt="" width="300px" id="imgShow">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!--Modal Hapus Pengguna-->
     <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="modalHapusLabel">
