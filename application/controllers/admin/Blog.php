@@ -37,11 +37,11 @@ class Blog extends CI_Controller{
             $data_ok[] = $no++;
             $data_ok[] = "<img src=".base_url().'assets/images/blog/'.$d['Image']." style='width:100px;height:100px'>";
             $data_ok[] = $d['Judul'];
-            $data_ok[] = $d['Deskripsi'];
             $data_ok[] = $d['Kategori'];
             $data_ok[] = '<div class="btn-group">
-                      <a href="#" onclick="return blog_edit('.$d['ID'].');" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
-                      <a href="#" onclick="return blog_hapus('.$d['ID'].');" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
+                        <a href="#" onclick="return blog_show('.$d['ID'].');" class="btn btn-success btn-xs"><i class="fa fa-eye" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Show</a>
+                        <a href="#" onclick="return blog_edit('.$d['ID'].');" class="btn btn-info btn-xs"><i class="fa fa-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
+                        <a href="#" onclick="return blog_hapus('.$d['ID'].');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
                      ';
      	   $data[] = $data_ok;
         }

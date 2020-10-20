@@ -30,7 +30,8 @@ class Kategori_model extends CI_Model{
     public function getDetailKategori($nID)
     {
         $dbRow  = [];
-        $dbData = $this->dbd->select("tbl_kategori", "*", "ID='$nID'");
+        $cWhere = "ID='$nID' OR Kode='$nID'";
+        $dbData = $this->dbd->select("tbl_kategori", "*", $cWhere);
         $dbRow  = $this->dbd->getrow($dbData);
         return $dbRow;
     }
