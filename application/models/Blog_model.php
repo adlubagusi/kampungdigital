@@ -95,5 +95,25 @@ class Blog_model extends CI_Model{
       $cKeterangan = $dbRow['Keterangan'];
     }
     return $cKeterangan;
-  }
+	}
+
+	function getCountDataBlog(){
+		$cField = "tbl_blog.*";
+		$dbData = $this->dbd->select("tbl_blog",$cField);
+		$nCount = $this->dbd->rows($dbData);
+
+		return $nCount;
+	}
+
+	function getDataBlogPagination($limit_start, $limit){
+		$vaArray = [];
+		$cField = "tbl_blog.*";
+		$cOrder = "ID";
+		$nLimit = "$limit_start, $limit";
+		$dbData = $this->dbd->select("tbl_blog",$cField,"","","",$cOrder,$nLimit);
+		while($dbRow = $this->dbd->getrow($dbData)){
+			$vaArray[] = $dbRow;
+		}
+		return $vaArray;
+	}
 }

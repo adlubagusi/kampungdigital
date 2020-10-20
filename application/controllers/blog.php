@@ -13,4 +13,114 @@ class Blog extends CI_Controller{
 		$a['js']			   = 'frontend/blog/v_blog-js';
 		$this->load->view('frontend/v_index', $a);
 	}
+
+  function getData(){
+    $page = 1;
+    if( $this->input->post() ){
+      $va = $this->input->post();
+      $page = ($va['page'])? $va['page'] : 1;
+
+    }
+    $limit = 4;
+    $limit_start = ($page - 1) * $limit;
+    $no = $limit_start + 1;
+    $nCountDataBlog = $this->Blog_model->getCountDataBlog();
+
+    $data = array();
+    $html = '';
+
+    $vaData = $this->Blog_model->getDataBlogPagination($limit_start, $limit);
+
+    $html .= '<div class="row">';
+    foreach ($vaData as $key => $i) {
+        $cBlog_judul = $i['Judul'];
+        $cBlog_deskripsi = $i['Deskripsi'];
+        $cBlog_date = $i['DateTime'];
+        $cBlog_image = $i['Image'];
+        $cBlog_author = $i['Author'];
+
+        $cDeskripsi = substr($cBlog_deskripsi,0, 200);
+
+
+        $html .= '<div class="col-md-6">';
+        $html .= '<div class="single-recent-blog-post card-view">';
+        $html .= '<div class="thumb">';
+        $html .= '<img class="card-img rounded-0" src="'.base_url().'assets/images/blog/'.$cBlog_image.'" alt="">';
+        $html .= '<ul class="thumb-info">';
+        $html .= '<li><a href="#"><i class="ti-user"></i>'.$cBlog_author.'</a></li>';
+        $html .= '<li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>';
+        $html .= '</ul>';
+        $html .= '</div>';
+        $html .= '<div class="details mt-20">';
+        $html .= '<a href="blog-single.html"><h3>'.$cBlog_judul.'</h3></a>';
+        $html .= '<p>'.$cDeskripsi.'........</p>';
+        $html .= '<a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>';
+        $html .= '</div>';
+        $html .= '</div>';
+        $html .= '</div>';
+
+    }
+    $html .= '</div>';
+    $jumlah_page = ceil($nCountDataBlog / $limit);
+    $jumlah_number = 1; //jumlah halaman ke kanan dan kiri dari halaman yang aktif
+    $start_number = ($page > $jumlah_number)? $page - $jumlah_number : 1;
+    $end_number = ($page < ($jumlah_page - $jumlah_number))? $page + $jumlah_number : $jumlah_page;
+    //view bagian pagination
+    $html .= '<div class="row">';
+    $html .= '<div class="col-lg-12">';
+    $html .= '<nav class="blog-pagination justify-content-center d-flex">';
+    $html .= '<ul class="pagination">';
+
+    if($page == 1){
+      $html .= '<li class="page-item disabled">';
+      $html .= '<a href="#" class="page-link" aria-label="Previous">';
+      $html .= '<span aria-hidden="true">';
+      $html .= '<i class="ti-angle-left"></i>';
+      $html .= '</span>';
+      $html .= '</a>';
+      $html .= '</li>';
+    } else{
+      $link_prev = ($page > 1)? $page - 1 : 1;
+      $html .= '<li class="page-item halaman" id="'.$link_prev.'">';
+      $html .= '<a href="#" class="page-link" aria-label="Previous">';
+      $html .= '<span aria-hidden="true">';
+      $html .= '<i class="ti-angle-left"></i>';
+      $html .= '</span>';
+      $html .= '</a>';
+      $html .= '</li>';
+    }
+
+    for($i =$start_number; $i <=$end_number; $i++){
+      $link_active = ($page == $i)? ' active' : '';
+      $html .= '<li class="page-item halaman '.$link_active.'" id="'.$i.'"><a href="#blog-post-area" class="page-link">'.$i.'</a></li>';
+    }
+
+    if($page == $jumlah_page){
+      $html .= '<li class="page-item disabled">';
+      $html .= '<a href="#blog-post-area" class="page-link" aria-label="Next">';
+      $html .= '<span aria-hidden="true">';
+      $html .= '<i class="ti-angle-right"></i>';
+      $html .= '</span>';
+      $html .= '</a>';
+      $html .= '</li>';
+    } else {
+      $link_next = ($page < $jumlah_page)? $page + 1 : $jumlah_page;
+      $html .= '<li class="page-item halaman" id="'.$link_next.'"">';
+      $html .= '<a href="#blog-post-area" class="page-link" aria-label="Next">';
+      $html .= '<span aria-hidden="true">';
+      $html .= '<i class="ti-angle-right"></i>';
+      $html .= '</span>';
+      $html .= '</a>';
+      $html .= '</li>';
+    }
+
+    $html .= '</ul>';
+    $html .= '</nav>';
+    $html .= '</div>';
+    $html .= '</div>';
+
+    $data['page'] = $page;
+    $data['html'] = $html;
+    j($data);
+  }
 }
