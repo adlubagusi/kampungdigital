@@ -12,7 +12,7 @@
         fd.append('cJudul',cJudul);
         fd.append('cDeskripsi',cDeskripsi);
         $.ajax({
-            url:'<?php echo base_url();?>/admin/about/save',
+            url: base_url+'admin/about/save',
             type:"post",
             data:fd,
             processData:false,

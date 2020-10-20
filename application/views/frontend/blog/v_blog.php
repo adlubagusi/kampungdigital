@@ -1,4 +1,4 @@
-<section class="blog-post-area section-margin">
+<section class="blog-post-area section-margin" id="blog-post-area">
   <div class="container">
     <div class="row">
       <div class="col-lg-8" id="data">
