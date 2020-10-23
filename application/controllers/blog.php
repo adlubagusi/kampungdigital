@@ -38,6 +38,7 @@ class Blog extends CI_Controller{
         $cBlog_date = $i['DateTime'];
         $cBlog_image = $i['Image'];
         $cBlog_author = $i['Author'];
+        $cBlog_id = $i['ID'];
 
         $cDeskripsi = substr($cBlog_deskripsi,0, 200);
 
@@ -54,7 +55,7 @@ class Blog extends CI_Controller{
         $html .= '<div class="details mt-20">';
         $html .= '<a href="blog-single.html"><h3>'.$cBlog_judul.'</h3></a>';
         $html .= '<p>'.$cDeskripsi.'........</p>';
-        $html .= '<a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>';
+        $html .= '<a class="button" href="'.base_url().'blog/det/'.$cBlog_id.'">Read More <i class="ti-arrow-right"></i></a>';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
@@ -122,5 +123,19 @@ class Blog extends CI_Controller{
     $data['page'] = $page;
     $data['html'] = $html;
     j($data);
+  }
+
+  public function det(){
+    $uri3 = $this->uri->segment(3);
+
+    $data_detail_blog       = $this->Blog_model->getDetailBlog($uri3);
+
+    $a['cData_Judul'] = $data_detail_blog['Judul'];
+    $a['cData_Deskripsi'] = $data_detail_blog['Deskripsi'];
+    $a['cData_Foto'] = $data_detail_blog['Image'];
+    $a['cData_Date'] = $data_detail_blog['DateTime'];
+    $a['cData_Author'] = $data_detail_blog['Author'];
+    $a['p']  = "frontend/blog/v_blog_details";
+    $this->load->view('frontend/v_index', $a);
   }
 }

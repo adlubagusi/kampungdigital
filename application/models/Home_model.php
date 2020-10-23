@@ -47,5 +47,23 @@ class Home_model extends CI_Model{
   		return $vaArray;
   	}
 
+		function getDetailBlog($nID){
+	    $dbRow  = [];
+	    $dbData = $this->dbd->select("tbl_blog", "*", "ID='$nID'");
+	    $dbRow  = $this->dbd->getrow($dbData);
+	    $dbRow['KeteranganKategori'] = $this->getKeteranganKategori($dbRow['Kategori']);
+	    return $dbRow;
+	  }
+
+		public function getKeteranganKategori($cKode)
+	  {
+	    $cKeterangan  = "";
+	    $dbData = $this->dbd->select("tbl_kategori", "*", "Kode='$cKode'");
+	    if($dbRow  = $this->dbd->getrow($dbData)){
+	      $cKeterangan = $dbRow['Keterangan'];
+	    }
+	    return $cKeterangan;
+		}
+
 }
 ?>
