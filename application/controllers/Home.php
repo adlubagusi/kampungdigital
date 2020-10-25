@@ -3,12 +3,13 @@ class Home extends CI_Controller{
     function __construct(){
       parent::__construct();
       $this->load->model('Home_model');
+      $this->load->model('Kategori_model');
     }
 
     public function index()
     {
         $a['vaData'] = $this->Home_model->getDataBlog();
-        // $a['nCountDataBlog'] = $this->Home_model->getCountDataBlog();
+        $a['vaKategori'] = $this->Kategori_model->countAllKategori();
         $a['p']      = 'frontend/home/v_home';
 
         $this->load->view('frontend/v_index', $a);
@@ -52,7 +53,7 @@ class Home extends CI_Controller{
           $html .= '</div>';
           $html .= '<div class="details mt-20">';
           $html .= '<a href="blog-single.html">';
-          $html .= '<h3><?php echo $cBlog_judul;?></h3>';
+          $html .= '<h3>'.$cBlog_judul.'</h3>';
           $html .= '</a>';
           $html .= '<p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>';
           $html .= '<p>'.$cDeskripsi.'......</p>';
@@ -92,12 +93,12 @@ class Home extends CI_Controller{
 
       for($i =$start_number; $i <=$end_number; $i++){
         $link_active = ($page == $i)? ' active' : '';
-        $html .= '<li class="page-item halaman '.$link_active.'" id="'.$i.'"><a href="#blog-post-area" class="page-link">'.$i.'</a></li>';
+        $html .= '<li class="page-item halaman '.$link_active.'" id="'.$i.'"><a href="#" class="page-link">'.$i.'</a></li>';
       }
 
       if($page == $jumlah_page){
         $html .= '<li class="page-item disabled">';
-        $html .= '<a href="#blog-post-area" class="page-link" aria-label="Next">';
+        $html .= '<a href="#" class="page-link" aria-label="Next">';
         $html .= '<span aria-hidden="true">';
         $html .= '<i class="ti-angle-right"></i>';
         $html .= '</span>';
@@ -106,7 +107,7 @@ class Home extends CI_Controller{
       } else {
         $link_next = ($page < $jumlah_page)? $page + 1 : $jumlah_page;
         $html .= '<li class="page-item halaman" id="'.$link_next.'"">';
-        $html .= '<a href="#blog-post-area" class="page-link" aria-label="Next">';
+        $html .= '<a href="#" class="page-link" aria-label="Next">';
         $html .= '<span aria-hidden="true">';
         $html .= '<i class="ti-angle-right"></i>';
         $html .= '</span>';

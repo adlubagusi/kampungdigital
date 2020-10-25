@@ -4,7 +4,7 @@
 <!--================Hero Banner end =================-->  
 
 <!--================ Blog slider start =================-->  
-<?php $this->load->view('frontend/home/v_blog_slider')?>
+<!-- <?php $this->load->view('frontend/home/v_blog_slider')?> -->
 <!--================ Blog slider end =================-->  
 
 <!--================ Start Blog Post Area =================-->

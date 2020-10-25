@@ -119,6 +119,17 @@ function saveCfg($cKode,$cKeterangan){
    
 }
 
+function getVal($cKode,$cField,$cTable,$cWhereField="Kode"){
+  $CI 	=& get_instance();
+  $cVal   = "";
+  $dbData = $CI->db->query("SELECT $cField FROM $cTable WHERE $cWhereField='$cKode'");
+  if($dbRow = $dbData->row()){
+    $cVal = $dbRow->$cField;
+  }
+  return $cVal;
+}
+
+
 function savesession($cKey, $cVal)
 {
   $CI 	=& get_instance();

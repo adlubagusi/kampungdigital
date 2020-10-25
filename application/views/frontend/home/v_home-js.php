@@ -9,6 +9,11 @@
             data:{page:page},
             success:function(data){
                  $('#data').html(data.html);
+                 if(page >0){ //jika page > 0, berarti btn pagination sudah diklik. scroll ke blog area.
+                    $('html, body').animate({
+                         scrollTop: $("#blog-post-area").offset().top
+                    }, 2000);
+                 }
             }
        })
   }

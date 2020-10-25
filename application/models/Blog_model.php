@@ -97,20 +97,22 @@ class Blog_model extends CI_Model{
     return $cKeterangan;
 	}
 
-	function getCountDataBlog(){
-		$cField = "tbl_blog.*";
-		$dbData = $this->dbd->select("tbl_blog",$cField);
+	function getCountDataBlog($cKategori=""){
+    $cField = "tbl_blog.*";
+    $cWhere = ($cKategori <> "") ? "Kategori = '$cKategori' " : "";
+		$dbData = $this->dbd->select("tbl_blog",$cField,$cWhere);
 		$nCount = $this->dbd->rows($dbData);
 
 		return $nCount;
 	}
 
-	function getDataBlogPagination($limit_start, $limit){
+	function getDataBlogPagination($limit_start, $limit,$cKategori=""){
 		$vaArray = [];
-		$cField = "tbl_blog.*";
+    $cField = "tbl_blog.*";
+    $cWhere = ($cKategori <> "") ? "Kategori = '$cKategori' " : "";
 		$cOrder = "ID";
 		$nLimit = "$limit_start, $limit";
-		$dbData = $this->dbd->select("tbl_blog",$cField,"","","",$cOrder,$nLimit);
+		$dbData = $this->dbd->select("tbl_blog",$cField,$cWhere,"","",$cOrder,$nLimit);
 		while($dbRow = $this->dbd->getrow($dbData)){
 			$vaArray[] = $dbRow;
 		}
