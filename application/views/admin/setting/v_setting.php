@@ -16,6 +16,37 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
+                    <h3 class="box-title">Deskripsi Singkat</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input type="text" name="cDeskripsiSingkat" class="form-control" id="cDeskripsiSingkat" value="<?=$cDeskripsiSingkat?>" placeholder="Deskripsi Singkat" required/>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button type="submit" onclick="return save_deskripsi_singkat();" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Update</button>
+                            <!-- /.form-group -->
+                            </div>
+                        <!-- /.col -->
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                <!-- /.box -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header with-border">
                     <h3 class="box-title">Alamat</h3>
                 </div>
                 <!-- /.box-header -->

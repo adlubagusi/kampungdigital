@@ -18,6 +18,7 @@ class Setting extends CI_Controller{
         $a['cEmail']     = getCfg("msEmail");
         $a['cNoTelp1']   = getCfg("msNoTelp1");
         $a['cNoTelp2']   = getCfg("msNoTelp2");
+        $a['cDeskripsiSingkat'] = getCfg("msDeskripsiSingkat");
         $this->load->view('admin/index',$a);
     }
 
