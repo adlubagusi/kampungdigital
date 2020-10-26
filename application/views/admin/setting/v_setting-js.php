@@ -40,4 +40,10 @@ function save_email(){
     var cVal = $("#cEmail").val();
     saveCfg(cKey,cVal);
 }
+
+function save_deskripsi_singkat(){
+    var cKey = "msDeskripsiSingkat";
+    var cVal = $("#cDeskripsiSingkat").val();
+    saveCfg(cKey,cVal);
+}
 </script>

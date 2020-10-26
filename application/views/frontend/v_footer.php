@@ -5,8 +5,7 @@
           <div class="single-footer-widget">
             <h6>About Us</h6>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-              magna aliqua.
+              <?= getCfg("msDeskripsiSingkat")?>
             </p>
           </div>
         </div>

@@ -8,47 +8,30 @@
                 onblur="this.placeholder = 'Enter email'">
             </div>
             </div>
-            <button class="bbtns d-block mt-20 w-100">Subcribe</button>
+            <button class="bbtns d-block mt-20 w-100">Subscribe</button>
         </div>
 
 
         <div class="single-sidebar-widget post-category-widget">
-            <h4 class="single-sidebar-widget__title">Catgory</h4>
+            <h4 class="single-sidebar-widget__title">Kategori</h4>
             <ul class="cat-list mt-20">
-            <li>
-                <a href="#" class="d-flex justify-content-between">
-                <p>Technology</p>
-                <p>(03)</p>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="d-flex justify-content-between">
-                <p>Software</p>
-                <p>(09)</p>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="d-flex justify-content-between">
-                <p>Lifestyle</p>
-                <p>(12)</p>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="d-flex justify-content-between">
-                <p>Shopping</p>
-                <p>(02)</p>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="d-flex justify-content-between">
-                <p>Food</p>
-                <p>(10)</p>
-                </a>
-            </li>
+                <?php
+                foreach($vaKategori as $i):
+                    $cLowKategori = str_replace(" ","_",strtolower($i['Keterangan']));
+                ?>
+                <li>
+                    <a href="<?= base_url().'c/'.$cLowKategori?>" class="d-flex justify-content-between">
+                    <p> <?= $i['Keterangan']?> </p>
+                    <p> <?= $i['Jml']?> </p>
+                    </a>
+                </li>
+                <?php
+                endforeach;
+                ?>
             </ul>
         </div>
 
-        <div class="single-sidebar-widget popular-post-widget">
+        <!-- <div class="single-sidebar-widget popular-post-widget">
             <h4 class="single-sidebar-widget__title">Popular Post</h4>
             <div class="popular-post-list">
                 <div class="single-post-list">
@@ -111,6 +94,6 @@
                     <a href="#">illustration</a>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </div>
 </div>

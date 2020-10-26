@@ -5,12 +5,14 @@ class Blog extends CI_Controller{
 		$this->load->model('Pengunjung_model');
 		$this->Pengunjung_model->count_visitor();
 		$this->load->model('Blog_model');
+		$this->load->model('Kategori_model');
 	}
 	function index(){
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
 		$a['cAbout_Deskripsi'] = getCfg("msAboutUs_Deskripsi");
-		$a['p']				   = 'frontend/blog/v_blog';
-		$a['js']			   = 'frontend/blog/v_blog-js';
+		$a['vaKategori']       = $this->Kategori_model->countAllKategori();
+    $a['p']				         = 'frontend/blog/v_blog';
+		$a['js']			         = 'frontend/blog/v_blog-js';
 		$this->load->view('frontend/v_index', $a);
 	}
 
@@ -18,18 +20,24 @@ class Blog extends CI_Controller{
     $page = 1;
     if( $this->input->post() ){
       $va = $this->input->post();
-      $page = ($va['page'])? $va['page'] : 1;
+      $page = (floatval($va['page']) >0) ? $va['page'] : 1;
 
+      //ambil kode kategori jika ada
+      $cKategori = $va['kategori'];
+      if($cKategori <> "") {
+        $cKategori = str_replace("_"," ",$cKategori);
+        $cKategori = getVal($cKategori, "Kode", "tbl_kategori","Keterangan"); //ambil Kode dari tbl_kategori where keterangan=cKategori
+      }
     }
     $limit = 4;
     $limit_start = ($page - 1) * $limit;
     $no = $limit_start + 1;
-    $nCountDataBlog = $this->Blog_model->getCountDataBlog();
+    $nCountDataBlog = $this->Blog_model->getCountDataBlog($cKategori);
 
     $data = array();
     $html = '';
 
-    $vaData = $this->Blog_model->getDataBlogPagination($limit_start, $limit);
+    $vaData = $this->Blog_model->getDataBlogPagination($limit_start, $limit, $cKategori);
 
     $html .= '<div class="row">';
     foreach ($vaData as $key => $i) {
@@ -46,14 +54,14 @@ class Blog extends CI_Controller{
         $html .= '<div class="col-md-6">';
         $html .= '<div class="single-recent-blog-post card-view">';
         $html .= '<div class="thumb">';
-        $html .= '<img class="card-img rounded-0" src="'.base_url().'assets/images/blog/'.$cBlog_image.'" alt="">';
+        $html .= '<img class="card-img rounded-0" src="'.base_url().'assets/images/blog/'.$cBlog_image.'" alt="" style="width:350px;height:300px;">';
         $html .= '<ul class="thumb-info">';
         $html .= '<li><a href="#"><i class="ti-user"></i>'.$cBlog_author.'</a></li>';
         $html .= '<li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>';
         $html .= '</ul>';
         $html .= '</div>';
         $html .= '<div class="details mt-20">';
-        $html .= '<a href="blog-single.html"><h3>'.$cBlog_judul.'</h3></a>';
+        $html .= '<a href="'.base_url().'blog/det/'.$cBlog_id.'"><h3>'.$cBlog_judul.'</h3></a>';
         $html .= '<p>'.$cDeskripsi.'........</p>';
         $html .= '<a class="button" href="'.base_url().'blog/det/'.$cBlog_id.'">Read More <i class="ti-arrow-right"></i></a>';
         $html .= '</div>';
@@ -93,12 +101,12 @@ class Blog extends CI_Controller{
 
     for($i =$start_number; $i <=$end_number; $i++){
       $link_active = ($page == $i)? ' active' : '';
-      $html .= '<li class="page-item halaman '.$link_active.'" id="'.$i.'"><a href="#blog-post-area" class="page-link">'.$i.'</a></li>';
+      $html .= '<li class="page-item halaman '.$link_active.'" id="'.$i.'"><a href="#" class="page-link">'.$i.'</a></li>';
     }
 
     if($page == $jumlah_page){
       $html .= '<li class="page-item disabled">';
-      $html .= '<a href="#blog-post-area" class="page-link" aria-label="Next">';
+      $html .= '<a href="#" class="page-link" aria-label="Next">';
       $html .= '<span aria-hidden="true">';
       $html .= '<i class="ti-angle-right"></i>';
       $html .= '</span>';
@@ -107,7 +115,7 @@ class Blog extends CI_Controller{
     } else {
       $link_next = ($page < $jumlah_page)? $page + 1 : $jumlah_page;
       $html .= '<li class="page-item halaman" id="'.$link_next.'"">';
-      $html .= '<a href="#blog-post-area" class="page-link" aria-label="Next">';
+      $html .= '<a href="#" class="page-link" aria-label="Next">';
       $html .= '<span aria-hidden="true">';
       $html .= '<i class="ti-angle-right"></i>';
       $html .= '</span>';
@@ -130,6 +138,7 @@ class Blog extends CI_Controller{
 
     $data_detail_blog       = $this->Blog_model->getDetailBlog($uri3);
 
+    $a['vaKategori'] = $this->Kategori_model->countAllKategori();
     $a['cData_Judul'] = $data_detail_blog['Judul'];
     $a['cData_Deskripsi'] = $data_detail_blog['Deskripsi'];
     $a['cData_Foto'] = $data_detail_blog['Image'];
