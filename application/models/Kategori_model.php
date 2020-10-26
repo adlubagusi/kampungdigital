@@ -61,5 +61,18 @@ class Kategori_model extends CI_Model{
     function delete($nID){
 		$dbd = $this->dbd->delete("tbl_kategori","ID='$nID'");
 		return $dbd;
-	}
+    }
+    
+    public function countAllKategori()
+    {
+        $vaArr  = [];
+        $cField = "b.Kategori as Kode, k.Keterangan, COUNT(k.id) as Jml";
+        $cJoin  = "left join tbl_kategori k on k.Kode = b.Kategori";
+        $cGroup = "b.Kategori";
+        $dbData = $this->dbd->select("tbl_blog b",$cField,"",$cJoin,$cGroup);
+        while($dbRow = $this->dbd->getrow($dbData)){
+            $vaArr[] = $dbRow;
+        }
+        return $vaArr;
+    }
 }
