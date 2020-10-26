@@ -52,7 +52,7 @@ class Home extends CI_Controller{
           $html .= '</div>';
           $html .= '<div class="details mt-20">';
           $html .= '<a href="blog-single.html">';
-          $html .= '<h3><?php echo $cBlog_judul;?></h3>';
+          $html .= '<h3>'.$cBlog_judul.'></h3>';
           $html .= '</a>';
           $html .= '<p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>';
           $html .= '<p>'.$cDeskripsi.'......</p>';
