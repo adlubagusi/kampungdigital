@@ -1,6 +1,9 @@
 
 <script>
     $(function () {
+
+        pagination("datatabel", base_url+"/admin/pengguna/getdata", []);
+        
         $("#example1").DataTable();
         $('#example2').DataTable({
         "paging": true,

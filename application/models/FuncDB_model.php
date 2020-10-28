@@ -234,6 +234,17 @@ class FuncDB_model extends CI_Model{
 			PRIMARY KEY (`ID`) USING BTREE
 		   ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_surat_masuk_file',$cSQL);
+
+		$cSQL = "CREATE TABLE `tbl_download` (
+		 `ID` int(11) NOT NULL AUTO_INCREMENT,
+		 `Kode` varchar(20) NOT NULL,
+		 `Judul` varchar(200) NOT NULL,
+		 `File` varchar(100) NOT NULL,
+		 `UserName` varchar(50) NOT NULL,
+		 `DateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		 PRIMARY KEY (`ID`)
+		) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		$this->AddTable('tbl_download',$cSQL);
     }
 }
 ?>

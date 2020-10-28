@@ -1,8 +1,7 @@
 <script>
 
     $(function () {
-
-       
+        pagination("datatabel", base_url+"/admin/kategori/getdata", []);
     });
 
     $('#f_kategori').submit(function(e){
