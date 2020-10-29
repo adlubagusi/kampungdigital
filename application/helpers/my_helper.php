@@ -53,6 +53,9 @@ function gen_menu_admin(){
       ["icon"=>"fa-users", "url"=>"pengguna", "text"=>"Pengguna"],
       ["icon"=>"fa-envelope", "url"=>"suratmasuk", "text"=>"Surat Masuk", "submenu"=>[            
         ["icon"=>"fa-envelope-o", "url"=>"suratmasuk-list", "text"=>"List Surat Masuk"]  
+      ]], 
+      ["icon"=>"fa-file-text-o", "url"=>"suratdigital", "text"=>"Surat Digital", "submenu"=>[            
+        ["icon"=>"fa-file-text-o", "url"=>"suratdigital-list", "text"=>"List Surat Digital"]  
       ]],                                                                       
       ["icon"=>"fa-newspaper-o", "url"=>"blog", "text"=>"Blog", "submenu"=>[      //menu spesial    
           ["icon"=>"fa-list", "url"=>"blog", "text"=>"List Postingan"], //

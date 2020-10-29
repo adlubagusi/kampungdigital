@@ -106,19 +106,7 @@
 	var url = get_url[4];
 	var url2 = get_url[5];
 	var url3 = get_url[6];
-	console.log(url+","+url2+","+url3);
-  
-  //route
-  url2 = url2.replace("#","");
-	if (url2 == "pengguna") {
-		pagination("datatabel", base_url+"/admin/pengguna/getdata", []);
-  }else if (url2 == "blog") {
-		pagination("datatabel", base_url+"/admin/blog/getdata", []);
-	}else if (url2 == "blog-kategori") {
-		pagination("datatabel", base_url+"/admin/kategori/getdata", []);
-	}else if (url2 == "suratmasuk-list") {
-		pagination("datatabel", base_url+"/admin/suratmasuk/getdata", []);
-	}
+	// console.log(url+","+url2+","+url3);
   
   function pagination(indentifier, url, config) {
     $('#'+indentifier).DataTable({
