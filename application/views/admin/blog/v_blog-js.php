@@ -4,7 +4,7 @@
 
         $(".select2").select2();
         CKEDITOR.replace('cDeskripsi');
-
+        pagination("datatabel", base_url+"/admin/blog/getdata", []);
     });
 
     $('#f_blog').submit(function(e){

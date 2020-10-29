@@ -3,6 +3,7 @@
     $(function () {
         $("#listFile").css("display","none");
         CKEDITOR.replace('cDeskripsi');
+		pagination("datatabel", base_url+"/admin/suratmasuk/getdata", []);
     });
     
     $('#f_surat_masuk').submit(function(e){
