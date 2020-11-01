@@ -167,7 +167,7 @@ class SuratMasuk extends CI_Controller{
     public function savingFile()
     {
         savesession("ss_surat_masuk_vaFile" , "") ;
-        $cFileName = "SuratMasuk_". date("Ymd_His");
+        $cFileName = "SuratMasuk_". date_now();
         $cDir      = "./tmp/";
         if(!is_dir($cDir)){
             @mkdir($cDir, 0777,true);

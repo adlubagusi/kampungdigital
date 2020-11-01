@@ -58,8 +58,10 @@ $route['admin/blog-kategori']   = 'admin/kategori';
 $route['admin/suratmasuk-list'] = 'admin/suratmasuk';
 $route['admin/suratdigital-list']    = 'admin/download';
 $route['admin/setting-general'] = 'admin/setting';
+$route['admin/setting-seo']     = 'admin/setting/seo';
+$route['admin/setting-socmed']  = 'admin/setting/socmed';
 $route['admin/about-text']      = 'admin/about';
-$route['admin/about-struktur']   = 'admin/about/struktur';
+$route['admin/about-struktur']  = 'admin/about/struktur';
 
 //front end
 $route['c/(:any)']           = 'blog';
