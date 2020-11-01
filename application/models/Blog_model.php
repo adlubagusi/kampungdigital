@@ -50,7 +50,7 @@ class Blog_model extends CI_Model{
     $vaUpd = array("Judul"=>$cJudul,
             "Deskripsi"=>$cDeskripsi,
             "Kategori"=>$optKategori,
-            "DateTime"=>date('Y-m-d h:i:s'));
+            "DateTime"=>date_now());
     $cWhere = "ID='$nID'";
     if($nID == 0) {
       $vaUpd['Image'] = $cGambar;

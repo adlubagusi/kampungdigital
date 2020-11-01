@@ -55,7 +55,7 @@ class SuratMasuk_model extends CI_Model{
                         "Perihal"=>$cPerihal,
                         "Deskripsi"=>$cDeskripsi,
                         "UserName"=>$cUserName,
-                        "DateTime"=>date('Y-m-d h:i:s'));
+                        "DateTime"=>date_now());
         $cWhere = "Kode='$cKode'";
         $this->dbd->update("tbl_surat_masuk",$vaUpd,$cWhere,"ID");
     }
@@ -67,7 +67,7 @@ class SuratMasuk_model extends CI_Model{
         $vaData = array("Kode"=>$cKode, 
                         "FilePath"=>$va['FilePath'],
                         "UserName"=>$cUserName ,
-                        "DateTime"=>date('Y-m-d H:i:s')
+                        "DateTime"=>date_now()
         ) ;
         $this->dbd->insert("tbl_surat_masuk_file", $vaData) ;
     }

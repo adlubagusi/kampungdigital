@@ -110,7 +110,7 @@ class Download extends CI_Controller{
     public function savingFile()
     {
         savesession("ss_download_vaFile" , "") ;
-        $cFileName = "Download_". date("Ymd_His");
+        $cFileName = "Download_". date_now();
         $cDir      = "./tmp/";
         if(!is_dir($cDir)){
             @mkdir($cDir, 0777,true);

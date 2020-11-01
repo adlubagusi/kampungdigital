@@ -66,9 +66,9 @@ function gen_menu_admin(){
           ["icon"=>"fa-list", "url"=>"blog", "text"=>"List Postingan"],           //
           ["icon"=>"fa-wrench", "url"=>"blog-kategori", "text"=>"Kategori"]       //
       ]],                                                                         //
-      ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[            
-          ["icon"=>"fa-file-o", "url"=>"setting-general", "text"=>"Pengaturan Umum"],
-          ["icon"=>"fa-globe", "url"=>"setting-seo", "text"=>"SEO"]
+      ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[  
+          ["icon"=>"fa-gears", "url"=>"setting-general", "text"=>"Pengaturan Umum"],
+          ["icon"=>"fa-facebook-square", "url"=>"setting-socmed", "text"=>"Pengaturan Sosmed"],
       ]],                                                                       
       ["icon"=>"fa-sign-out", "url"=>"logout", "text"=>"Logout"],
   );
