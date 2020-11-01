@@ -16,12 +16,13 @@ function gen_menu()
 {
     $CI 	=& get_instance();
     $url = $CI->uri->segment(1);
-    
+
     $menu = array(
         array("icon"=>"", "url"=>"", "text"=>"Home"),
         array("icon"=>"", "url"=>"about", "text"=>"Tentang Kami"),
         array("icon"=>"", "url"=>"blog", "text"=>"Blog"),
-        array("icon"=>"", "url"=>"contact", "text"=>"Kontak")
+        array("icon"=>"", "url"=>"contact", "text"=>"Kontak"),
+				array("icon"=>"", "url"=>"letter", "text"=>"Surat")
       );
 
     if ($menu != null) {
@@ -37,10 +38,10 @@ function gen_menu()
                                   <a class="nav-link" href="'.base_url().''.$m['url'].'">'.$m['text'].'</a>
                               </li>';
                   }
-                } 
+                }
           echo'
             </ul>
-          ' ; 
+          ' ;
     }
 }
 
@@ -66,12 +67,11 @@ function gen_menu_admin(){
           ["icon"=>"fa-wrench", "url"=>"blog-kategori", "text"=>"Kategori"]       //
       ]],                                                                         //
       ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[            
-          ["icon"=>"fa-file-o", "url"=>"setting-general", "text"=>"Pengaturan Umum"]
+          ["icon"=>"fa-file-o", "url"=>"setting-general", "text"=>"Pengaturan Umum"],
+          ["icon"=>"fa-globe", "url"=>"setting-seo", "text"=>"SEO"]
       ]],                                                                       
       ["icon"=>"fa-sign-out", "url"=>"logout", "text"=>"Logout"],
   );
-  
-  
   $vaMenu = $menu;
   foreach($vaMenu as $k=>$m){
     $cUrl  = "#";
@@ -118,11 +118,11 @@ function saveCfg($cKode,$cKeterangan){
   $CI 	=& get_instance();
   $dbData = $CI->db->query("SELECT * FROM tbl_config WHERE Kode='$cKode'");
   if($dbRow = $dbData->row()){
-    $dbd  = $CI->db->query("UPDATE tbl_config SET Keterangan='$cKeterangan' WHERE Kode='$cKode'"); 
+    $dbd  = $CI->db->query("UPDATE tbl_config SET Keterangan='$cKeterangan' WHERE Kode='$cKode'");
   }else{
-    $dbd  = $CI->db->query("INSERT INTO tbl_config (Kode, Keterangan) VALUES('$cKode','$cKeterangan')"); 
+    $dbd  = $CI->db->query("INSERT INTO tbl_config (Kode, Keterangan) VALUES('$cKode','$cKeterangan')");
   }
-   
+
 }
 
 function getVal($cKode,$cField,$cTable,$cWhereField="Kode"){
@@ -157,5 +157,5 @@ function formatSizeUnits($bytes){
   }else{
       $bytes = '0 bytes';
   }
-  return $bytes;  
+  return $bytes;
 }
