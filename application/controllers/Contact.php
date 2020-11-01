@@ -11,6 +11,7 @@ class Contact extends CI_Controller{
 		$a['cAlamat']     = getCfg("msAlamat");
 		$a['cNoTelp'] 	  = getCfg("msNoTelp1");
 		$a['cEmail'] 	  = getCfg("msEmail");
+		$a['title']		  = "Kontak";
 		$a['p']				   = 'frontend/contact/v_contact';
 		$this->load->view('frontend/v_index', $a);
 	}

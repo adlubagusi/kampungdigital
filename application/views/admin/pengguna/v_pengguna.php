@@ -127,9 +127,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="cDivisi" class="col-sm-4 control-label">Divisi/Bagian</label>
+                        <!-- <label for="cDivisi" class="col-sm-4 control-label">Divisi/Bagian</label> -->
                         <div class="col-sm-7">
-                            <input type="text" name="cDivisi" class="form-control" id="cDivisi" placeholder="Divisi" required>
+                            <input type="hidden" name="cDivisi" class="form-control" id="cDivisi" placeholder="Divisi" required>
                         </div>
                     </div>
                     <div class="form-group">

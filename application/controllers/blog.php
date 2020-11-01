@@ -10,9 +10,9 @@ class Blog extends CI_Controller{
 	function index(){
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
 		$a['cAbout_Deskripsi'] = getCfg("msAboutUs_Deskripsi");
-		$a['vaKategori']       = $this->Kategori_model->countAllKategori();
+    $a['vaKategori']       = $this->Kategori_model->countAllKategori();
+    $a['']                 = "Blog";
     $a['p']				         = 'frontend/blog/v_blog';
-		$a['js']			         = 'frontend/blog/v_blog-js';
 		$this->load->view('frontend/v_index', $a);
 	}
 
