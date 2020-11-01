@@ -73,6 +73,7 @@
             $("#cPassword2").val("");
             $("#cFileFoto").val("");
             $("#cDivisi").val(data.pengguna_divisi);
+            $("#cDivisi").prop('disabled',true);
             if(data.pengguna_tampilhome == "Y"){
                 $("#chckTampil").prop('checked',true);
             } else{

@@ -245,6 +245,14 @@ class FuncDB_model extends CI_Model{
 		 PRIMARY KEY (`ID`)
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_download',$cSQL);
+
+		$cSQL = "CREATE TABLE `tbl_struktur_organisasi` (
+			`ID` int(11) NOT NULL AUTO_INCREMENT,
+			`UserName` varchar(100) NOT NULL,
+			`Jabatan` varchar(100) NOT NULL
+			PRIMARY KEY (`ID`)
+			) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		$this->AddTable('tbl_struktur_organisasi',$cSQL);
     }
 }
 ?>

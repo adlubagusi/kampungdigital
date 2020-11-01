@@ -13,7 +13,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?= $this->config->item('nama_aplikasi')?> | <?=$title?></title>
+  <title><?= $this->config->item('nama_aplikas')?> | <?=$title?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -33,6 +33,11 @@
   <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/skins/_all-skins.min.css'?>">
   <script src="<?php echo base_url().'assets/plugins/sweetalert2/dist/sweetalert2.min.js'?>"></script>
   <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/sweetalert2/dist/sweetalert2.min.css'?>">
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- SELECT2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/i18n/id.js" type="text/javascript"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -67,7 +72,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url().'assets/plugins/jQuery/jquery-2.2.3.min.js'?>"></script>
+<!-- <script src="<?php echo base_url().'assets/plugins/jQuery/jquery-2.2.3.min.js'?>"></script> -->
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js'?>"></script>
 <!-- DataTables -->
@@ -75,8 +80,6 @@
 <script src="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.min.js'?>"></script>
 <!-- CKEDITOR -->
 <script src="<?php echo base_url().'assets/ckeditor/ckeditor.js'?>"></script>
-<!-- SELECT2 -->
-<script src="<?php echo base_url().'assets/plugins/select2/select2.full.min.js'?>"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url().'assets/plugins/fastclick/fastclick.js'?>"></script>
 <!-- AdminLTE App -->

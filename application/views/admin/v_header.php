@@ -10,7 +10,10 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><?= $this->config->item('nama_aplikasi_mini')?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><?= $this->config->item('nama_aplikasi')?></span>
+      <span class="logo-lg">
+        Administrator
+        <!-- <?= $this->config->item('nama_aplikasi')?> -->
+      </span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

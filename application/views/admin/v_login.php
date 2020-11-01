@@ -25,7 +25,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg"> <img width="70%;" src="<?php echo base_url().'assets/images/banatechlogo.png'?>">
+    <p class="login-box-msg"> <img width="50%;" src="<?php echo base_url().'assets/images/logo-karang-taruna.png'?>">
     </p><hr/>
     <!-- <h3 style="text-align:center;"> <span style="color:#209B60;"><?= $this->config->item('nama_aplikasi')?></span> <?= $this->config->item('lokasi')?></h3> -->
     <form action="<?php echo site_url().'admin/login/auth'?>" method="post">

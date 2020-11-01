@@ -10,8 +10,8 @@ class Home extends CI_Controller{
     {
         $a['vaData'] = $this->Home_model->getDataBlog();
         $a['vaKategori'] = $this->Kategori_model->countAllKategori();
+        $a['title']  = "Home";
         $a['p']      = 'frontend/home/v_home';
-
         $this->load->view('frontend/v_index', $a);
     }
 
@@ -130,7 +130,7 @@ class Home extends CI_Controller{
       $uri3 = $this->uri->segment(3);
 
       $data_detail_blog       = $this->Home_model->getDetailBlog($uri3);
-
+      $a['vaKategori']       = $this->Kategori_model->countAllKategori();
       $a['cData_Judul'] = $data_detail_blog['Judul'];
       $a['cData_Deskripsi'] = $data_detail_blog['Deskripsi'];
       $a['cData_Foto'] = $data_detail_blog['Image'];
