@@ -76,5 +76,23 @@ class About_model extends CI_Model{
 		$dbd = $this->dbd->delete("tbl_struktur_organisasi","ID='$nID'");
 		return $dbd;
     }
+
+		public function getDataPanitia()
+		{
+				$vaData = [];
+	        $vaArr  = [];
+	        $cField = "s.ID, s.UserName, s.Jabatan, p.pengguna_nama Nama, p.pengguna_photo as Foto";
+	        $cJoin  = "left join tbl_pengguna p on p.pengguna_username=s.UserName";
+
+	        $dbDataRow = $this->dbd->select("tbl_struktur_organisasi s",$cField,"",$cJoin);
+	        $dbData    = $this->dbd->select("tbl_struktur_organisasi s",$cField,"",$cJoin,"");
+	        while($dbRow = $this->dbd->getrow($dbData)){
+	            $vaArr[] = $dbRow;
+	        }
+	        $vaData['row']  = $this->dbd->rows($dbDataRow);
+	        $vaData['data'] = $vaArr;
+
+	        return $vaData;
+		}
 }
 ?>

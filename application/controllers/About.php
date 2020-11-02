@@ -10,8 +10,11 @@ class About extends CI_Controller{
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
 		$a['cAbout_Deskripsi'] = getCfg("msAboutUs_Deskripsi");
 		$a['vaData'] 		   = $this->About_model->getDataPengguna();
+		$a['vaDataPanitia'] 		   = $this->About_model->getDataPanitia();
 		$a['p']				   = 'frontend/about/v_about';
 		$a['title']			   = "Tentang Kami";
 		$this->load->view('frontend/v_index', $a);
 	}
+
+
 }
