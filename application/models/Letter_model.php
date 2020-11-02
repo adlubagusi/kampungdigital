@@ -16,5 +16,15 @@ class Letter_model extends CI_Model{
   		return $vaArray;
   	}
 
+		function getDataSurat(){
+  		$vaArray = [];
+  		$cField = "tbl_download.*";
+  		$dbData = $this->dbd->select("tbl_download",$cField);
+  		while($dbRow = $this->dbd->getrow($dbData)){
+  			$vaArray[] = $dbRow;
+  		}
+  		return $vaArray;
+  	}
+
 }
 ?>

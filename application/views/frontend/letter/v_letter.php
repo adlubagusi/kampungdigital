@@ -4,22 +4,22 @@
       <div class="col-lg-12">
         <div class="row">
           <?php
-            for($i = 0; $i < 8; $i++){
-
+          foreach ($vaData as $key => $i) {
+              $cSurat_judul = $i['Judul'];
+              $cSurat_File = $i['File'];
 
           ?>
           <div class="col-md-3">
             <div class="single-recent-blog-post card-view">
               <div class="thumb">
-                <img class="card-img rounded-0" src="<?=base_url()?>template/img/blog/thumb/thumb-card1.png" alt="">
+                <img class="card-img rounded-0" src="<?=base_url()?>assets/images/logo-pdf.png" alt="">
 
               </div>
               <div class="details mt-20">
                 <a href="blog-single.html">
-                  <h3>Fast cars and rickety bridges as
-                      he grand tour returns</h3>
+                  <h3><?php echo $cSurat_judul?></h3>
                 </a>
-                <a class="button" href="#" style="width: 100%;text-align: center;">Download <i class="ti-arrow-right"></i></a>
+                <a href="<?=base_url().$cSurat_File?>" class="button" href="#" style="width: 100%;text-align: center;">Download <i class="ti-arrow-right"></i></a>
               </div>
             </div>
           </div>
