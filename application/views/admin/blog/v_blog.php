@@ -67,7 +67,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="cEmail" class="col-sm-2 control-label">Deskripsi</label>
+                        <label for="cSlug" class="col-sm-2 control-label">Link</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="cSlug" class="form-control" id="cSlug" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cDeskripsi" class="col-sm-2 control-label">Deskripsi</label>
                         <div class="col-sm-10">
                             <textarea id="cDeskripsi" name="cDeskripsi" required rows="20" cols="5"></textarea>
                         </div>

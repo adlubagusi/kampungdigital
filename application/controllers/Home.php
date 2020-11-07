@@ -35,10 +35,13 @@ class Home extends CI_Controller{
       foreach ($vaData as $key => $i) {
           $cBlog_judul = $i['Judul'];
           $cBlog_deskripsi = $i['Deskripsi'];
+          $cBlog_kategori = $i['KeteranganKategori'];
+          $cBlog_kategori_link = strtolower($cBlog_kategori);
           $cBlog_date = $i['DateTime'];
           $cBlog_image = $i['Image'];
           $cBlog_author = $i['Author'];
           $cBlog_id = $i['ID'];
+          $cBlog_slug = $i['Slug'];
 
           $cDeskripsi = substr($cBlog_deskripsi,0, 200);
 
@@ -52,12 +55,13 @@ class Home extends CI_Controller{
           $html .= '</ul>';
           $html .= '</div>';
           $html .= '<div class="details mt-20">';
-          $html .= '<a href="blog-single.html">';
+          $html .= '<a href="'.base_url().'p/'.$cBlog_slug.'">';
           $html .= '<h3>'.$cBlog_judul.'</h3>';
           $html .= '</a>';
-          $html .= '<p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>';
+          $html .= '<p class="tag-list-inline">Tag: <a href="'.base_url().'c/'.$cBlog_kategori_link.'">'.$cBlog_kategori.'</a></p>';
           $html .= '<p>'.$cDeskripsi.'......</p>';
-          $html .= '<a class="button" href="'.base_url().'home/det/'.$cBlog_id.'">Read More <i class="ti-arrow-right"></i></a>';
+          // $html .= '<a class="button" href="'.base_url().'home/det/'.$cBlog_id.'">Read More <i class="ti-arrow-right"></i></a>';
+          $html .= '<a class="button" href="'.base_url().'p/'.$cBlog_slug.'">Read More <i class="ti-arrow-right"></i></a>';
           $html .= '</div>';
           $html .= '</div>';
 
