@@ -16,7 +16,7 @@
 
               </div>
               <div class="details mt-20">
-                <a href="blog-single.html">
+                <a href="#">
                   <h3><?php echo $cSurat_judul?></h3>
                 </a>
                 <a href="<?=base_url().$cSurat_File?>" class="button" href="#" style="width: 100%;text-align: center;" download>Download <i class="ti-arrow-right"></i></a>

@@ -45,7 +45,7 @@ class Blog extends CI_Controller{
         $cBlog_deskripsi = $i['Deskripsi'];
         $cBlog_date = $i['DateTime'];
         $cBlog_image = $i['Image'];
-        $cBlog_author = $i['Author'];
+        $cBlog_author = (empty($i['Author'])) ? "Admin" : $i['Author'];
         $cBlog_id = $i['ID'];
         $cBlog_slug = $i['Slug'];
 
@@ -58,7 +58,7 @@ class Blog extends CI_Controller{
         $html .= '<img class="card-img rounded-0" src="'.base_url().'assets/images/blog/'.$cBlog_image.'" alt="" style="width:350px;height:300px;">';
         $html .= '<ul class="thumb-info">';
         $html .= '<li><a href="#"><i class="ti-user"></i>'.$cBlog_author.'</a></li>';
-        $html .= '<li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>';
+        $html .= '<li><a href="#"><i class="ti-themify-favicon"></i>0 Comments</a></li>';
         $html .= '</ul>';
         $html .= '</div>';
         $html .= '<div class="details mt-20">';
@@ -147,6 +147,8 @@ class Blog extends CI_Controller{
     $a['cData_Foto'] = $data_detail_blog['Image'];
     $a['cData_Date'] = $data_detail_blog['DateTime'];
     $a['cData_Author'] = $data_detail_blog['Author'];
+    $a['cData_kategori'] = $data_detail_blog['KeteranganKategori'];
+    $a['cData_kategori_link'] = strtolower($a['cData_kategori']);
     $a['p']  = "frontend/blog/v_blog_details";
     $this->load->view('frontend/v_index', $a);
   }

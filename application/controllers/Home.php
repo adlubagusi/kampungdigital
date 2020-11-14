@@ -39,9 +39,11 @@ class Home extends CI_Controller{
           $cBlog_kategori_link = strtolower($cBlog_kategori);
           $cBlog_date = $i['DateTime'];
           $cBlog_image = $i['Image'];
-          $cBlog_author = $i['Author'];
+          $cBlog_author = (empty($i['Author'])) ? "Admin" : $i['Author'];
           $cBlog_id = $i['ID'];
           $cBlog_slug = $i['Slug'];
+          // $cBlog_tgl  = date2String($i['DateTime']);
+          $dBlog_tgl  = string2date($i['DateTime']);
 
           $cDeskripsi = substr($cBlog_deskripsi,0, 200);
 
@@ -50,8 +52,8 @@ class Home extends CI_Controller{
           $html .= '<img class="img-fluid" src="'.base_url().'assets/images/blog/'.$cBlog_image.'" alt="">';
           $html .= '<ul class="thumb-info">';
           $html .= '<li><a href="#"><i class="ti-user"></i>'.$cBlog_author.'</a></li>';
-          $html .= '<li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>';
-          $html .= '<li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>';
+          $html .= '<li><a href="#"><i class="ti-notepad"></i>'.$dBlog_tgl.'</a></li>';
+          $html .= '<li><a href="#"><i class="ti-themify-favicon"></i>0 Comments</a></li>';
           $html .= '</ul>';
           $html .= '</div>';
           $html .= '<div class="details mt-20">';
@@ -140,6 +142,8 @@ class Home extends CI_Controller{
       $a['cData_Foto'] = $data_detail_blog['Image'];
       $a['cData_Date'] = $data_detail_blog['DateTime'];
       $a['cData_Author'] = $data_detail_blog['Author'];
+      $a['cData_kategori'] = $data_detail_blog['KeteranganKategori'];
+      $a['cData_kategori_link'] = strtolower($a['cData_Kategori']);
       $a['p']  = "frontend/blog/v_blog_details";
       $this->load->view('frontend/v_index', $a);
     }
