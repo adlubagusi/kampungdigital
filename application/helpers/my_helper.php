@@ -69,6 +69,7 @@ function gen_menu_admin(){
       ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[  
           ["icon"=>"fa-gears", "url"=>"setting-general", "text"=>"Pengaturan Umum"],
           ["icon"=>"fa-facebook-square", "url"=>"setting-socmed", "text"=>"Pengaturan Sosmed"],
+          ["icon"=>"fa-globe", "url"=>"setting-seo", "text"=>"Pengaturan SEO"],
       ]],                                                                       
       ["icon"=>"fa-sign-out", "url"=>"logout", "text"=>"Logout"],
   );

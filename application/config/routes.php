@@ -65,6 +65,7 @@ $route['admin/about-struktur']  = 'admin/about/struktur';
 
 //front end
 $route['c/(:any)']           = 'blog';
+$route['p/(:any)']           = 'blog/detail';
 
 $route['404_override']       = '';
 $route['translate_uri_dashes'] = FALSE;

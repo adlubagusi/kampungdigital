@@ -54,17 +54,22 @@
     }); 
 
     function blog_edit(id) {
-        $("#modalBlog").modal('show');
+        $("#nID").val("");
+        $("#cJudul").val("");
+        $("#cSlug").val("");
+        CKEDITOR.instances['cDeskripsi'].setData("");
         $.ajax({
             type: "GET",
             url: base_url+"admin/blog/detail/"+id,
             success: function(data) {
                 $("#nID").val(data.ID);
                 $("#cJudul").val(data.Judul);
+                $("#cSlug").val(data.Slug);
                 CKEDITOR.instances['cDeskripsi'].setData(data.Deskripsi);
                 $("#optKategori").val(data.Kategori);
             }
         });
+        $("#modalBlog").modal('show');
         return false;
     }
 
@@ -101,5 +106,22 @@
         return false;
     }
 
-    
+    $("#cJudul").on('keypress', function(e){
+        var cText = $(this).val();
+        var cSlug = convertToSlug(cText)
+        $("#cSlug").val(cSlug);
+        
+    })
+    $("#cJudul").on('blur', function(e){
+        var cText = $(this).val();
+        var cSlug = convertToSlug(cText)
+        $("#cSlug").val(cSlug);
+    })
+    function convertToSlug(cText){
+        return cText
+            .toLowerCase()
+            .replace(/ /g,'-')
+            .replace(/[^\w-]+/g,'')
+            ;
+    }
 </script>

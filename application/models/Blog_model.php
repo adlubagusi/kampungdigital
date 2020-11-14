@@ -46,8 +46,18 @@ class Blog_model extends CI_Model{
     return $dbRow;
   }
 
-  public function save($cJudul,$cDeskripsi,$optKategori,$cGambar='',$nID=0){
+  public function getDetailBlogBySlug($cSlug)
+  {
+    $dbRow  = [];
+    $dbData = $this->dbd->select("tbl_blog", "*", "Slug='$cSlug'");
+    $dbRow  = $this->dbd->getrow($dbData);
+    $dbRow['KeteranganKategori'] = $this->getKeteranganKategori($dbRow['Kategori']);
+    return $dbRow;
+  }
+
+  public function save($cJudul,$cSlug,$cDeskripsi,$optKategori,$cGambar='',$nID=0){
     $vaUpd = array("Judul"=>$cJudul,
+            "Slug"=>$cSlug,
             "Deskripsi"=>$cDeskripsi,
             "Kategori"=>$optKategori,
             "DateTime"=>date_now());
