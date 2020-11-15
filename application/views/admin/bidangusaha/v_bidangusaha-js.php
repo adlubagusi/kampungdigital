@@ -1,44 +1,47 @@
-
 <script>
-    $(function () {
-        $("#listFile").css("display","none");
-        CKEDITOR.replace('cDeskripsi');
-		pagination("datatabel", base_url+"/admin/suratmasuk/getdata", []);
-    });
-    
-    $('#f_surat_masuk').submit(function(e){
-        e.preventDefault(); 
-        var table = $('#datatabel').DataTable();
 
+    $(function () {
+
+        $(".select2").select2();
+        CKEDITOR.replace('cDeskripsi');
+        pagination("datatabel", base_url+"/admin/bidangusaha/getdata", []);
+    });
+
+    $('#f_bidangusaha').submit(function(e){
+        e.preventDefault();
+        
+        var table = $('#datatabel').DataTable();
+        //untuk ambil value dari ckeditor
         var cDeskripsi = CKEDITOR.instances.cDeskripsi.getData();
         
         var fd = new FormData(this);
         fd.append('cDeskripsi',cDeskripsi);
         $.ajax({
-            url:'<?php echo base_url();?>/admin/suratmasuk/save',
+            url:'<?php echo base_url();?>/admin/bidangusaha/save',
             type:"post",
             data:fd,
             processData:false,
             contentType:false,
             cache:false,
             async:false,
-            success: function(data){
-                Swal.fire({
-                    icon: "success",
-                    title: "Data Disimpan!",
-                });  
-                $("#modalSuratMasuk").modal("hide");
-                table.ajax.reload();
+            success: function(reply){
+                if(reply == "ok"){
+                    Swal.fire({
+                        icon: "success",
+                        title: "Data Disimpan!",
+                    });  
+                    $("#modalBidangUsaha").modal('hide');
+                    table.ajax.reload();
+                }
         }
         });
     });
-    
-    $('#f_submit_hapus').submit(function(e){
-        e.preventDefault(); 
-        var table = $('#datatabel').DataTable();
 
+    $('#f_submit_hapus').submit(function(e){
+        var table = $('#datatabel').DataTable();
+        e.preventDefault(); 
         $.ajax({
-            url:'<?php echo base_url();?>/admin/suratmasuk/delete',
+            url:'<?php echo base_url();?>/admin/bidangusaha/delete',
             type:"post",
             data:new FormData(this),
             processData:false,
@@ -51,7 +54,62 @@
         }
         });
     }); 
-    
+
+    function bidangusaha_edit(id) {
+        $("#nID").val("");
+        $("#cJudul").val("");
+        $("#cSlug").val("");
+        CKEDITOR.instances['cDeskripsi'].setData("");
+        $.ajax({
+            type: "GET",
+            url: base_url+"admin/bidangusaha/detail/"+id,
+            success: function(data) {           
+                loadFileBidangUsaha(data.File)
+                $("#cKode").val(data.Kode);
+                $("#cNamaOwner").val(data.NamaOwner);
+                $("#cNamaUsaha").val(data.NamaUsaha);
+                $("#cAlamatUsaha").val(data.AlamatUsaha);
+                $("#cHP").val(data.HP);
+                CKEDITOR.instances['cDeskripsi'].setData(data.Deskripsi);
+                $("#optJenisUsaha").val(data.JenisUsaha);
+                $("#vaFile").val("");
+            }
+        });
+        $("#modalBidangUsaha").modal('show');
+        return false;
+    }
+
+    function bidangusaha_hapus(id){
+        $("#modalHapus").modal('show');
+            $.ajax({
+            type: "GET",
+            url: base_url+"admin/bidangusaha/detail/"+id,
+            success: function(data) {
+                $("#cKodeHapus").val(data.Kode);
+                $("#cNamaOwnerHapus").html(data.NamaOwner);
+            }
+        });
+    }
+    function bidangusaha_show(id){
+        $("#modalBidangUsahaShow").modal('show');
+        $.ajax({
+            type: "GET",
+            url: base_url+"admin/bidangusaha/detail/"+id,
+            success: function(data) {
+                $("#nIDShow").val(data.ID);
+                $("#cJudulShow").val(data.Judul);
+                $("#cDeskripsiShow").html(data.Deskripsi)
+                $("#optKategoriShow").html(data.KeteranganKategori);
+
+                //disable input
+                $("#nIDShow").prop('disabled', true);
+                $("#cJudulShow").prop('disabled', true);
+                $("#imgShow").attr('src', base_url+"assets/images/bidangusaha/"+data.Image);
+            }
+        });
+        return false;
+    }
+
     $("#vaFile").on('change', function(e){
         e.preventDefault();
         var name   = $(this).attr("id");
@@ -61,7 +119,7 @@
             fdfile.append("vaFile[]",file[i]);
         }
         $.ajax({
-            url:'<?php echo base_url();?>/admin/suratmasuk/savingFile',
+            url:'<?php echo base_url();?>/admin/bidangusaha/savingFile',
             type:"post",
             data:fdfile,
             processData:false,
@@ -74,45 +132,9 @@
         });
     })
 
-    function surat_masuk_edit(id) {
-        $("#vaFile").val("");
-        $("#listFile").css("display","none")
-        
-        $("#modalSuratMasuk").modal('show');
-        
-        $.ajax({
-        type: "GET",
-        url: base_url+"admin/suratmasuk/detail/"+id,
-        success: function(data) {
-            loadFileSuratMasuk(data.File)
-            $("#cKode").val(data.Kode);
-            $("#dTgl").val(data.Tgl);
-            $("#cNoSurat").val(data.NoSurat);
-            $("#cDari").val(data.Dari);
-            $("#cPerihal").val(data.Perihal);
-            CKEDITOR.instances['cDeskripsi'].setData(data.Deskripsi);
-            $("#cUserName").val(data.UserName);
-            $("#vaFile").val("");
-        }
-        });
-        return false;
-    }
-
-    function surat_masuk_hapus(id){
-        $("#modalHapus").modal('show');
-        $.ajax({
-        type: "GET",
-        url: base_url+"admin/suratmasuk/detail/"+id,
-        success: function(data) {
-            $("#cKodeHapus").val(data.Kode);
-            $("#cLabelKodeHapus").html(data.Kode);
-        }
-        });
-    }
-
-    function loadFileSuratMasuk(file){
+    function loadFileBidangUsaha(file){
         $("#listFile").css("display","none");
-        $("#areaFileSuratMasuk").html("");
+        $("#areaFileBidangUsaha").html("");
         for(var i=0; i<file.length;i++){
             var id           = file[i].ID;
             var cFileName    = file[i].FileName;
@@ -120,8 +142,8 @@
             var cFilePath    = file[i].FilePath;
             var cFileSize    = file[i].FileSize;
 
-            var $liFileWO         = $('<li class="itemFileWO"></li>');
-            var $spanIconWO       = $('<span class="mailbox-attachment-icon"><i class="fa fa-file-text"></i></span>');
+            var $liFile           = $('<li class="itemFile"></li>');
+            var $spanIcon         = $('<span class="mailbox-attachment-icon"><i class="fa fa-file-text"></i></span>');
             var $aDeleteFile      = $('<a href="#" onclick="deleteFile('+id+')" style="float: right;margin: 5px;color: red;font-size:20px;" title="Hapus File?"><i class="fa fa-trash"></i></a>');
             var $divFileInfo      = $('<div class="mailbox-attachment-info"></div>');
             var $aLinkFile        = $('<a href="'+base_url+cFilePath+'" class="mailbox-attachment-name" title="'+cFileName+'" target="_blank"><i class="fa fa-paperclip"></i>&nbsp;'+cFileNameCut+'</a>');
@@ -131,11 +153,11 @@
             $spanDownloadFile.append($aLinkDownload);
             $divFileInfo.append($aLinkFile);
             $divFileInfo.append($spanDownloadFile);
-            $liFileWO.append($aDeleteFile);
-            $liFileWO.append($spanIconWO);
-            $liFileWO.append($divFileInfo);
+            $liFile.append($aDeleteFile);
+            $liFile.append($spanIcon);
+            $liFile.append($divFileInfo);
 
-            $("#areaFileSuratMasuk").append($liFileWO);
+            $("#areaFileBidangUsaha").append($liFile);
         } 
         if(file.length > 0) $("#listFile").css("display","block");
     }
@@ -157,7 +179,7 @@
                 var fd = new FormData();
                 fd.append('cID', id)
                 $.ajax({
-                    url:'<?php echo base_url();?>/admin/suratmasuk/deleteFile',
+                    url:'<?php echo base_url();?>/admin/bidangusaha/deleteFile',
                     type:"post",
                     data:fd,
                     processData:false,
@@ -169,11 +191,10 @@
                             icon: "success",
                             title: "File Dihapus!",
                         });  
-                        $("#modalSuratMasuk").modal('hide');
+                        $("#modalBidangUsaha").modal('hide');
                 }
                 });
             }
         });
     }
-    
 </script>

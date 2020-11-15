@@ -263,6 +263,29 @@ class FuncDB_model extends CI_Model{
 			PRIMARY KEY (`ID`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_socmed',$cSQL);   
+
+		$cSQL = "CREATE TABLE `tbl_jenis_usaha` (
+			`ID` int(11) NOT NULL AUTO_INCREMENT,
+			`Kode` varchar(4) NOT NULL,
+			`Keterangan` varchar(50) NOT NULL,
+			PRIMARY KEY (`ID`)
+		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		$this->AddTable('tbl_jenis_usaha',$cSQL);
+
+		$cSQL = "CREATE TABLE `tbl_bidang_usaha` (
+			`ID` int(11) NOT NULL AUTO_INCREMENT,
+			`Kode` varchar(255) NOT NULL,
+			`NamaOwner` varchar(100) NOT NULL,
+			`NamaUsaha` varchar(500) NOT NULL,
+			`AlamatUsaha` text NOT NULL,
+			`HP` varchar(13) NOT NULL,
+			`JenisUsaha` varchar(4) NOT NULL,
+			`Deskripsi` text NOT NULL,
+			`UserName` varchar(50) NOT NULL,
+			`DateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY (`ID`)
+		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		$this->AddTable('tbl_bidang_usaha_file',$cSQL);
     }
 }
 ?>

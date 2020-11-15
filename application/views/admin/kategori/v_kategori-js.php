@@ -64,7 +64,6 @@
         type: "GET",
         url: base_url+"admin/kategori/detail/"+id,
         success: function(data) {
-            console.log(data);            
             $("#nIDHapus").val(data.ID);
             $("#cKeteranganHapus").html(data.Keterangan);
         }

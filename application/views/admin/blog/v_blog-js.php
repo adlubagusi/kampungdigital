@@ -79,7 +79,6 @@
             type: "GET",
             url: base_url+"admin/blog/detail/"+id,
             success: function(data) {
-                console.log(data);            
                 $("#nIDHapus").val(data.ID);
                 $("#cJudulHapus").html(data.Judul);
             }
@@ -91,7 +90,6 @@
             type: "GET",
             url: base_url+"admin/blog/detail/"+id,
             success: function(data) {
-                console.log(data);
                 $("#nIDShow").val(data.ID);
                 $("#cJudulShow").val(data.Judul);
                 $("#cDeskripsiShow").html(data.Deskripsi)
