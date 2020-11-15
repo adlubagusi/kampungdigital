@@ -74,6 +74,7 @@ class Blog extends CI_Controller{
         $va          = $this->input->post();
         $nID         = $va['nID'];
         $cJudul      = $va['cJudul'];
+        $cSlug       = $va['cSlug'];
         $cDeskripsi  = $va['cDeskripsi'];
         $optKategori = $va['optKategori'];
         $config['upload_path'] = './assets/images/blog/'; //path folder
@@ -102,7 +103,7 @@ class Blog extends CI_Controller{
                 redirect('admin/blog');
             }
         }
-        $this->Blog_model->save($cJudul,$cDeskripsi,$optKategori,$cGambar,$nID);
+        $this->Blog_model->save($cJudul,$cSlug,$cDeskripsi,$optKategori,$cGambar,$nID);
         echo $this->session->set_flashdata('msg','success');
         // redirect('admin/Blog');
     

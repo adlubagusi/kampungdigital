@@ -109,7 +109,6 @@
 	var url = get_url[4];
 	var url2 = get_url[5];
 	var url3 = get_url[6];
-	// console.log(url+","+url2+","+url3);
   
   function pagination(indentifier, url, config) {
     $('#'+indentifier).DataTable({

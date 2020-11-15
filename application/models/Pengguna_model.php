@@ -46,7 +46,7 @@ class Pengguna_model extends CI_Model{
 					   "pengguna_level"=>$optLevel,
 					   "pengguna_divisi"=>$cDivisi,
 					   "pengguna_tampilhome"=>$cTampil);
-		$cWhere = "pengguna_username='$cUserName'";
+		$cWhere = "pengguna_id='$nID'";
 		if($nID == 0) {
 			$this->dbd->insert("tbl_pengguna",$vaUpd); 
 		}else{

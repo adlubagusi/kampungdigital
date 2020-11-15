@@ -56,19 +56,23 @@ function gen_menu_admin(){
         ["icon"=>"fa-file-o", "url"=>"about-text", "text"=>"Teks About Us"]            
       ]],                                                                       
       ["icon"=>"fa-users", "url"=>"pengguna", "text"=>"Pengguna"],
+      ["icon"=>"fa-newspaper-o", "url"=>"blog", "text"=>"Blog", "submenu"=>[      //menu spesial    
+          ["icon"=>"fa-list", "url"=>"blog", "text"=>"List Postingan"],           //
+          ["icon"=>"fa-wrench", "url"=>"blog-kategori", "text"=>"Kategori"]       //
+      ]],                                                                         //
       ["icon"=>"fa-envelope", "url"=>"suratmasuk", "text"=>"Surat Masuk", "submenu"=>[            
         ["icon"=>"fa-envelope-o", "url"=>"suratmasuk-list", "text"=>"List Surat Masuk"]  
       ]], 
       ["icon"=>"fa-file-text-o", "url"=>"suratdigital", "text"=>"Surat Digital", "submenu"=>[            
         ["icon"=>"fa-file-text-o", "url"=>"suratdigital-list", "text"=>"List Surat Digital"]  
+      ]],  
+      ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha", "text"=>"Bidang Usaha", "submenu"=>[            
+        ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha-list", "text"=>"List Bidang Usaha"]  
       ]],                                                                       
-      ["icon"=>"fa-newspaper-o", "url"=>"blog", "text"=>"Blog", "submenu"=>[      //menu spesial    
-          ["icon"=>"fa-list", "url"=>"blog", "text"=>"List Postingan"],           //
-          ["icon"=>"fa-wrench", "url"=>"blog-kategori", "text"=>"Kategori"]       //
-      ]],                                                                         //
-      ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[  
+       ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[  
           ["icon"=>"fa-gears", "url"=>"setting-general", "text"=>"Pengaturan Umum"],
           ["icon"=>"fa-facebook-square", "url"=>"setting-socmed", "text"=>"Pengaturan Sosmed"],
+          ["icon"=>"fa-globe", "url"=>"setting-seo", "text"=>"Pengaturan SEO"],
       ]],                                                                       
       ["icon"=>"fa-sign-out", "url"=>"logout", "text"=>"Logout"],
   );

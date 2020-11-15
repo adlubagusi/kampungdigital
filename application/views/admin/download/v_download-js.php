@@ -75,7 +75,6 @@
         type: "GET",
         url: base_url+"admin/download/detail/"+id,
         success: function(data) {
-            console.log(data);
             $("#cKode").val(data.Kode);
             $("#cJudul").val(data.Judul);
             $("#vaFile").val("");

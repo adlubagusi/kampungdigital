@@ -7,8 +7,7 @@
               <a href="#"><h4><?php echo $cData_Judul?></h4></a>
               <div class="user_details">
                 <div class="float-left">
-                  <a href="#">Lifestyle</a>
-                  <a href="#">Gadget</a>
+                  <a href="<?=base_url().'c/'.$cData_kategori_link?>"><?=$cData_kategori?></a>
                 </div>
                 <div class="float-right mt-sm-0 mt-3">
                   <div class="media">
@@ -23,20 +22,20 @@
                 </div>
               </div>
               <?php echo $cData_Deskripsi?>
-             <div class="news_d_footer flex-column flex-sm-row">
-               <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>Lily and 4 people like this</a>
-               <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>06 Comments</a>
-               <div class="news_socail ml-sm-auto mt-sm-0 mt-2">
-             <a href="#"><i class="fab fa-facebook-f"></i></a>
-             <a href="#"><i class="fab fa-twitter"></i></a>
-             <a href="#"><i class="fab fa-dribbble"></i></a>
-             <a href="#"><i class="fab fa-behance"></i></a>
-           </div>
+             <div class="news_d_footer flex-column flex-sm-row" style="display:none">
+                <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>Lily and 4 people like this</a>
+                <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>06 Comments</a>
+                <div class="news_socail ml-sm-auto mt-sm-0 mt-2">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                    <a href="#"><i class="fab fa-behance"></i></a>
+                </div>
              </div>
             </div>
 
 
-        <div class="navigation-area">
+            <div class="navigation-area" style="display:none">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                         <div class="thumb">
@@ -63,8 +62,9 @@
                         </div>
                     </div>
                 </div>
-              </div>
-              <div class="comments-area">
+            </div>
+           
+            <div class="comments-area" style="display:none">
                   <h4>05 Comments</h4>
                   <div class="comment-list">
                       <div class="single-comment justify-content-between d-flex">

@@ -36,16 +36,17 @@ class Home_model extends CI_Model{
 		}
 
 		function getDataBlogPagination($limit_start, $limit){
-  		$vaArray = [];
-  		$cField = "tbl_blog.*";
+			$vaArray = [];
+			$cField = "tbl_blog.*";
 			$cOrder = "ID";
 			$nLimit = "$limit_start, $limit";
-  		$dbData = $this->dbd->select("tbl_blog",$cField,"","","",$cOrder,$nLimit);
-  		while($dbRow = $this->dbd->getrow($dbData)){
-  			$vaArray[] = $dbRow;
-  		}
-  		return $vaArray;
-  	}
+			$dbData = $this->dbd->select("tbl_blog",$cField,"","","",$cOrder,$nLimit);
+			while($dbRow = $this->dbd->getrow($dbData)){
+				$dbRow['KeteranganKategori'] = $this->getKeteranganKategori($dbRow['Kategori']);
+				$vaArray[] = $dbRow;
+			}
+			return $vaArray;
+		}
 
 		function getDetailBlog($nID){
 	    $dbRow  = [];

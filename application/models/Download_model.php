@@ -41,7 +41,7 @@ class Download_model extends CI_Model{
         $vaUpd = array("Kode"=>$cKode,
                         "Judul"=>$cJudul,
                         "UserName"=>$cUserName,
-                        "DateTime"=>date_now());
+                        "DateTime"=>Now());
         $cWhere = "Kode='$cKode'";
         $this->dbd->update("tbl_download",$vaUpd,$cWhere,"ID");
         if(!empty($cFile)){
@@ -52,7 +52,7 @@ class Download_model extends CI_Model{
     public function saveFile($cKode,$cFile)
     {
         $vaUpd = array("File"=>$cFile,
-                        "DateTime"=>date_now());
+                        "DateTime"=>Now());
         $cWhere = "Kode='$cKode'";
         $this->dbd->update("tbl_download",$vaUpd,$cWhere,"ID");
         

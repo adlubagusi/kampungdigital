@@ -6,6 +6,7 @@ $config['nama_aplikasi_mini'] = "APP";
 $config['lokasi'] = "";
 $config['copyright'] = "Banatech Indonesia";
 $config['upload_dokumen_dir'] = "assets/doc/";
+$config['upload_file_dir'] = "assets/files/";
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

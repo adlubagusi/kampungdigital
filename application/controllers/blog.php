@@ -45,8 +45,9 @@ class Blog extends CI_Controller{
         $cBlog_deskripsi = $i['Deskripsi'];
         $cBlog_date = $i['DateTime'];
         $cBlog_image = $i['Image'];
-        $cBlog_author = $i['Author'];
+        $cBlog_author = (empty($i['Author'])) ? "Admin" : $i['Author'];
         $cBlog_id = $i['ID'];
+        $cBlog_slug = $i['Slug'];
 
         $cDeskripsi = substr($cBlog_deskripsi,0, 200);
 
@@ -57,13 +58,15 @@ class Blog extends CI_Controller{
         $html .= '<img class="card-img rounded-0" src="'.base_url().'assets/images/blog/'.$cBlog_image.'" alt="" style="width:350px;height:300px;">';
         $html .= '<ul class="thumb-info">';
         $html .= '<li><a href="#"><i class="ti-user"></i>'.$cBlog_author.'</a></li>';
-        $html .= '<li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>';
+        $html .= '<li><a href="#"><i class="ti-themify-favicon"></i>0 Comments</a></li>';
         $html .= '</ul>';
         $html .= '</div>';
         $html .= '<div class="details mt-20">';
-        $html .= '<a href="'.base_url().'blog/det/'.$cBlog_id.'"><h3>'.$cBlog_judul.'</h3></a>';
+        // $html .= '<a href="'.base_url().'blog/det/'.$cBlog_id.'"><h3>'.$cBlog_judul.'</h3></a>';
+        $html .= '<a href="'.base_url().'p/'.$cBlog_slug.'"><h3>'.$cBlog_judul.'</h3></a>';
         $html .= '<p>'.$cDeskripsi.'........</p>';
-        $html .= '<a class="button" href="'.base_url().'blog/det/'.$cBlog_id.'">Read More <i class="ti-arrow-right"></i></a>';
+        // $html .= '<a class="button" href="'.base_url().'blog/det/'.$cBlog_id.'">Read More <i class="ti-arrow-right"></i></a>';
+        $html .= '<a class="button" href="'.base_url().'p/'.$cBlog_slug.'">Read More <i class="ti-arrow-right"></i></a>';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
@@ -133,10 +136,10 @@ class Blog extends CI_Controller{
     j($data);
   }
 
-  public function det(){
-    $uri3 = $this->uri->segment(3);
-
-    $data_detail_blog       = $this->Blog_model->getDetailBlog($uri3);
+  public function detail(){
+    $uri2 = $this->uri->segment(2);
+    // $data_detail_blog       = $this->Blog_model->getDetailBlog($uri3);
+    $data_detail_blog       = $this->Blog_model->getDetailBlogBySlug($uri2);
 
     $a['vaKategori'] = $this->Kategori_model->countAllKategori();
     $a['cData_Judul'] = $data_detail_blog['Judul'];
@@ -144,6 +147,8 @@ class Blog extends CI_Controller{
     $a['cData_Foto'] = $data_detail_blog['Image'];
     $a['cData_Date'] = $data_detail_blog['DateTime'];
     $a['cData_Author'] = $data_detail_blog['Author'];
+    $a['cData_kategori'] = $data_detail_blog['KeteranganKategori'];
+    $a['cData_kategori_link'] = strtolower($a['cData_kategori']);
     $a['p']  = "frontend/blog/v_blog_details";
     $this->load->view('frontend/v_index', $a);
   }

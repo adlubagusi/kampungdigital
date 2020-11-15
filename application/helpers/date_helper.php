@@ -94,7 +94,12 @@ function date_2b($date=''){
 }
 
 function date_now(){
-    return date("Y-m-d H:i:s") ;
+    return date('Ymd_His') ;
+}
+
+function Now()
+{
+    return date('Y-m-d H:i:s');
 }
 
 function sql_2sql($cChar){

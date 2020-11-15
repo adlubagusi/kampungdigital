@@ -28,7 +28,6 @@
         type: "GET",
         url: base_url+"admin/about/detailstrukturanggota/"+id,
         success: function(data) {
-            console.log(data);
             $("#nID").val(data.ID);
             $('#cUserName').select2('data', {id: data.UserName, text: data.Nama});
             $("#cJabatan").val(data.Jabatan);
@@ -43,7 +42,6 @@
         type: "GET",
         url: base_url+"admin/about/detailstrukturanggota/"+id,
         success: function(data) {
-            console.log(data);
             $("#nIDHapus").val(data.ID);
             $("#cLabelUserNameHapus").html(data.UserName);
         }

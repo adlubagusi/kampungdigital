@@ -114,11 +114,11 @@ class Pengguna extends CI_Controller{
         }
         if ($cPassword <> "" && $cPassword <> $cPassword2) {
             echo $this->session->set_flashdata('msg','error');
-            redirect('admin/pengguna');
+            //redirect('admin/pengguna');
         }else{
             $this->Pengguna_model->save($cNama,$optJK,$cUserName,$cPassword,$cEmail,$cKontak,$optLevel,$cDivisi,$lTampil,$cGambar,$nID);
             echo $this->session->set_flashdata('msg','success');
-                redirect('admin/pengguna');
+                //redirect('admin/pengguna');
         }
     }
 
