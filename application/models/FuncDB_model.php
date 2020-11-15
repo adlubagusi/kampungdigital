@@ -192,8 +192,6 @@ class FuncDB_model extends CI_Model{
         }
 	}
 
-
-
     public function CheckDatabase(){
 		$this->AddField("tbl_pengguna","pengguna_divisi","varchar(50)","","pengguna_level");
 		$this->AddField("tbl_pengguna","pengguna_tampilhome","char(1)","","pengguna_divisi");
@@ -286,6 +284,19 @@ class FuncDB_model extends CI_Model{
 			PRIMARY KEY (`ID`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_bidang_usaha_file',$cSQL);
+
+		$cSQL = "CREATE TABLE `tbl_komentar` (
+			`ID` int(11) NOT NULL AUTO_INCREMENT,
+			`Nama` varchar(100) NOT NULL,
+			`Email` varchar(100) NOT NULL,
+			`Message` text NOT NULL,
+			`Status` varchar(2) NOT NULL,
+			`BlogID` int(11) NOT NULL,
+			`Parent` int(11) NOT NULL,
+			`DateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY (`ID`)
+		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		$this->AddTable('tbl_komentar',$cSQL);
     }
 }
 ?>
