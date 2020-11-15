@@ -36,6 +36,7 @@ class BidangUsaha extends CI_Controller{
         foreach ($vaData['data'] as $d) {
             $data_ok = array();
             $data_ok[] = $no++;
+            $data_ok[] = '<img src="'.base_url().'assets/images/bidangusaha/'.$d['Foto'].'" width="150px">';
             $data_ok[] = $d['NamaOwner'];
             $data_ok[] = $d['NamaUsaha'];
             $data_ok[] = $d['HP'];
@@ -74,7 +75,7 @@ class BidangUsaha extends CI_Controller{
     
     public function save(){
         $va         = $this->input->post();
-        
+        $cError     = "";
         $vaKode         = $va['cKode'];
         if($vaKode == "" || trim(empty($vaKode))){
             $cKode = $this->mdl->getKode() ;
@@ -89,20 +90,50 @@ class BidangUsaha extends CI_Controller{
         $cDeskripsi   = $va['cDeskripsi'];
         $cJenisUsaha  = $va['optJenisUsaha'];
         $cUserName    = getSession("username");
+
+        $config['upload_path'] = './assets/images/bidangusaha/'; //path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
+        if(!is_dir($config['upload_path'])){
+            mkdir($config['upload_path'],0777,true);
+        }
+        $cFoto     = "";
+        $this->upload->initialize($config);
+        if(!empty($_FILES['cFileFoto']['name'])){
+            if ($this->upload->do_upload('cFileFoto')){
+                    $gbr = $this->upload->data();
+                    //Compress Image
+                    $config['image_library']='gd2';
+                    $config['source_image']='./assets/images/bidangusaha/'.$gbr['file_name'];
+                    $config['create_thumb']= FALSE;
+                    $config['maintain_ratio']= FALSE;
+                    $config['quality']= '60%';
+                    $config['width']= 460;
+                    $config['height']= 710;
+                    $config['new_image']= './assets/images/bidangusaha/'.$gbr['file_name'];
+                    $this->load->library('image_lib', $config);
+                    $this->image_lib->resize();
+
+                    $cFoto    = $gbr['file_name'];
+            }else{
+                $cError.= "error upload gambar";
+            }
+        }
+
         $nYear        = date('Y');
         $cKategori    = "/BidangUsaha";
         $adir         = $this->config->item('upload_file_dir') . $nYear . $cKategori ;
         if(!is_dir($adir)){
             mkdir($adir,0777,true);
         }
-        $upload         = array("vaFile"=>getSession("ss_bidang_usaha_vaFile")) ;
+        $vaUploadFile     = array("vaFile"=>getSession("ss_bidang_usaha_vaFile")) ;
         $va['FilePath'] = ""; 
         $dir            = "" ;
         // print_r($upload);
         // exit;
-        if(!empty($upload)){
+        if(!empty($vaUploadFile)){
             //$this->mdl->deleteFile($va) ;
-            foreach ($upload as $key => $value) {
+            foreach ($vaUploadFile as $key => $value) {
                 if(!empty($value)){
                     foreach ($value as $tkey => $tval) {
                         if(!empty($tval)){
@@ -124,9 +155,10 @@ class BidangUsaha extends CI_Controller{
             }
         }
         $saving = $this->mdl->save($cKode,$cNamaOwner,$cNamaUsaha,$cAlamatUsaha,$cHP,
-                                                $cDeskripsi,$cJenisUsaha,$cUserName);
+                                    $cDeskripsi,$cJenisUsaha,$cUserName,$cFoto);
         savesession("ss_bidang_usaha_vaFile" , "") ;
-        echo ('ok');
+        if($cError == "") $cError.= "ok";
+        echo $cError;
     }
 
     public function savingFile()

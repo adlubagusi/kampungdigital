@@ -17,7 +17,7 @@
         var fd = new FormData(this);
         fd.append('cDeskripsi',cDeskripsi);
         $.ajax({
-            url:'<?php echo base_url();?>/admin/bidangusaha/save',
+            url:'<?php echo base_url();?>admin/bidangusaha/save',
             type:"post",
             data:fd,
             processData:false,
@@ -32,6 +32,11 @@
                     });  
                     $("#modalBidangUsaha").modal('hide');
                     table.ajax.reload();
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: reply,
+                    });  
                 }
         }
         });
@@ -41,7 +46,7 @@
         var table = $('#datatabel').DataTable();
         e.preventDefault(); 
         $.ajax({
-            url:'<?php echo base_url();?>/admin/bidangusaha/delete',
+            url:'<?php echo base_url();?>admin/bidangusaha/delete',
             type:"post",
             data:new FormData(this),
             processData:false,

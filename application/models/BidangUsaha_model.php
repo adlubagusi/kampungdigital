@@ -11,7 +11,7 @@ class BidangUsaha_model extends CI_Model{
         $vaData = [];
         $vaArr  = [];
         $cField = "b.ID, b.Kode, b.NamaOwner, b.NamaUsaha, b.AlamatUsaha, b.HP, b.Deskripsi, b.JenisUsaha, 
-                   b.DateTime, j.Keterangan as KeteranganJenisUsaha";
+                   b.DateTime, j.Keterangan as KeteranganJenisUsaha, b.Foto";
         $cWhere = "b.NamaOwner like '%".$cSearch['value']."%'
                     OR j.Keterangan like '%".$cSearch['value']."%'";
         $cJoin  = "left join tbl_jenis_usaha j on j.Kode=b.JenisUsaha";
@@ -37,7 +37,7 @@ class BidangUsaha_model extends CI_Model{
         return $dbRow;
     }
 
-    public function save($cKode,$cNamaOwner,$cNamaUsaha,$cAlamatUsaha,$cHP,$cDeskripsi,$cJenisUsaha,$cUserName){
+    public function save($cKode,$cNamaOwner,$cNamaUsaha,$cAlamatUsaha,$cHP,$cDeskripsi,$cJenisUsaha,$cUserName,$cFoto){
         $vaUpd = array("Kode"=>$cKode,
                         "NamaOwner"=>$cNamaOwner,
                         "NamaUsaha"=>$cNamaUsaha,
@@ -49,6 +49,16 @@ class BidangUsaha_model extends CI_Model{
                         "DateTime"=>Now());
         $cWhere = "Kode='$cKode'";
         $this->dbd->update("tbl_bidang_usaha",$vaUpd,$cWhere,"ID");
+        if($cFoto <> ""){
+            $this->saveFoto($cFoto,$cKode);
+        }
+    }
+
+    public function saveFoto($cFoto,$cKode)
+	{
+        $cWhere = "Kode='$cKode'";
+        $vaUpd = array("Foto"=>$cFoto);
+        $this->dbd->edit("tbl_bidang_usaha",$vaUpd,$cWhere);
     }
 
 	public function saveFile($va)

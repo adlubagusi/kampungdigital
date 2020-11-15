@@ -24,13 +24,20 @@
             contentType:false,
             cache:false,
             async:false,
-            success: function(data){
-                Swal.fire({
-                    icon: "success",
-                    title: "Data Disimpan!",
-                });  
-                $("#modalBlog").modal('hide');
-                table.ajax.reload();
+            success: function(reply){
+                if(reply == "ok"){
+                    Swal.fire({
+                        icon: "success",
+                        title: "Data Disimpan!",
+                    });  
+                    $("#modalBlog").modal('hide');
+                    table.ajax.reload();
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: reply,
+                    });  
+                }
         }
         });
     });
