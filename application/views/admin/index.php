@@ -2,7 +2,7 @@
 <?php
     //error_reporting(0);
     $query=$this->db->query("SELECT * FROM tbl_inbox WHERE Status='1'");
-    $query2=$this->db->query("SELECT * FROM tbl_komentar WHERE komentar_status='0'");
+    $query2=$this->db->query("SELECT * FROM tbl_komentar WHERE Status='0'");
     $jum_comment=$query2->num_rows();
     $jum_pesan=$query->num_rows();
     $a['jum_comment'] = $jum_comment;
@@ -13,7 +13,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?= $this->config->item('nama_aplikas')?> | <?=$title?></title>
+  <title><?= $this->config->item('nama_aplikasi')?> | <?=$title?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">

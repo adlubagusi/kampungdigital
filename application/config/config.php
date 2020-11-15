@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['nama_aplikasi'] = "Karang Taruna Sumbersari RW 3";
+$config['nama_aplikasi'] = "Kampung Digital";
 $config['nama_aplikasi_mini'] = "APP";
 $config['lokasi'] = "";
 $config['copyright'] = "Banatech Indonesia";
