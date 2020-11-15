@@ -49,7 +49,7 @@
       <!-- /.row -->
     </section>
 
-    
+
 
     <div class="modal fade" id="modalPengguna" tabindex="-1" role="dialog" aria-labelledby="modalPenggunaLabel">
         <div class="modal-dialog" role="document">
@@ -129,7 +129,7 @@
                     <div class="form-group">
                         <!-- <label for="cDivisi" class="col-sm-4 control-label">Divisi/Bagian</label> -->
                         <div class="col-sm-7">
-                            <input type="hidden" name="cDivisi" class="form-control" id="cDivisi" placeholder="Divisi" required>
+                            <input type="hidden" name="cDivisi" class="form-control" id="cDivisi" value="-" placeholder="Divisi" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -150,7 +150,7 @@
             </div>
         </div>
     </div>
-    
+
     <!--Modal Hapus Pengguna-->
     <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="modalHapusLabel">
         <div class="modal-dialog" role="document">
