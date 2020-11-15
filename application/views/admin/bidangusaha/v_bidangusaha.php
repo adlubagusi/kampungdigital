@@ -27,6 +27,7 @@
                 <thead>
                 <tr>
                     <th>No</th>
+                    <th>Cover</th>
                     <th>Nama Owner</th>
                     <th>Nama Usaha</th>
                     <th>No. HP</th>
@@ -73,12 +74,20 @@
                         <div class="col-sm-10">
                             <input type="text" name="cNamaUsaha" class="form-control" id="cNamaUsaha" placeholder="Nama Usaha" required>
                         </div>
-                    </div><div class="form-group">
+                    </div>
+                    <div class="form-group">
+                        <label for="cFileFoto" class="col-sm-2 control-label">Foto</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="cFileFoto" id="cFileFoto"  class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="cAlamatUsaha" class="col-sm-2 control-label">Alamat Usaha</label>
                         <div class="col-sm-10">
                             <input type="text" name="cAlamatUsaha" class="form-control" id="cAlamatUsaha" placeholder="Alamat Usaha" required>
                         </div>
-                    </div><div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <label for="cHP" class="col-sm-2 control-label">No. HP</label>
                         <div class="col-sm-10">
                             <input type="text" name="cHP" class="form-control" id="cHP" placeholder="No. HP" required>

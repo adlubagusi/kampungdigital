@@ -283,6 +283,16 @@ class FuncDB_model extends CI_Model{
 			`DateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY (`ID`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		$this->AddTable('tbl_bidang_usaha',$cSQL);
+
+		$cSQL = "CREATE TABLE `tbl_bidang_usaha_file` (
+			`ID` int(11) NOT NULL AUTO_INCREMENT,
+			`Kode` varchar(255) NOT NULL,
+			`FilePath` varchar(255) NOT NULL,
+			`UserName` varchar(255) NOT NULL,
+			`DateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY (`ID`)
+		   ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_bidang_usaha_file',$cSQL);
 
 		$cSQL = "CREATE TABLE `tbl_komentar` (
@@ -297,6 +307,9 @@ class FuncDB_model extends CI_Model{
 			PRIMARY KEY (`ID`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_komentar',$cSQL);
+
+		$this->AddField("tbl_pengguna","pengguna_tampilhome","char(1)","","pengguna_divisi");
+		$this->AddField("tbl_bidang_usaha", "Foto", "varchar(255)", "", "Deskripsi");
     }
 }
 ?>

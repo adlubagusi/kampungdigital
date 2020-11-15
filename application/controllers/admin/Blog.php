@@ -91,22 +91,19 @@ class Blog extends CI_Controller{
                     $config['create_thumb']= FALSE;
                     $config['maintain_ratio']= FALSE;
                     $config['quality']= '60%';
-                    $config['width']= 300;
-                    $config['height']= 300;
-                    $config['new_image']= './assets/images/'.$gbr['file_name'];
+                    $config['width']= 710;
+                    $config['height']= 460;
+                    $config['new_image']= './assets/images/blog/'.$gbr['file_name'];
                     $this->load->library('image_lib', $config);
                     $this->image_lib->resize();
 
                     $cGambar    = $gbr['file_name'];
             }else{
-                echo $this->session->set_flashdata('msg','warning');
-                redirect('admin/blog');
+                echo "error upload gambar";
             }
         }
         $this->Blog_model->save($cJudul,$cSlug,$cDeskripsi,$optKategori,$cGambar,$nID);
-        echo $this->session->set_flashdata('msg','success');
-        // redirect('admin/Blog');
-    
+        echo "ok";    
     }
 
     public function delete(){
