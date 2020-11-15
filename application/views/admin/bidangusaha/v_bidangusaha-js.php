@@ -85,7 +85,6 @@
             type: "GET",
             url: base_url+"admin/bidangusaha/detail/"+id,
             success: function(data) {
-                console.log(data);            
                 $("#cKodeHapus").val(data.Kode);
                 $("#cNamaOwnerHapus").html(data.NamaOwner);
             }
@@ -97,7 +96,6 @@
             type: "GET",
             url: base_url+"admin/bidangusaha/detail/"+id,
             success: function(data) {
-                console.log(data);
                 $("#nIDShow").val(data.ID);
                 $("#cJudulShow").val(data.Judul);
                 $("#cDeskripsiShow").html(data.Deskripsi)

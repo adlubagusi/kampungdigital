@@ -84,7 +84,6 @@
         type: "GET",
         url: base_url+"admin/suratmasuk/detail/"+id,
         success: function(data) {
-            console.log(data);
             loadFileSuratMasuk(data.File)
             $("#cKode").val(data.Kode);
             $("#dTgl").val(data.Tgl);
@@ -93,7 +92,7 @@
             $("#cPerihal").val(data.Perihal);
             CKEDITOR.instances['cDeskripsi'].setData(data.Deskripsi);
             $("#cUserName").val(data.UserName);
-            $("#cKode").focus();
+            $("#vaFile").val("");
         }
         });
         return false;
@@ -112,7 +111,7 @@
     }
 
     function loadFileSuratMasuk(file){
-        console.log(file);
+        $("#listFile").css("display","none");
         $("#areaFileSuratMasuk").html("");
         for(var i=0; i<file.length;i++){
             var id           = file[i].ID;
@@ -173,8 +172,6 @@
                         $("#modalSuratMasuk").modal('hide');
                 }
                 });
-            
-            
             }
         });
     }
