@@ -90,7 +90,8 @@ class BidangUsaha extends CI_Controller{
         $cDeskripsi   = $va['cDeskripsi'];
         $cJenisUsaha  = $va['optJenisUsaha'];
         $cUserName    = getSession("username");
-
+        $cSlug        = $va['cSlug'];
+        
         $config['upload_path'] = './assets/images/bidangusaha/'; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
@@ -155,7 +156,7 @@ class BidangUsaha extends CI_Controller{
             }
         }
         $saving = $this->mdl->save($cKode,$cNamaOwner,$cNamaUsaha,$cAlamatUsaha,$cHP,
-                                    $cDeskripsi,$cJenisUsaha,$cUserName,$cFoto);
+                                    $cDeskripsi,$cJenisUsaha,$cUserName,$cFoto,$cSlug);
         savesession("ss_bidang_usaha_vaFile" , "") ;
         if($cError == "") $cError.= "ok";
         echo $cError;

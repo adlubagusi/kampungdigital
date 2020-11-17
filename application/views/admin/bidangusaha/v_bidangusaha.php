@@ -76,6 +76,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="cSlug" class="col-sm-2 control-label">Link</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="cSlug" class="form-control" id="cSlug" placeholder="Link" required readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="cFileFoto" class="col-sm-2 control-label">Foto</label>
                         <div class="col-sm-10">
                             <input type="file" name="cFileFoto" id="cFileFoto"  class="form-control"/>

@@ -310,6 +310,7 @@ class FuncDB_model extends CI_Model{
 
 		$this->AddField("tbl_pengguna","pengguna_tampilhome","char(1)","","pengguna_divisi");
 		$this->AddField("tbl_bidang_usaha", "Foto", "varchar(255)", "", "Deskripsi");
+		$this->AddField("tbl_bidang_usaha", "Slug", "varchar(255)", "");
     }
 }
 ?>
