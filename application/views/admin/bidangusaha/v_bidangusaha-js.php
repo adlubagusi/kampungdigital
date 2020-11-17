@@ -75,6 +75,7 @@
                 $("#cNamaUsaha").val(data.NamaUsaha);
                 $("#cAlamatUsaha").val(data.AlamatUsaha);
                 $("#cHP").val(data.HP);
+                $("#cSlug").val(data.Slug);
                 CKEDITOR.instances['cDeskripsi'].setData(data.Deskripsi);
                 $("#optJenisUsaha").val(data.JenisUsaha);
                 $("#vaFile").val("");
@@ -201,5 +202,24 @@
                 });
             }
         });
+    }
+
+    $("#cNamaUsaha").on('keypress', function(e){
+        var cText = $(this).val();
+        var cSlug = convertToSlug(cText)
+        $("#cSlug").val(cSlug);
+        
+    })
+    $("#cNamaUsaha").on('blur', function(e){
+        var cText = $(this).val();
+        var cSlug = convertToSlug(cText)
+        $("#cSlug").val(cSlug);
+    })
+    function convertToSlug(cText){
+        return cText
+            .toLowerCase()
+            .replace(/ /g,'-')
+            .replace(/[^\w-]+/g,'')
+            ;
     }
 </script>

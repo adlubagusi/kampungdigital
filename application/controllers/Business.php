@@ -10,6 +10,7 @@ class Business extends CI_Controller{
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
 		$a['cAbout_Deskripsi'] = getCfg("msAboutUs_Deskripsi");
 		$a['vaData'] 					= $this->Business_model->getDataBidangUsaha();
+		$a['title']			   = "Bidang Usaha";
 		$a['p']				   = 'frontend/business/v_business';
 		$this->load->view('frontend/v_index', $a);
 	}

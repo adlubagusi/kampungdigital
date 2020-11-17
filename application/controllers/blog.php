@@ -11,7 +11,7 @@ class Blog extends CI_Controller{
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
 		$a['cAbout_Deskripsi'] = getCfg("msAboutUs_Deskripsi");
     $a['vaKategori']       = $this->Kategori_model->countAllKategori();
-    $a['']                 = "Blog";
+    $a['title']                 = "Blog";
     $a['p']				         = 'frontend/blog/v_blog';
 		$this->load->view('frontend/v_index', $a);
 	}
