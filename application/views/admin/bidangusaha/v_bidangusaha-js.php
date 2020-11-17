@@ -64,6 +64,8 @@
         $("#nID").val("");
         $("#cJudul").val("");
         $("#cSlug").val("");
+        $("#cFileFoto").val("");
+        $("#cDeskripsi").val("");
         CKEDITOR.instances['cDeskripsi'].setData("");
         $.ajax({
             type: "GET",
