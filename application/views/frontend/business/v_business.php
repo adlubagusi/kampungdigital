@@ -5,21 +5,23 @@
         <div class="row">
           <?php
           foreach ($vaData as $key => $i) {
-              $cSurat_judul = $i['Judul'];
-              $cSurat_File = $i['File'];
+              $cBidangUsaha_Nama = $i['NamaUsaha'];
+              $cBidangUsaha_Foto = $i['Foto'];
+              $cBidangUsaha_Id = $i['ID'];
+              $cBidangUsaha_Kode = $i['Kode'];
 
           ?>
           <div class="col-md-3">
             <div class="single-recent-blog-post card-view">
               <div class="thumb">
-                <img class="card-img rounded-0" src="<?=base_url()?>assets/images/logo-pdf.png" alt="">
+                <img class="card-img rounded-0" src="<?=base_url()?>assets/images/bidangusaha/<?php echo $cBidangUsaha_Foto?>" alt="">
 
               </div>
               <div class="details mt-20">
                 <a href="#">
-                  <h3><?php echo $cSurat_judul?></h3>
+                  <h3><?php echo $cBidangUsaha_Nama?></h3>
                 </a>
-                <a href="<?=base_url().$cSurat_File?>" class="button" href="#" style="width: 100%;text-align: center;" download>Download <i class="ti-arrow-right"></i></a>
+                <a href="<?=base_url()?>business/<?php echo $cBidangUsaha_Kode;?>" class="button" href="#" style="width: 100%;text-align: center;"> Read More <i class="ti-arrow-right"></i></a>
               </div>
             </div>
           </div>
