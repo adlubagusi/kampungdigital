@@ -22,7 +22,8 @@ function gen_menu()
         array("icon"=>"", "url"=>"about", "text"=>"Tentang Kami"),
         array("icon"=>"", "url"=>"blog", "text"=>"Blog"),
         array("icon"=>"", "url"=>"contact", "text"=>"Kontak"),
-				array("icon"=>"", "url"=>"letter", "text"=>"Surat")
+				array("icon"=>"", "url"=>"letter", "text"=>"Surat"),
+				array("icon"=>"", "url"=>"business", "text"=>"Bidang Usaha")
       );
 
     if ($menu != null) {
@@ -48,38 +49,38 @@ function gen_menu()
 function gen_menu_admin(){
   $CI 	=& get_instance();
   $url = $CI->uri->segment(2);
-  
+
   $menu = array(
       ["icon"=>"fa-home", "url"=>"dashboard", "text"=>"Dashboard"], //menu biasa
-      ["icon"=>"fa-list", "url"=>"about", "text"=>"Data Pokok", "submenu"=>[ 
-        ["icon"=>"fa-user", "url"=>"about-struktur", "text"=>"Struktur Organisasi"],  
-        ["icon"=>"fa-file-o", "url"=>"about-text", "text"=>"Teks About Us"]            
-      ]],                                                                       
+      ["icon"=>"fa-list", "url"=>"about", "text"=>"Data Pokok", "submenu"=>[
+        ["icon"=>"fa-user", "url"=>"about-struktur", "text"=>"Struktur Organisasi"],
+        ["icon"=>"fa-file-o", "url"=>"about-text", "text"=>"Teks About Us"]
+      ]],
       ["icon"=>"fa-users", "url"=>"pengguna", "text"=>"Pengguna"],
-      ["icon"=>"fa-newspaper-o", "url"=>"blog", "text"=>"Blog", "submenu"=>[      //menu spesial    
+      ["icon"=>"fa-newspaper-o", "url"=>"blog", "text"=>"Blog", "submenu"=>[      //menu spesial
           ["icon"=>"fa-list", "url"=>"blog", "text"=>"List Postingan"],           //
           ["icon"=>"fa-wrench", "url"=>"blog-kategori", "text"=>"Kategori"]       //
       ]],                                                                         //
-      ["icon"=>"fa-envelope", "url"=>"suratmasuk", "text"=>"Surat Masuk", "submenu"=>[            
-        ["icon"=>"fa-envelope-o", "url"=>"suratmasuk-list", "text"=>"List Surat Masuk"]  
-      ]], 
-      ["icon"=>"fa-file-text-o", "url"=>"suratdigital", "text"=>"Surat Digital", "submenu"=>[            
-        ["icon"=>"fa-file-text-o", "url"=>"suratdigital-list", "text"=>"List Surat Digital"]  
-      ]],  
-      ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha", "text"=>"Bidang Usaha", "submenu"=>[            
-        ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha-list", "text"=>"List Bidang Usaha"]  
-      ]],                                                                       
-       ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[  
+      ["icon"=>"fa-envelope", "url"=>"suratmasuk", "text"=>"Surat Masuk", "submenu"=>[
+        ["icon"=>"fa-envelope-o", "url"=>"suratmasuk-list", "text"=>"List Surat Masuk"]
+      ]],
+      ["icon"=>"fa-file-text-o", "url"=>"suratdigital", "text"=>"Surat Digital", "submenu"=>[
+        ["icon"=>"fa-file-text-o", "url"=>"suratdigital-list", "text"=>"List Surat Digital"]
+      ]],
+      ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha", "text"=>"Bidang Usaha", "submenu"=>[
+        ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha-list", "text"=>"List Bidang Usaha"]
+      ]],
+       ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[
           ["icon"=>"fa-gears", "url"=>"setting-general", "text"=>"Pengaturan Umum"],
           ["icon"=>"fa-facebook-square", "url"=>"setting-socmed", "text"=>"Pengaturan Sosmed"],
           ["icon"=>"fa-globe", "url"=>"setting-seo", "text"=>"Pengaturan SEO"],
-      ]],                                                                       
+      ]],
       ["icon"=>"fa-sign-out", "url"=>"logout", "text"=>"Logout"],
   );
   $vaMenu = $menu;
   foreach($vaMenu as $k=>$m){
     $cUrl  = "#";
-    
+
     $cActive = "";
     if($m['url'] <> "") $cUrl = base_url()."admin/".$m['url'];
     $cIcon = $m['icon'];
@@ -90,11 +91,11 @@ function gen_menu_admin(){
     if($url == $m['url'] || $vaUrl[0] == $m['url']) $cActive = "active";
     echo '<li class="'.$cActive.'">
             <a href="'.$cUrl.'">
-            <i class="fa '.$cIcon.'"></i> 
+            <i class="fa '.$cIcon.'"></i>
             <span>'.$cText.'</span>';
     echo '  <span class="pull-right-container">
               '.$cIconRight.'
-            </span>';                  
+            </span>';
     echo '  </a>';
     if(isset($m['submenu'])){
       $vaSubmenu = $m['submenu'];
@@ -103,7 +104,7 @@ function gen_menu_admin(){
         echo '<li><a href="'.base_url().'admin/'.$sm['url'].'"><i class="fa '.$sm['icon'].'"></i> '.$sm['text'].'</a></li>';
       }
       echo '</ul>';
-    }      
+    }
     echo '</li>';
   }
 }
