@@ -1,7 +1,7 @@
 <!--Counter Inbox-->
 <?php
     //error_reporting(0);
-    $query=$this->db->query("SELECT * FROM tbl_inbox WHERE Status='1'");
+    $query=$this->db->query("SELECT * FROM tbl_inbox WHERE Status='0'");
     $query2=$this->db->query("SELECT * FROM tbl_komentar WHERE Status='0'");
     $jum_comment=$query2->num_rows();
     $jum_pesan=$query->num_rows();
@@ -62,7 +62,7 @@
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
+       Database: <b><?=$this->db->database;?></b> | <b>Version</b> 1.0
     </div>
     <strong>Copyright &copy; 2018 <a href="http://banatechindo.com">Banatech Indonesia</a>.</strong> All rights reserved.
   </footer>
@@ -92,6 +92,14 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url().'assets/dist/js/demo.js'?>"></script>
 <script>
+  var base_url = '<?= base_url()?>';
+  getDataInbox();
+
+  // interval function 
+  setInterval(function(){
+    getDataInbox();
+  }, 7000);
+
   //get url
   function getSiteUrl(){
       var vars = [], hash;
@@ -104,7 +112,6 @@
       }
       return vars;
   }
-  var base_url = '<?= base_url()?>';
   var get_url = getSiteUrl();
 	var url = get_url[4];
 	var url2 = get_url[5];
@@ -129,6 +136,18 @@
         }
     });
   }
+
+  function getDataInbox(){
+    $.ajax({
+        type: "GET",
+        url: base_url+"admin/inbox/countUnreadInbox",
+        success: function(reply) {
+            // console.log(reply);
+            $(".countInbox").text(reply);
+        }
+    });
+  }
+
 </script>
 <?php 
     //load javascript
