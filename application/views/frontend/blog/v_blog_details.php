@@ -1,3 +1,23 @@
+<style>
+  #sendmessage {
+    color: green;
+    border: 1px solid green;
+    display: none;
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  #errormessage {
+    color: red;
+    border: 1px solid red;
+    display: none;
+    text-align: left;
+    padding: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+</style>
 <section class="blog-post-area section-margin">
   <div class="container">
     <div class="row">
@@ -63,7 +83,7 @@
                     </div>
                 </div>
             </div>
-           
+
             <div class="comments-area" style="display:none">
                   <h4>05 Comments</h4>
                   <div class="comment-list">
@@ -162,24 +182,24 @@
                       </div>
                   </div>
               </div>
-              <div class="comment-form">
+              <div>
                   <h4>Leave a Reply</h4>
-                  <form>
+                  <div id="sendmessage"></div>
+                  <div id="errormessage"></div>
+                  <form class="form-contact contact_form" action="" method="post" id="contactForm" novalidate="novalidate">
+                      <input type="hidden" id="cBlogId" name="cBlogId" value="<?php echo $cData_Id;?>">
                       <div class="form-group form-inline">
-                        <div class="form-group col-lg-6 col-md-6 name">
-                          <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                        <div class="form-group col-lg-6 col-md-6 name" style="padding-left: 0;">
+                          <input type="text" class="form-control" id="cName" name="cName" placeholder="Masukkan Nama Anda" style="width: 100%;">
                         </div>
                         <div class="form-group col-lg-6 col-md-6 email">
-                          <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                          <input type="email" class="form-control" id="cEmail" name="cEmail" placeholder="Masukkan Alamat Email Anda" style="width: 100%;">
                         </div>
                       </div>
                       <div class="form-group">
-                          <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
+                          <textarea class="form-control mb-10" rows="5" name="cMessage" id="cMessage" placeholder="Masukkan Pesan Anda" required="" style="height: 120px;"></textarea>
                       </div>
-                      <div class="form-group">
-                          <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                      </div>
-                      <a href="#" class="button submit_btn">Post Comment</a>
+                      <button type="submit" class="button button--active button-contactForm">Kirim Pesan</button>
                   </form>
               </div>
       </div>
