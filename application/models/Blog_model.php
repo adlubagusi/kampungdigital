@@ -96,7 +96,7 @@ class Blog_model extends CI_Model{
 		$dbd = $this->dbd->delete("tbl_blog","ID='$nID'");
 		return $dbd;
   }
-  
+
   public function getKeteranganKategori($cKode)
   {
     $cKeterangan  = "";
@@ -127,5 +127,41 @@ class Blog_model extends CI_Model{
 			$vaArray[] = $dbRow;
 		}
 		return $vaArray;
+	}
+
+	public function sendMail($va)
+	{
+			$cBlogId    = $va['cBlogId'];
+			$cNama    = $va['cName'];
+			$cEmail   = $va['cEmail'];
+			$cMessage = $va['cMessage'];
+			$cStatus = "0";
+			$cParent = null;
+			$cHost    = $_SERVER['HTTP_HOST'];
+
+			$vaInsert = array("Nama"=>$cNama, "Email"=>$cEmail, "Parent"=>$cParent, "Status"=>$cStatus, "Message"=>$cMessage, "BlogId"=>$cBlogId);
+			$this->dbd->insert("tbl_komentar",$vaInsert);
+
+			// Send Email
+			if($cHost <> "localhost"){
+					$cMail   = getCfg("msEmail","");
+					$vaMail  = explode(";",$cMail);
+					foreach($vaMail as $mail){
+							$cReceiverEmail = $mail;
+							$subjectMail    = $cSubject ." Dari: ".$cNama;
+							$headers        = "MIME-Version: 1.0" . "\r\n";
+							$headers        .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+							$headers        .= 'From: <'.$cEmail.'>' . "\r\n";
+							$message = "
+									<html>
+											<body>
+											".$cMessage."
+											</body>
+									</html>
+							";
+
+							mail($cReceiverEmail,$subjectMail,$message,$headers);
+					}
+			}
 	}
 }

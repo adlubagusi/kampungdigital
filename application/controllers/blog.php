@@ -142,6 +142,7 @@ class Blog extends CI_Controller{
     $data_detail_blog       = $this->Blog_model->getDetailBlogBySlug($uri2);
 
     $a['vaKategori'] = $this->Kategori_model->countAllKategori();
+    $a['cData_Id'] = $data_detail_blog['ID'];
     $a['cData_Judul'] = $data_detail_blog['Judul'];
     $a['cData_Deskripsi'] = $data_detail_blog['Deskripsi'];
     $a['cData_Foto'] = $data_detail_blog['Image'];
@@ -152,4 +153,15 @@ class Blog extends CI_Controller{
     $a['p']  = "frontend/blog/v_blog_details";
     $this->load->view('frontend/v_index', $a);
   }
+
+  public function sendMail()
+	{
+
+		$va = $this->input->post();
+		// print_r($va);
+    // $cKategori = getVal($cKategori, "Kode", "tbl_kategori","Keterangan"); //ambil Kode dari tbl_kategori where keterangan=cKategori
+    // $cBlogID = getVal($cKategori, "ID", "tbl_blog","Keterangan");
+		$this->Blog_model->sendMail($va);
+		echo ("Terima kasih telah menghubungi kami. Kami akan membalas pesan anda secepatnya");
+	}
 }
