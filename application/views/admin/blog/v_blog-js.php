@@ -82,7 +82,7 @@
 
     function blog_hapus(id){
         $("#modalHapus").modal('show');
-            $.ajax({
+        $.ajax({
             type: "GET",
             url: base_url+"admin/blog/detail/"+id,
             success: function(data) {

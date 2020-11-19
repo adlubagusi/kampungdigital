@@ -203,7 +203,7 @@ class FuncDB_model extends CI_Model{
 				`Subject` varchar(200) DEFAULT NULL,
 				`Message` text,
 				`Tgl` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-				`Status` int(11) DEFAULT '1' COMMENT '1=Belum dilihat, 0=Telah dilihat',
+				`Status` int(11) DEFAULT '1' COMMENT '0=Belum dilihat, 1=Telah dilihat, 2=Telah dibalas, 3=Dihapus',
 				PRIMARY KEY (`ID`)
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_inbox',$cSQL);
@@ -302,15 +302,16 @@ class FuncDB_model extends CI_Model{
 			`Message` text NOT NULL,
 			`Status` varchar(2) NOT NULL,
 			`BlogID` int(11) NOT NULL,
-			`Parent` int(11) NOT NULL,
+			`Parent` int(11) DEFAULT NULL,
 			`DateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY (`ID`)
-		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		   ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin";
 		$this->AddTable('tbl_komentar',$cSQL);
 
 		$this->AddField("tbl_pengguna","pengguna_tampilhome","char(1)","","pengguna_divisi");
 		$this->AddField("tbl_bidang_usaha", "Foto", "varchar(255)", "", "Deskripsi");
 		$this->AddField("tbl_bidang_usaha", "Slug", "varchar(255)", "");
+		$this->AddField("tbl_inbox", "Parent", "int(11)", 0);
     }
 }
 ?>
