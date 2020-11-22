@@ -17,7 +17,7 @@ class Login extends CI_Controller{
         if(count($vaAdmin) > 0){
             $this->session->set_userdata('masuk',true);
             $this->session->set_userdata('user',$cUserName);
-            
+
             $cIdAdmin   = $vaAdmin['pengguna_id'];
             $cNamaUser  = $vaAdmin['pengguna_nama'];
             $cUser      = $vaAdmin['pengguna_username'];
