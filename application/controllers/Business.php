@@ -17,7 +17,6 @@ class Business extends CI_Controller{
 
 	public function det(){
     $uri3 = $this->uri->segment(2);
-		echo "uri3 = ".$uri3;
     $data_detail_business       = $this->Business_model->getDetailBidangUsaha($uri3);
 		$kode_file = $data_detail_business['Kode'];
 		$kode_jenis = $data_detail_business['JenisUsaha'];
@@ -25,6 +24,7 @@ class Business extends CI_Controller{
 		$data_jenis_business = $this->Business_model->getJenisBidangUsaha($kode_jenis);
 
     $a['cData_Judul'] = $data_detail_business['NamaUsaha'];
+		$a['cData_Id'] = $data_detail_business['ID'];
     $a['cData_Deskripsi'] = $data_detail_business['Deskripsi'];
     $a['cData_Foto'] = $data_detail_business['Foto'];
 		$a['cData_File'] = $data_file_business[0]['FilePath'];
@@ -35,4 +35,13 @@ class Business extends CI_Controller{
     $a['p']  = "frontend/business/v_business_detail";
     $this->load->view('frontend/v_index', $a);
   }
+
+	public function sendMail()
+	{
+
+		$va = $this->input->post();
+		print_r($va);
+		$this->Busniness_model->sendMail($va);
+		echo ("Terima kasih telah menghubungi kami. Kami akan membalas pesan anda secepatnya");
+	}
 }

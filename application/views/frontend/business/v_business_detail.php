@@ -1,3 +1,23 @@
+<style>
+  #sendmessage {
+    color: green;
+    border: 1px solid green;
+    display: none;
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  #errormessage {
+    color: red;
+    border: 1px solid red;
+    display: none;
+    text-align: left;
+    padding: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+</style>
 <section class="blog-post-area section-margin">
   <div class="container">
     <div class="row">
@@ -48,7 +68,7 @@
                   <span style="color: black;font-size: 20px;font-family: sans-serif;">Keterangan : </span>
                   <?php echo $cData_Deskripsi?>
                 </div>
-            </div>
+              </div>
 
              <div class="news_d_footer flex-column flex-sm-row" style="display:none">
                 <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>Lily and 4 people like this</a>
@@ -91,129 +111,29 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="comments-area" style="display:none">
-                  <h4>05 Comments</h4>
-                  <div class="comment-list">
-                      <div class="single-comment justify-content-between d-flex">
-                          <div class="user justify-content-between d-flex">
-                              <div class="thumb">
-                                  <img src="<?=base_url()?>template/img/blog/c1.jpg" alt="">
-                              </div>
-                              <div class="desc">
-                                  <h5><a href="#">Emilly Blunt</a></h5>
-                                  <p class="date">December 4, 2017 at 3:12 pm </p>
-                                  <p class="comment">
-                                      Never say goodbye till the end comes!
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="reply-btn">
-                                  <a href="" class="btn-reply text-uppercase">reply</a>
-                          </div>
+            <div style="margin-top: 25px;">
+                <h4>Leave a Reply</h4>
+                <div id="sendmessage"></div>
+                <div id="errormessage"></div>
+                <form class="form-contact contact_form" action="" method="post" id="contactForm" novalidate="novalidate">
+                    <input type="hidden" id="cBidangUsahaId" name="cBidangUsahaId" value="<?php echo $cData_Id;?>">
+                    <div class="form-group form-inline">
+                      <div class="form-group col-lg-6 col-md-6 name" style="padding-left: 0;">
+                        <input type="text" class="form-control" id="cName" name="cName" placeholder="Masukkan Nama Anda" style="width: 100%;">
                       </div>
-                  </div>
-                  <div class="comment-list left-padding">
-                      <div class="single-comment justify-content-between d-flex">
-                          <div class="user justify-content-between d-flex">
-                              <div class="thumb">
-                                  <img src="<?=base_url()?>template/img/blog/c2.jpg" alt="">
-                              </div>
-                              <div class="desc">
-                                  <h5><a href="#">Elsie Cunningham</a></h5>
-                                  <p class="date">December 4, 2017 at 3:12 pm </p>
-                                  <p class="comment">
-                                      Never say goodbye till the end comes!
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="reply-btn">
-                                  <a href="" class="btn-reply text-uppercase">reply</a>
-                          </div>
+                      <div class="form-group col-lg-6 col-md-6 email">
+                        <input type="email" class="form-control" id="cEmail" name="cEmail" placeholder="Masukkan Alamat Email Anda" style="width: 100%;">
                       </div>
-                  </div>
-                  <div class="comment-list left-padding">
-                      <div class="single-comment justify-content-between d-flex">
-                          <div class="user justify-content-between d-flex">
-                              <div class="thumb">
-                                  <img src="<?=base_url()?>template/img/blog/c3.jpg" alt="">
-                              </div>
-                              <div class="desc">
-                                  <h5><a href="#">Annie Stephens</a></h5>
-                                  <p class="date">December 4, 2017 at 3:12 pm </p>
-                                  <p class="comment">
-                                      Never say goodbye till the end comes!
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="reply-btn">
-                                  <a href="" class="btn-reply text-uppercase">reply</a>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="comment-list">
-                      <div class="single-comment justify-content-between d-flex">
-                          <div class="user justify-content-between d-flex">
-                              <div class="thumb">
-                                  <img src="<?=base_url()?>template/img/blog/c4.jpg" alt="">
-                              </div>
-                              <div class="desc">
-                                  <h5><a href="#">Maria Luna</a></h5>
-                                  <p class="date">December 4, 2017 at 3:12 pm </p>
-                                  <p class="comment">
-                                      Never say goodbye till the end comes!
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="reply-btn">
-                                  <a href="" class="btn-reply text-uppercase">reply</a>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="comment-list">
-                      <div class="single-comment justify-content-between d-flex">
-                          <div class="user justify-content-between d-flex">
-                              <div class="thumb">
-                                  <img src="<?=base_url()?>template/img/blog/c5.jpg" alt="">
-                              </div>
-                              <div class="desc">
-                                  <h5><a href="#">Ina Hayes</a></h5>
-                                  <p class="date">December 4, 2017 at 3:12 pm </p>
-                                  <p class="comment">
-                                      Never say goodbye till the end comes!
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="reply-btn">
-                                  <a href="" class="btn-reply text-uppercase">reply</a>
-                          </div>
-                      </div>
-                  </div>
-              </div> -->
-              <div class="comment-form">
-                  <h4>Leave a Reply</h4>
-                  <form>
-                      <div class="form-group form-inline">
-                        <div class="form-group col-lg-6 col-md-6 name">
-                          <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-                        </div>
-                        <div class="form-group col-lg-6 col-md-6 email">
-                          <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                          <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
-                      </div>
-                      <div class="form-group">
-                          <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                      </div>
-                      <a href="#" class="button submit_btn">Post Comment</a>
-                  </form>
-              </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control mb-10" rows="5" name="cMessage" id="cMessage" placeholder="Masukkan Pesan Anda" required="" style="height: 120px;"></textarea>
+                    </div>
+                    <button type="submit" class="button button--active button-contactForm">Kirim Pesan</button>
+                </form>
+            </div>
+          </div>
       </div>
-
-      <!-- Start Blog Post Siddebar -->
-      <!-- <?php $this->load->view('frontend/home/v_sidebar')?> -->
-      <!-- End Blog Post Siddebar -->
+      
     </div>
+
 </section>
