@@ -98,6 +98,7 @@
   // interval function 
   setInterval(function(){
     getDataInbox();
+    getDataKomentarBlog();
   }, 7000);
 
   //get url
@@ -143,7 +144,18 @@
         url: base_url+"admin/inbox/countUnreadInbox",
         success: function(reply) {
             // console.log(reply);
-            $(".countInbox").text(reply);
+            $(".countinbox").text(reply);
+        }
+    });
+  }
+
+  function getDataKomentarBlog(){
+    $.ajax({
+        type: "GET",
+        url: base_url+"admin/komentar/countUnreadComment",
+        success: function(reply) {
+            // console.log(reply);
+            $(".countblog-komentar").text(reply);
         }
     });
   }

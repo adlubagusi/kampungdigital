@@ -27,12 +27,13 @@
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
+            
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success countInbox"></span>
+              <span class="label label-success countinbox"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">Anda memiliki <span class="countInbox"></span> pesan</li>
+              <li class="header">Anda memiliki <span class="countinbox"></span> pesan</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -62,6 +63,7 @@
               </li>
               <li class="footer"><a href="<?php echo base_url().'admin/inbox'?>">Lihat Semua Pesan</a></li>
             </ul>
+
           </li>
 
           <?php
