@@ -12,7 +12,7 @@ function string2Date($date, $ltime=false){
 
 function date2String($date){
     $retval = substr($date,0,10) ;
-    $va = explode("-",$date) ;
+    $va = explode("-",$retval) ;
     // Jika Array 1 Bukan Tahun maka akan berisi 2 Digit
     if(strlen($va [0]) == 2){
         $retval = $va [2] . "-" . $va [1] . "-" . $va[0] ;
@@ -22,7 +22,8 @@ function date2String($date){
 
 function date_2d($date){
     $retval = substr($date,0,10) ;
-    $va = explode("-",$date) ;
+    
+    $va = explode("-",$retval) ;
     // Jika Array 1 Tahun maka akan berisi 4 Digit
     if(strlen($va [0]) == 4){
         $retval = $va [2] . "-" . $va [1] . "-" . $va[0] ;
@@ -114,4 +115,11 @@ function sql_2str($cChar){
     $cChar = str_replace("\'","'",$cChar) ;
     $cChar = str_replace('\"','"',$cChar) ;
     return $cChar ;
+}
+
+function date_2text($date){
+    $va = explode("-",$date);
+    $va[1] = date_month(intval($va[1])-1);
+    $retval = implode(" ",$va);
+    return $retval;
 }

@@ -21,9 +21,11 @@ class Login extends CI_Controller{
             $cIdAdmin   = $vaAdmin['pengguna_id'];
             $cNamaUser  = $vaAdmin['pengguna_nama'];
             $cUser      = $vaAdmin['pengguna_username'];
+            $cEmail     = $vaAdmin['pengguna_email'];
             $this->session->set_userdata('idadmin',$cIdAdmin);
             $this->session->set_userdata('nama',$cNamaUser);
             $this->session->set_userdata('username',$cUser);
+            $this->session->set_userdata('email',$cEmail);
             if($vaAdmin['pengguna_level']=='1'){
                 $this->dbd->CheckDatabase();
                 $this->session->set_userdata('akses','1');

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="<?= getCfg("msDeskripsiSEO")?>">
   <meta name="keywords" content="<?=getCfg("msKeywordsSEO")?>">
+  <meta name="author" content="<?=$this->config->item("copyright")?>">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?=$this->config->item('nama_aplikasi')?> - <?=$title?></title>
 	<link rel="icon" href="<?=base_url()?>template/img/Fevicon.png" type="image/png">

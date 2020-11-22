@@ -1,32 +1,33 @@
 <?php
-class Contact_model extends CI_Model{
+class Komentar_model extends CI_Model{
 	public function __construct() {
         parent::__construct();
         $this->load->model('FuncDB_model');
         $this->dbd = $this->FuncDB_model;
     }
 
-    public function getDataInbox($nStart,$nLength,$cDraw,$cSearch)
+    public function getDataKomentar($nStart,$nLength,$cDraw,$cSearch,$cType="")
     {
-        /*  Status inbox :
-            0=Belum dilihat, 
-            1=Telah dilihat, 
+        /*  Status komentar :
+            0=Belum dipublish, 
+            1=Telah dipublish, 
             2=Telah dibalas, 
             3=Dihapus
-            4=Pesan balasan oleh admin 
+            4=Pesan balasan admin
         */
+        $cTable = ($cType == "blog") ? "tbl_komentar" : "tbl_bidangusaha_komentar";
         $vaData = [];
         $vaArr  = [];
-        $cField = "*";
+        $cField = "i.*,b.Judul JudulBlog,b.Slug";
         $cWhere = "(i.Nama like '%".$cSearch['value']."%'
                     OR i.Email like '%".$cSearch['value']."%'
-                    OR i.Subject like '%".$cSearch['value']."%')
-                    AND i.Parent=0";
+                    OR b.Judul like '%".$cSearch['value']."%')
+                    AND i.Status <= 2";
         $cOrder = "i.DateTime DESC";
         $nLimit = "$nStart,$nLength";
-
-        $dbDataRow = $this->dbd->select("tbl_inbox i",$cField,$cWhere,"");
-        $dbData    = $this->dbd->select("tbl_inbox i",$cField,$cWhere,"","",$cOrder,$nLimit);
+        $cJoin  = "left join tbl_blog b on b.ID=i.BlogID";
+        $dbDataRow = $this->dbd->select("$cTable i",$cField,$cWhere,$cJoin);
+        $dbData    = $this->dbd->select("$cTable i",$cField,$cWhere,$cJoin,"",$cOrder,$nLimit);
         while($dbRow = $this->dbd->getrow($dbData)){
             $vaArr[] = $dbRow;
         }
@@ -45,7 +46,7 @@ class Contact_model extends CI_Model{
         
         $vaInsert = array("Nama"=>$cNama, "Email"=>$cEmail, 
                           "Subject"=>$cSubject, "Message"=>$cMessage);
-        $this->dbd->insert("tbl_inbox",$vaInsert);
+        $this->dbd->insert("tbl_komentar",$vaInsert);
 
         // Send Email
         if($cHost <> "localhost"){
@@ -69,27 +70,28 @@ class Contact_model extends CI_Model{
             }
         }
     }
-    public function sendReply($cSubjectReply,$cMessageReply,$nIDParent)
+
+    public function sendReply($cMessageReply,$nIDParent,$nIDBlog)
     {
         $cNama    = getSession('nama');
-        $cSubject = $cSubjectReply;
+        $cSubject = "Balasan Dari ".base_url();
         $cMessage = $cMessageReply;
         $cEmailFrom     = getSession('email');
         $cHost    = $_SERVER['HTTP_HOST'];
         
-        //simpan ke tbl_inbox dengan status '4'
-        $vaInsert = array("Nama"=>$cNama, "Email"=>$cEmailFrom, "Status"=>4, 
-                          "Subject"=>$cSubject, "Message"=>$cMessage,"Parent"=>$nIDParent);
-        $this->dbd->insert("tbl_inbox",$vaInsert);
+        //simpan ke tbl_komentar dengan status '4'
+        $vaInsert = array("Nama"=>$cNama, "Email"=>$cEmailFrom, "Status"=>4,
+                         "Message"=>$cMessage,"Parent"=>$nIDParent,"BlogID"=>$nIDBlog);
+        $this->dbd->insert("tbl_komentar",$vaInsert);
 
-        //update status inbox yang dibalas oleh admin menjadi '2'
-        $this->updateStatusInbox($nIDParent,2);
+        //update status komentar yang dibalas oleh admin menjadi '2'
+        $this->updateStatusKomentar($nIDParent,2);
 
         // Kirim email balasan kepada pengirim pesan.
         if($cHost <> "localhost"){
-            $cReceiverEmail = getVal($nIDParent,"Email","tbl_inbox","ID");
+            $cReceiverEmail = getVal($nIDParent,"Email","tbl_komentar","ID");
             
-            $subjectMail    = $cSubject .". Dari: ".$cNama;
+            $subjectMail    = $cSubject .". Oleh: ".$cNama;
             $headers        = "MIME-Version: 1.0" . "\r\n";
             $headers        .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers        .= 'From: <'.$cEmailFrom.'>' . "\r\n";
@@ -105,27 +107,27 @@ class Contact_model extends CI_Model{
             
         }
     }
-    public function countUnreadInbox()
+    public function countUnreadComment()
     {
-        $dbData = $this->dbd->select("tbl_inbox","IFNULL(COUNT(ID),0) as Count","Status=0","","","ID DESC",5);
+        $dbData = $this->dbd->select("tbl_komentar","IFNULL(COUNT(ID),0) as Count","Status=0","","","ID DESC",5);
         $dbRow  = $this->dbd->getrow($dbData);
         return $dbRow['Count'];
     }
 
-    public function getDetailInbox($nID)
+    public function getDetailKomentar($nID)
     {
         $dbRow  = [];
         $cWhere = "ID='$nID'";
-        $dbData = $this->dbd->select("tbl_inbox", "*", $cWhere);
+        $dbData = $this->dbd->select("tbl_komentar", "*", $cWhere);
         $dbRow  = $this->dbd->getrow($dbData);
         return $dbRow;
     }
 
-    public function updateStatusInbox($nID,$nStatus=1)
+    public function updateStatusKomentar($nID,$nStatus=1)
     {
         $vaUpd  = array('Status' => $nStatus);
         $cWhere = "ID='$nID'"; 
-        $this->dbd->update("tbl_inbox",$vaUpd,$cWhere,"ID");
+        $this->dbd->update("tbl_komentar",$vaUpd,$cWhere,"ID");
         return 1;
     }
 
@@ -133,16 +135,16 @@ class Contact_model extends CI_Model{
     {
         $dbRow  = [];
         $cWhere = "Parent='$nID' and Status=4";
-        $dbData = $this->dbd->select("tbl_inbox", "*", $cWhere);
+        $dbData = $this->dbd->select("tbl_komentar", "*", $cWhere);
         $dbRow  = $this->dbd->getrow($dbData);
         return $dbRow;
     }
 
-    public function getStatusInbox($nID)
+    public function getStatusKomentar($nID)
     {
         $dbRow  = [];
         $cWhere = "ID='$nID'";
-        $dbData = $this->dbd->select("tbl_inbox", "Status", $cWhere);
+        $dbData = $this->dbd->select("tbl_komentar", "Status", $cWhere);
         $dbRow  = $this->dbd->getrow($dbData);
         $dbRow['Keterangan'] = $this->getKeteranganStatus($dbRow['Status']);
         return $dbRow;
@@ -150,17 +152,17 @@ class Contact_model extends CI_Model{
 
     public function getKeteranganStatus($nStatus)
     {
-        /*  Status inbox :
-            0=Belum dilihat, 
-            1=Telah dilihat, 
+        /*  Status komentar :
+            0=Belum dipublish, 
+            1=Telah dipublish, 
             2=Telah dibalas, 
             3=Dihapus
-            4=Pesan balasan oleh admin 
+            4=Pesan balasan admin
         */
         if($nStatus == 0){
-            $cKet = "Belum Dilihat";
+            $cKet = "Belum Dipublish";
         }else if($nStatus == 1){
-            $cKet = "Sudah Dilihat";
+            $cKet = "Sudah Dipublish";
         }else if($nStatus == 2){
             $cKet = "Sudah Dibalas";
         }else if($nStatus == 3){
@@ -169,5 +171,10 @@ class Contact_model extends CI_Model{
             $cKet = "Pesan balasan oleh admin";
         }
         return $cKet;
+    }
+
+    public function delete($nID)
+    {
+        $this->updateStatusKomentar($nID,3);
     }
 }

@@ -55,6 +55,7 @@ $route['default_controller'] = 'Home';
 $route['administrator']         = 'admin/Login';
 $route['admin/logout']          = 'admin/login/logout';
 $route['admin/blog-kategori']   = 'admin/kategori';
+$route['admin/blog-komentar']   = 'admin/komentar/blog';
 $route['admin/suratmasuk-list'] = 'admin/suratmasuk';
 $route['admin/suratdigital-list']    = 'admin/download';
 $route['admin/setting-general'] = 'admin/setting';

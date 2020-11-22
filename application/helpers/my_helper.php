@@ -21,9 +21,9 @@ function gen_menu()
         array("icon"=>"", "url"=>"", "text"=>"Home"),
         array("icon"=>"", "url"=>"about", "text"=>"Tentang Kami"),
         array("icon"=>"", "url"=>"blog", "text"=>"Blog"),
-        array("icon"=>"", "url"=>"contact", "text"=>"Kontak"),
 				array("icon"=>"", "url"=>"letter", "text"=>"Surat"),
-				array("icon"=>"", "url"=>"business", "text"=>"Bidang Usaha")
+				array("icon"=>"", "url"=>"business", "text"=>"Bidang Usaha"),
+        array("icon"=>"", "url"=>"contact", "text"=>"Kontak")
       );
 
     if ($menu != null) {
@@ -59,7 +59,8 @@ function gen_menu_admin(){
       ["icon"=>"fa-users", "url"=>"pengguna", "text"=>"Pengguna"],
       ["icon"=>"fa-newspaper-o", "url"=>"blog", "text"=>"Blog", "submenu"=>[      //menu spesial
           ["icon"=>"fa-list", "url"=>"blog", "text"=>"List Postingan"],           //
-          ["icon"=>"fa-wrench", "url"=>"blog-kategori", "text"=>"Kategori"]       //
+          ["icon"=>"fa-wrench", "url"=>"blog-kategori", "text"=>"Kategori"],       //
+          ["icon"=>"fa-comments", "url"=>"blog-komentar", "text"=>"Komentar","count"=>true]       //
       ]],                                                                         //
       ["icon"=>"fa-envelope", "url"=>"suratmasuk", "text"=>"Surat Masuk", "submenu"=>[
         ["icon"=>"fa-envelope-o", "url"=>"suratmasuk-list", "text"=>"List Surat Masuk"]
@@ -70,7 +71,8 @@ function gen_menu_admin(){
       ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha", "text"=>"Bidang Usaha", "submenu"=>[
         ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha-list", "text"=>"List Bidang Usaha"]
       ]],
-       ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[
+      ["icon"=>"fa-envelope", "url"=>"inbox", "text"=>"Inbox","count"=>true],
+      ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[
           ["icon"=>"fa-gears", "url"=>"setting-general", "text"=>"Pengaturan Umum"],
           ["icon"=>"fa-facebook-square", "url"=>"setting-socmed", "text"=>"Pengaturan Sosmed"],
           ["icon"=>"fa-globe", "url"=>"setting-seo", "text"=>"Pengaturan SEO"],
@@ -87,6 +89,7 @@ function gen_menu_admin(){
     $cText = $m['text'];
     $cIconRight = '<small class="label pull-right"></small>';
     if(isset($m['submenu'])) $cIconRight = '<i class="fa fa-angle-left pull-right"></i>';
+    if(isset($m['count'])) $cIconRight   = '<small class="label pull-right bg-green count'.$m['url'].'">0</small>';
     $vaUrl     = explode('-',$url);
     if($url == $m['url'] || $vaUrl[0] == $m['url']) $cActive = "active";
     echo '<li class="'.$cActive.'">
@@ -101,7 +104,8 @@ function gen_menu_admin(){
       $vaSubmenu = $m['submenu'];
       echo '<ul class="treeview-menu">';
       foreach($vaSubmenu as $sm){
-        echo '<li><a href="'.base_url().'admin/'.$sm['url'].'"><i class="fa '.$sm['icon'].'"></i> '.$sm['text'].'</a></li>';
+        if(isset($sm['count'])) $cIconRight   = '<small class="label pull-right bg-green count'.$sm['url'].'">0</small>';
+        echo '<li><a href="'.base_url().'admin/'.$sm['url'].'"><i class="fa '.$sm['icon'].'"></i> '.$sm['text'].$cIconRight.'</a></li>';
       }
       echo '</ul>';
     }

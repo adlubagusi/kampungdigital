@@ -1,7 +1,7 @@
 <!--Counter Inbox-->
 <?php
-    $query=$this->db->query("SELECT * FROM tbl_inbox WHERE Status='1'");
-    $jum_pesan=$query->num_rows();
+    // $query=$this->db->query("SELECT * FROM tbl_inbox WHERE Status='1'");
+    // $jum_pesan=$query->num_rows();
 ?>
 <header class="main-header">
 
@@ -27,17 +27,18 @@
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
+            
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success"><?php echo $jum_pesan;?></span>
+              <span class="label label-success countinbox"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">Anda memiliki <?php echo $jum_pesan;?> pesan</li>
+              <li class="header">Anda memiliki <span class="countinbox"></span> pesan</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                 <?php
-                    $inbox=$this->db->query("SELECT tbl_inbox.*,DATE_FORMAT(DateTime,'%d %M %Y') AS tanggal FROM tbl_inbox WHERE Status='1' ORDER BY ID DESC LIMIT 5");
+                    $inbox=$this->db->query("SELECT tbl_inbox.*,DATE_FORMAT(DateTime,'%d %M %Y') AS tanggal FROM tbl_inbox WHERE Status='0' ORDER BY ID DESC LIMIT 5");
                     foreach ($inbox->result_array() as $in) :
                         $inbox_id=$in['ID'];
                         $inbox_nama=$in['Nama'];
@@ -62,6 +63,7 @@
               </li>
               <li class="footer"><a href="<?php echo base_url().'admin/inbox'?>">Lihat Semua Pesan</a></li>
             </ul>
+
           </li>
 
           <?php
