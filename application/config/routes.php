@@ -69,7 +69,7 @@ $route['admin/bidangusaha-list']    = 'admin/bidangusaha';
 $route['c/(:any)']           = 'blog';
 $route['p/(:any)']           = 'blog/detail';
 
-$route['business/(:any)']           = 'business/det';
+// $route['business/(:any)']           = 'business/det';
 
 $route['404_override']       = '';
 $route['translate_uri_dashes'] = FALSE;

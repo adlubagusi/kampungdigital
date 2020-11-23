@@ -39,11 +39,11 @@ function showAlert(cMessage){
 }
 
 function clearInput(){
-    $("#cNama").val("");
+    $("#cName").val("");
     $("#cEmail").val("");
     $("#cSubject").val("");
     $("#cMessage").val("");
-    $("#cNama").focus();
+    $("#cName").focus();
 
 }
 

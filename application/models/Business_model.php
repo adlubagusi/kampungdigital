@@ -45,7 +45,7 @@ class Business_model extends CI_Model{
 
 		public function sendMail($va)
 		{
-				$cBlogId    = $va['cBidangUsahaId'];
+				$cBidangUsahaId    = $va['cBidangUsahaId'];
 				$cNama    = $va['cName'];
 				$cEmail   = $va['cEmail'];
 				$cMessage = $va['cMessage'];
