@@ -21,7 +21,7 @@
                 <a href="#">
                   <h3><?php echo $cBidangUsaha_Nama?></h3>
                 </a>
-                <a href="<?=base_url()?>business/<?php echo $cBidangUsaha_Kode;?>" class="button" href="#" style="width: 100%;text-align: center;"> Read More <i class="ti-arrow-right"></i></a>
+                <a href="<?=base_url()?>business/det/<?php echo $cBidangUsaha_Kode;?>" class="button" href="#" style="width: 100%;text-align: center;"> Read More <i class="ti-arrow-right"></i></a>
               </div>
             </div>
           </div>

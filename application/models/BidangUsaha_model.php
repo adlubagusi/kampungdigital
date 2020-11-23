@@ -10,7 +10,7 @@ class BidangUsaha_model extends CI_Model{
     {
         $vaData = [];
         $vaArr  = [];
-        $cField = "b.ID, b.Kode, b.NamaOwner, b.NamaUsaha, b.AlamatUsaha, b.HP, b.Deskripsi, b.JenisUsaha, 
+        $cField = "b.ID, b.Kode, b.NamaOwner, b.NamaUsaha, b.AlamatUsaha, b.HP, b.Deskripsi, b.JenisUsaha,
                    b.DateTime, j.Keterangan as KeteranganJenisUsaha, b.Foto, b.Slug";
         $cWhere = "b.NamaOwner like '%".$cSearch['value']."%'
                     OR j.Keterangan like '%".$cSearch['value']."%'";
@@ -66,7 +66,7 @@ class BidangUsaha_model extends CI_Model{
     {
         $cKode          = $va['cKode'] ;
         $cUserName      = getsession('username') ;
-        $vaData = array("Kode"=>$cKode, 
+        $vaData = array("Kode"=>$cKode,
                         "FilePath"=>$va['FilePath'],
                         "UserName"=>$cUserName ,
                         "DateTime"=>Now()
@@ -95,7 +95,7 @@ class BidangUsaha_model extends CI_Model{
         }
         return $cKeterangan;
     }
-    
+
     public function getAllJenisUsaha()
     {
         $vaData = [];
@@ -124,4 +124,6 @@ class BidangUsaha_model extends CI_Model{
         }
         return $vaArr;
     }
+
+		
 }
