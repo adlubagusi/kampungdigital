@@ -4,7 +4,7 @@ class FuncDB_model extends CI_Model{
         parent::__construct();
 		//$this->load->database() ;
 		$this->db = $this->load->database('default', true);
-	
+
 	}
 
 	public function escape($str){
@@ -195,7 +195,7 @@ class FuncDB_model extends CI_Model{
     public function CheckDatabase(){
 		$this->AddField("tbl_pengguna","pengguna_divisi","varchar(50)","","pengguna_level");
 		$this->AddField("tbl_pengguna","pengguna_tampilhome","char(1)","","pengguna_divisi");
-		
+
 		$cSQL = "CREATE TABLE `tbl_inbox` (
 				`ID` int(11) NOT NULL AUTO_INCREMENT,
 				`Nama` varchar(40) DEFAULT NULL,
@@ -222,7 +222,7 @@ class FuncDB_model extends CI_Model{
 			PRIMARY KEY (`ID`)
 		   ) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_surat_masuk',$cSQL);
-		
+
 		$cSQL = "CREATE TABLE `tbl_surat_masuk_file` (
 			`ID` int(9) NOT NULL AUTO_INCREMENT,
 			`Kode` varchar(255) DEFAULT NULL,
@@ -260,7 +260,7 @@ class FuncDB_model extends CI_Model{
 			`Link` varchar(100) NOT NULL,
 			PRIMARY KEY (`ID`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
-		$this->AddTable('tbl_socmed',$cSQL);   
+		$this->AddTable('tbl_socmed',$cSQL);
 
 		$cSQL = "CREATE TABLE `tbl_jenis_usaha` (
 			`ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -312,6 +312,18 @@ class FuncDB_model extends CI_Model{
 		$this->AddField("tbl_bidang_usaha", "Foto", "varchar(255)", "", "Deskripsi");
 		$this->AddField("tbl_bidang_usaha", "Slug", "varchar(255)", "");
 		$this->AddField("tbl_inbox", "Parent", "int(11)", 0);
+
+		$cSQL = "CREATE TABLE `tbl_komentar_bidang_usaha` (
+			 `ID` int(11) NOT NULL AUTO_INCREMENT,
+			 `Nama` varchar(100) CHARACTER SET latin1 NOT NULL,
+			 `Email` varchar(100) CHARACTER SET latin1 NOT NULL,
+			 `Message` text CHARACTER SET latin1 NOT NULL,
+			 `Status` varchar(2) CHARACTER SET latin1 NOT NULL DEFAULT '0',
+			 `BidangUsahaId` int(11) DEFAULT NULL,
+			 `Parent` int(11) DEFAULT NULL,
+			 `DateTime` datetime NOT NULL DEFAULT current_timestamp(),
+			 PRIMARY KEY (`ID`)
+			) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4";
     }
 }
 ?>
