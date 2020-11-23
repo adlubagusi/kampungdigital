@@ -324,6 +324,7 @@ class FuncDB_model extends CI_Model{
 			 `DateTime` datetime NOT NULL DEFAULT current_timestamp(),
 			 PRIMARY KEY (`ID`)
 			) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4";
+		$this->AddTable('tbl_komentar_bidang_usaha',$cSQL);
     }
 }
 ?>
