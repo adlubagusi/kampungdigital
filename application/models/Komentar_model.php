@@ -15,17 +15,22 @@ class Komentar_model extends CI_Model{
             3=Dihapus
             4=Pesan balasan admin
         */
-        $cTable = ($cType == "blog") ? "tbl_komentar" : "tbl_bidangusaha_komentar";
+        $cTable = ($cType == "blog") ? "tbl_komentar" : "tbl_komentar_bidang_usaha";
+        $cTableJoin = ($cType == "blog") ? "tbl_blog" : "tbl_bidang_usaha";
+        $cIDJoin    = ($cType == "blog") ? "i.BlogID" : "i.BidangUsahaID";
+        $cJudul     = ($cType == "blog") ? "b.Judul" : "b.NamaUsaha";
+
         $vaData = [];
         $vaArr  = [];
-        $cField = "i.*,b.Judul JudulBlog,b.Slug";
+        $cField = "i.*,$cJudul as Judul,b.Slug";
+        if($cType == "bidangusaha") $cField .= ",b.Kode";
         $cWhere = "(i.Nama like '%".$cSearch['value']."%'
                     OR i.Email like '%".$cSearch['value']."%'
-                    OR b.Judul like '%".$cSearch['value']."%')
+                    OR $cJudul like '%".$cSearch['value']."%')
                     AND i.Status <= 2";
         $cOrder = "i.DateTime DESC";
         $nLimit = "$nStart,$nLength";
-        $cJoin  = "left join tbl_blog b on b.ID=i.BlogID";
+        $cJoin  = "left join $cTableJoin b on b.ID=$cIDJoin";
         $dbDataRow = $this->dbd->select("$cTable i",$cField,$cWhere,$cJoin);
         $dbData    = $this->dbd->select("$cTable i",$cField,$cWhere,$cJoin,"",$cOrder,$nLimit);
         while($dbRow = $this->dbd->getrow($dbData)){
@@ -71,8 +76,11 @@ class Komentar_model extends CI_Model{
         }
     }
 
-    public function sendReply($cMessageReply,$nIDParent,$nIDBlog)
+    public function sendReply($cMessageReply,$nIDParent,$nID,$cType="")
     {
+        $cTable   = ($cType == "blog") ? "tbl_komentar" : "tbl_komentar_bidang_usaha";
+        $cIDTable = ($cType == "blog") ? "BlogID" : "BidangUsahaID";
+
         $cNama    = getSession('nama');
         $cSubject = "Balasan Dari ".base_url();
         $cMessage = $cMessageReply;
@@ -81,15 +89,15 @@ class Komentar_model extends CI_Model{
         
         //simpan ke tbl_komentar dengan status '4'
         $vaInsert = array("Nama"=>$cNama, "Email"=>$cEmailFrom, "Status"=>4,
-                         "Message"=>$cMessage,"Parent"=>$nIDParent,"BlogID"=>$nIDBlog);
-        $this->dbd->insert("tbl_komentar",$vaInsert);
+                         "Message"=>$cMessage,"Parent"=>$nIDParent,$cIDTable=>$nID);
+        $this->dbd->insert($cTable,$vaInsert);
 
         //update status komentar yang dibalas oleh admin menjadi '2'
         $this->updateStatusKomentar($nIDParent,2);
 
         // Kirim email balasan kepada pengirim pesan.
         if($cHost <> "localhost"){
-            $cReceiverEmail = getVal($nIDParent,"Email","tbl_komentar","ID");
+            $cReceiverEmail = getVal($nIDParent,"Email",$cTable,"ID");
             
             $subjectMail    = $cSubject .". Oleh: ".$cNama;
             $headers        = "MIME-Version: 1.0" . "\r\n";
@@ -107,44 +115,49 @@ class Komentar_model extends CI_Model{
             
         }
     }
-    public function countUnreadComment()
+    public function countUnreadComment($cType)
     {
-        $dbData = $this->dbd->select("tbl_komentar","IFNULL(COUNT(ID),0) as Count","Status=0","","","ID DESC",5);
+        $cTable = ($cType == "blog") ? "tbl_komentar" : "tbl_komentar_bidang_usaha";
+        $dbData = $this->dbd->select($cTable,"IFNULL(COUNT(ID),0) as Count","Status=0","","","ID DESC",5);
         $dbRow  = $this->dbd->getrow($dbData);
         return $dbRow['Count'];
     }
 
-    public function getDetailKomentar($nID)
+    public function getDetailKomentar($nID,$cType="")
     {
+        $cTable = ($cType == "blog") ? "tbl_komentar" : "tbl_komentar_bidang_usaha";
         $dbRow  = [];
         $cWhere = "ID='$nID'";
-        $dbData = $this->dbd->select("tbl_komentar", "*", $cWhere);
+        $dbData = $this->dbd->select($cTable, "*", $cWhere);
         $dbRow  = $this->dbd->getrow($dbData);
         return $dbRow;
     }
 
-    public function updateStatusKomentar($nID,$nStatus=1)
+    public function updateStatusKomentar($nID,$nStatus=1,$cType="")
     {
+        $cTable = ($cType == "blog") ? "tbl_komentar" : "tbl_komentar_bidang_usaha";
         $vaUpd  = array('Status' => $nStatus);
         $cWhere = "ID='$nID'"; 
-        $this->dbd->update("tbl_komentar",$vaUpd,$cWhere,"ID");
+        $this->dbd->update($cTable,$vaUpd,$cWhere,"ID");
         return 1;
     }
 
-    public function getReplyMessage($nID)
+    public function getReplyMessage($nID,$cType="")
     {
+        $cTable = ($cType == "blog") ? "tbl_komentar" : "tbl_komentar_bidang_usaha";
         $dbRow  = [];
         $cWhere = "Parent='$nID' and Status=4";
-        $dbData = $this->dbd->select("tbl_komentar", "*", $cWhere);
+        $dbData = $this->dbd->select($cTable, "*", $cWhere);
         $dbRow  = $this->dbd->getrow($dbData);
         return $dbRow;
     }
 
-    public function getStatusKomentar($nID)
+    public function getStatusKomentar($nID,$cType="")
     {
+        $cTable = ($cType == "blog") ? "tbl_komentar" : "tbl_komentar_bidang_usaha";
         $dbRow  = [];
         $cWhere = "ID='$nID'";
-        $dbData = $this->dbd->select("tbl_komentar", "Status", $cWhere);
+        $dbData = $this->dbd->select($cTable, "Status", $cWhere);
         $dbRow  = $this->dbd->getrow($dbData);
         $dbRow['Keterangan'] = $this->getKeteranganStatus($dbRow['Status']);
         return $dbRow;
@@ -175,6 +188,11 @@ class Komentar_model extends CI_Model{
 
     public function delete($nID)
     {
-        $this->updateStatusKomentar($nID,3);
+        $this->updateStatusKomentar($nID,3,"blog");
+    }
+
+    public function deleteb($nID)
+    {
+        $this->updateStatusKomentar($nID,3,"bidangusaha");
     }
 }

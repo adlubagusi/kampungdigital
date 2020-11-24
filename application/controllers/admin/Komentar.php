@@ -11,8 +11,15 @@ class Komentar extends CI_Controller{
     }
     public function blog()
     {
-        $a['p']          = 'komentar/v_komentar_blog';
-        $a['title']      = "Komentar";
+        $a['p']          = 'komentar/blog/v_komentar_blog';
+        $a['title']      = "Komentar Blog";
+        $this->load->view('admin/index',$a);
+    }
+
+    public function bidangUsaha()
+    {
+        $a['p']          = 'komentar/bidangusaha/v_komentar_bidangusaha';
+        $a['title']      = "Komentar Bidang Usaha";
         $this->load->view('admin/index',$a);
     }
 
@@ -31,13 +38,13 @@ class Komentar extends CI_Controller{
         $data = array();
         $no = ($nStart+1);
         foreach ($vaData['data'] as $d) {
-            $vaStatus = $this->mdl->getStatusKomentar($d['ID']);
+            $vaStatus = $this->mdl->getStatusKomentar($d['ID'], $cType);
             $nStatus  = $vaStatus['Status'];
             $cStatus  = $vaStatus['Keterangan'];
             
             $cColor   = $this->getSpanColor($nStatus);
-            
-            $cTextBlog = '<a href="'.base_url()."p/".$d['Slug'].'" target="_blank">'.$d['JudulBlog'].'</label></a>';
+            $cLink    = ($cType == "blog") ? "p/".$d['Slug'] : "business/det/".$d['Kode'];
+            $cTextJudul = '<a href="'.base_url().$cLink.'" target="_blank">'.$d['Judul'].'</label></a>';
             
             $cBtnGroup = '<div class="btn-group">';
             if($nStatus == 0){
@@ -55,7 +62,7 @@ class Komentar extends CI_Controller{
             $data_ok[] = '<span style="color:'.$cColor.'">' .$no++ .'</span>';
             $data_ok[] = '<span style="color:'.$cColor.'">' .$d['Nama'] .'</span>';;
             $data_ok[] = '<span style="color:'.$cColor.'">' .$d['Email'] .'</span>';;
-            $data_ok[] = '<span style="color:'.$cColor.'">' .$cTextBlog .'</span>';;
+            $data_ok[] = '<span style="color:'.$cColor.'">' .$cTextJudul .'</span>';;
             $data_ok[] = '<span style="color:'.$cColor.'">' .strtolower(date_2text(date_2d($d['DateTime']))) .'</span>';;
             $data_ok[] = '<span style="color:'.$cColor.'">' .$cStatus .'</span>';;
             $data_ok[] = $cBtnGroup;
@@ -78,11 +85,8 @@ class Komentar extends CI_Controller{
         $uri4 = $this->uri->segment(4);
         $id   = $uri4;
         $data = array();
-        $vaData = $this->mdl->getDetailKomentar($id);
+        $vaData = $this->mdl->getDetailKomentar($id,"blog");
         if(count($vaData) > 0){
-            // if($vaData['Status'] == 0){
-            //     $vaData['Status'] = $this->mdl->updateStatusKomentar($id);
-            // } 
             $dDate = date_2d($vaData['DateTime']);
             $nTime = substr($vaData['DateTime'],11,5);
             $vaData['Time'] = $dDate." ".$nTime;
@@ -100,7 +104,7 @@ class Komentar extends CI_Controller{
         $nID           = $va['nID'];
         $cMessageReply = $va['cMessageReply'];
         $nIDBlog       = $va['nIDBlog'];
-        $this->mdl->sendReply($cMessageReply,$nID,$nIDBlog);
+        $this->mdl->sendReply($cMessageReply,$nID,$nIDBlog,"blog");
         echo "ok";
     }
 
@@ -112,13 +116,14 @@ class Komentar extends CI_Controller{
 
     public function countUnreadComment()
     {
-        $nData = $this->mdl->countUnreadComment();
+        $cType =  $this->uri->segment(4);
+        $nData = $this->mdl->countUnreadComment($cType);
         echo $nData;
     }
 
     public function getReplyMessage($nID)
     {
-        $vaData = $this->mdl->getReplyMessage($nID);
+        $vaData = $this->mdl->getReplyMessage($nID,"blog");
         $dDate = date_2d($vaData['DateTime']);
         $nTime = substr($vaData['DateTime'],11,5);
         $vaData['Time'] = $dDate." ".$nTime;
@@ -138,11 +143,72 @@ class Komentar extends CI_Controller{
         }
         return $cColor;
     }
+    
     public function publish()
     {
         $va = $this->input->post();
         $nID = $va['nIDPublish'];
-        $vaData = $this->mdl->getDetailKomentar($nID);
-        if(count($vaData) > 0) $this->mdl->updateStatusKomentar($nID);
+        $vaData = $this->mdl->getDetailKomentar($nID,"blog");
+        if(count($vaData) > 0) $this->mdl->updateStatusKomentar($nID,1,"blog");
     }
+
+
+    /********************* Bidang Usaha **********************/
+    
+    public function detailb()
+    {
+        //var def uri segment
+		$uri2 = $this->uri->segment(2);
+		$uri3 = $this->uri->segment(3);
+        $uri4 = $this->uri->segment(4);
+        $id   = $uri4;
+        $data = array();
+        $vaData = $this->mdl->getDetailKomentar($id,"bidangusaha");
+        if(count($vaData) > 0){
+            $dDate = date_2d($vaData['DateTime']);
+            $nTime = substr($vaData['DateTime'],11,5);
+            $vaData['Time'] = $dDate." ".$nTime;
+
+            //ambil data pesan balasan
+            if($vaData['Status'] >=2) $vaData['ReplyMsg'] = $this->getReplyMessageb($id);
+            $data=$vaData;
+        }
+        j($data);
+    }
+
+    public function publishb()
+    {
+        $va = $this->input->post();
+        $nID = $va['nIDPublish'];
+        $vaData = $this->mdl->getDetailKomentar($nID,"bidangusaha");
+        if(count($vaData) > 0) $this->mdl->updateStatusKomentar($nID,1,"bidangusaha");
+    }
+    
+    
+    public function sendReplyb()
+    {
+        $va             = $this->input->post();
+        $nID            = $va['nID'];
+        $cMessageReply  = $va['cMessageReply'];
+        $nIDBidangUsaha = $va['nIDBidangUsaha'];
+        $this->mdl->sendReply($cMessageReply,$nID,$nIDBidangUsaha,"bidangusaha");
+        echo "ok";
+    }
+
+    public function getReplyMessageb($nID)
+    {
+        $vaData = $this->mdl->getReplyMessage($nID,"bidangusaha");
+        $dDate = date_2d($vaData['DateTime']);
+        $nTime = substr($vaData['DateTime'],11,5);
+        $vaData['Time'] = $dDate." ".$nTime;
+        unset($vaData['DateTime']);
+        return $vaData;
+    }
+
+    public function deleteb()
+    {
+        $nID    = $this->input->post('nIDHapus');
+        $this->mdl->deleteb($nID);
+    }
+
 }

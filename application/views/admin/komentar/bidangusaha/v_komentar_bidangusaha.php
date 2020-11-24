@@ -1,12 +1,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
       <h1>
-         Komentar Blog
+         Komentar Bidang Usaha
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="">Blog</li>
+        <li class="">Bidang Usaha</li>
         <li class="active">Komentar</li>
       </ol>
     </section>
@@ -65,7 +65,7 @@
                 <form class="form-horizontal" method="post" id="f_komentar">
                 <div class="modal-body">
                     <input type="hidden" id="nID" name="nID" value="0">
-                    <input type="hidden" id="nIDBlog" name="nIDBlog" value="0">
+                    <input type="hidden" id="nIDBidangUsaha" name="nIDBidangUsaha" value="0">
                     <div class="form-group" style="border-bottom:1px solid #f4f4f4;">
                         <div class="mailbox-read-message" id="messageText" style="padding: 5px 10px 30px 10px;">
                         </div>
@@ -100,7 +100,7 @@
                         Nama : <span id="komentarNamaReplyTextShow"></span> 
                     </h5>
                 </div>
-                <form class="form-horizontal" method="post" id="f_komentar">
+                <form class="form-horizontal" method="post" id="f_komentar_show">
                 <div class="modal-body">
                     <input type="hidden" id="nIDShow" name="nIDShow" value="0">
                     <div class="form-group" style="border-bottom:1px solid #f4f4f4;">

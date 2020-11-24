@@ -69,7 +69,8 @@ function gen_menu_admin(){
         ["icon"=>"fa-file-text-o", "url"=>"suratdigital-list", "text"=>"List Surat Digital"]
       ]],
       ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha", "text"=>"Bidang Usaha", "submenu"=>[
-        ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha-list", "text"=>"List Bidang Usaha"]
+        ["icon"=>"fa-shopping-bag", "url"=>"bidangusaha-list", "text"=>"List Bidang Usaha"],
+        ["icon"=>"fa-comments", "url"=>"bidangusaha-komentar", "text"=>"Komentar","count"=>true]       //
       ]],
       ["icon"=>"fa-envelope", "url"=>"inbox", "text"=>"Inbox","count"=>true],
       ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[
@@ -103,6 +104,7 @@ function gen_menu_admin(){
     if(isset($m['submenu'])){
       $vaSubmenu = $m['submenu'];
       echo '<ul class="treeview-menu">';
+      $cIconRight = "";
       foreach($vaSubmenu as $sm){
         if(isset($sm['count'])) $cIconRight   = '<small class="label pull-right bg-green count'.$sm['url'].'">0</small>';
         echo '<li><a href="'.base_url().'admin/'.$sm['url'].'"><i class="fa '.$sm['icon'].'"></i> '.$sm['text'].$cIconRight.'</a></li>';
