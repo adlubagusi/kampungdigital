@@ -64,6 +64,7 @@ $route['admin/setting-socmed']  = 'admin/setting/socmed';
 $route['admin/about-text']      = 'admin/about';
 $route['admin/about-struktur']  = 'admin/about/struktur';
 $route['admin/bidangusaha-list']    = 'admin/bidangusaha';
+$route['admin/bidangusaha-komentar']    = 'admin/komentar/bidangusaha';
 
 //front end
 $route['c/(:any)']           = 'blog';
