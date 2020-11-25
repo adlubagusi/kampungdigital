@@ -58,18 +58,18 @@
             <h6>Follow Us</h6>
             <p>Let us be social</p>
             <div class="footer-social d-flex align-items-center">
-              <a href="#">
-                <i class="fab fa-facebook-f"></i>
+              <?php
+                foreach ($vaDataSocmed as $key => $i) {
+                  $cSocmed_keterangan = $i["Keterangan"];
+                  $cSocmed_icon = $i["Icon"];
+                  $cSocmed_link = $i["Link"];
+              ?>
+              <a href="<?php echo $cSocmed_link;?>" target="_blank">
+                <i class="fab <?php echo $cSocmed_icon?>"></i>
               </a>
-              <a href="#">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-dribbble"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-behance"></i>
-              </a>
+              <?php
+                }
+              ?>
             </div>
           </div>
         </div>

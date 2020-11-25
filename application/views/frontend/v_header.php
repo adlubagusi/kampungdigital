@@ -13,12 +13,19 @@
         <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
           <?= gen_menu();?>
           <ul class="nav navbar-nav navbar-right navbar-social">
-            <li><a href="#"><i class="ti-facebook"></i></a></li>
-            <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
-            <li><a href="#"><i class="ti-instagram"></i></a></li>
-            <li><a href="#"><i class="ti-skype"></i></a></li>
+            <?php
+              foreach ($vaDataSocmed as $key => $i) {
+                $cSocmed_keterangan = $i["Keterangan"];
+                $cSocmed_icon = $i["Icon"];
+                $cSocmed_link = $i["Link"];
+            ?>
+            <li><a href="<?php echo $cSocmed_link;?>"><i class="fab <?php echo $cSocmed_icon?>"></i></a></li>
+            <?php
+              }
+            ?>
+
           </ul>
-        </div> 
+        </div>
       </div>
     </nav>
   </div>

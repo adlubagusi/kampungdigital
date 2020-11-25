@@ -9,6 +9,7 @@ class Home extends CI_Controller{
     public function index()
     {
         $a['vaData'] = $this->Home_model->getDataBlog();
+        $a['vaDataSocmed'] = $this->Home_model->getDataSocmed();
         $a['vaKategori'] = $this->Kategori_model->countAllKategori();
         $a['title']  = "Home";
         $a['p']      = 'frontend/home/v_home';
@@ -147,4 +148,5 @@ class Home extends CI_Controller{
       $a['p']  = "frontend/blog/v_blog_details";
       $this->load->view('frontend/v_index', $a);
     }
+
 }

@@ -66,5 +66,15 @@ class Home_model extends CI_Model{
 	    return $cKeterangan;
 		}
 
+		function getDataSocmed(){
+  		$vaArray = [];
+  		$cField = "tbl_socmed.*";
+  		$dbData = $this->dbd->select("tbl_socmed",$cField);
+  		while($dbRow = $this->dbd->getrow($dbData)){
+  			$vaArray[] = $dbRow;
+  		}
+  		return $vaArray;
+  	}
+
 }
 ?>
