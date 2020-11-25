@@ -6,11 +6,13 @@ class Blog extends CI_Controller{
 		$this->Pengunjung_model->count_visitor();
 		$this->load->model('Blog_model');
 		$this->load->model('Kategori_model');
+    $this->load->model('Socmed_model');
 	}
 	function index(){
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
 		$a['cAbout_Deskripsi'] = getCfg("msAboutUs_Deskripsi");
     $a['vaKategori']       = $this->Kategori_model->countAllKategori();
+    $a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
     $a['title']                 = "Blog";
     $a['p']				         = 'frontend/blog/v_blog';
 		$this->load->view('frontend/v_index', $a);
@@ -150,6 +152,7 @@ class Blog extends CI_Controller{
     $a['cData_Author'] = $data_detail_blog['Author'];
     $a['cData_kategori'] = $data_detail_blog['KeteranganKategori'];
     $a['cData_kategori_link'] = strtolower($a['cData_kategori']);
+    $a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
     $a['p']  = "frontend/blog/v_blog_details";
     $this->load->view('frontend/v_index', $a);
   }

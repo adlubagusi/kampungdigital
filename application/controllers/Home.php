@@ -4,12 +4,13 @@ class Home extends CI_Controller{
       parent::__construct();
       $this->load->model('Home_model');
       $this->load->model('Kategori_model');
+      $this->load->model('Socmed_model');
     }
 
     public function index()
     {
         $a['vaData'] = $this->Home_model->getDataBlog();
-        $a['vaDataSocmed'] = $this->Home_model->getDataSocmed();
+        $a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
         $a['vaKategori'] = $this->Kategori_model->countAllKategori();
         $a['title']  = "Home";
         $a['p']      = 'frontend/home/v_home';
