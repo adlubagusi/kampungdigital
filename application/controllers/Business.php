@@ -5,11 +5,13 @@ class Business extends CI_Controller{
 		$this->load->model('Pengunjung_model');
 		$this->Pengunjung_model->count_visitor();
 		$this->load->model('Business_model');
+		$this->load->model('Socmed_model');
 	}
 	function index(){
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
 		$a['cAbout_Deskripsi'] = getCfg("msAboutUs_Deskripsi");
 		$a['vaData'] 					= $this->Business_model->getDataBidangUsaha();
+		$a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
 		$a['title']			   = "Bidang Usaha";
 		$a['p']				   = 'frontend/business/v_business';
 		$this->load->view('frontend/v_index', $a);
@@ -32,6 +34,7 @@ class Business extends CI_Controller{
 		$a['cData_Hp'] = $data_detail_business['HP'];
 		$a['cData_Alamat'] = $data_detail_business['AlamatUsaha'];
 		$a['cData_Jenis'] = $data_jenis_business[0]['Keterangan'];
+		$a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
     $a['p']  = "frontend/business/v_business_detail";
     $this->load->view('frontend/v_index', $a);
   }

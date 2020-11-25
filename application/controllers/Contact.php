@@ -5,6 +5,7 @@ class Contact extends CI_Controller{
 		$this->load->model('Pengunjung_model');
 		$this->Pengunjung_model->count_visitor();
 		$this->load->model('Contact_model');
+    $this->load->model('Socmed_model');
 		$this->mdl = $this->Contact_model;
 	}
 	function index(){
@@ -12,6 +13,7 @@ class Contact extends CI_Controller{
 		$a['cNoTelp'] 	  = getCfg("msNoTelp1");
 		$a['cEmail'] 	  = getCfg("msEmail");
 		$a['title']		  = "Kontak";
+    $a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
 		$a['p']				   = 'frontend/contact/v_contact';
 		$this->load->view('frontend/v_index', $a);
 	}
