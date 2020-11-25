@@ -99,6 +99,7 @@
   setInterval(function(){
     getDataInbox();
     getDataKomentarBlog();
+    getDataKomentarBidangUsaha();
   }, 7000);
 
   //get url
@@ -156,6 +157,16 @@
         success: function(reply) {
             // console.log(reply);
             $(".countblog-komentar").text(reply);
+        }
+    });
+  }
+  function getDataKomentarBidangUsaha(){
+    $.ajax({
+        type: "GET",
+        url: base_url+"admin/komentar/countUnreadComment/bidangusaha",
+        success: function(reply) {
+            // console.log(reply);
+            $(".countbidangusaha-komentar").text(reply);
         }
     });
   }
