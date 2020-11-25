@@ -100,7 +100,7 @@ class Setting extends CI_Controller{
         j($data);
     }
 
-    public function savesocmed()
+    public function saveSocmed()
     {
         $va          = $this->input->post();
         $nID         = $va['nID'];
@@ -109,5 +109,11 @@ class Setting extends CI_Controller{
         $cIcon       = $va['cIcon'];
         $cLink       = $va['cLink'];
         $this->Socmed_model->save($cKode,$cKeterangan,$cIcon,$cLink,$nID);
+    }
+
+    public function deleteSocmed()
+    {
+        $nID    = $this->input->post('nIDHapus');
+        $this->Socmed_model->delete($nID);
     }
 }

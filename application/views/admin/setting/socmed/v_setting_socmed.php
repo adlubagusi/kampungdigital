@@ -96,7 +96,7 @@
     </div>
     
 
-    <!--Modal Hapus Pengguna-->
+    <!--Modal Hapus Socmed-->
     <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="modalHapusLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
