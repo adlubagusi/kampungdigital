@@ -325,6 +325,14 @@ class FuncDB_model extends CI_Model{
 			 PRIMARY KEY (`ID`)
 			) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4";
 		$this->AddTable("tbl_komentar_bidang_usaha",$cSQL);		
+
+		$cSQL = "CREATE TABLE `tbl_newsletter` (
+			`ID` int(11) NOT NULL AUTO_INCREMENT,
+			`Email` varchar(255) NOT NULL,
+			`DateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY (`ID`)
+		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+		$this->AddTable("tbl_newsletter",$cSQL);
     }
 }
 ?>
