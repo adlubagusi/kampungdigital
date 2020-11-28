@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="<?=base_url()?>template/vendors/owl-carousel/owl.theme.default.min.css">
   <link rel="stylesheet" href="<?=base_url()?>template/vendors/owl-carousel/owl.carousel.min.css">
 
+  <script src="<?php echo base_url().'assets/plugins/sweetalert2/dist/sweetalert2.min.js'?>"></script>
+  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/sweetalert2/dist/sweetalert2.min.css'?>">
+
   <link rel="stylesheet" href="<?=base_url()?>template/css/style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -42,6 +45,34 @@
   <script src="<?=base_url()?>template/js/main.js"></script>
   <script>
     var base_url = '<?=base_url()?>';
+    $('#f_newsletter').submit(function(e){
+        e.preventDefault();
+        
+        var fd = new FormData(this);
+        $.ajax({
+            url:'<?php echo base_url();?>/send-newsletter',
+            type:"post",
+            data:fd,
+            processData:false,
+            contentType:false,
+            cache:false,
+            async:false,
+            success: function(reply){
+              if(reply == "ok"){
+                  Swal.fire({
+                      icon: "success",
+                      title: "Terima kasih sudah berlangganan! Nantikan update dari kami",
+                  });  
+                  window.location.reload();
+              }else{
+                  Swal.fire({
+                      icon: "error",
+                      title: "Terjadi kesalahan. Coba lagi nanti",
+                  });  
+              }
+        }
+        });
+    });
   </script>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="

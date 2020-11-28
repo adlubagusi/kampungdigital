@@ -333,6 +333,10 @@ class FuncDB_model extends CI_Model{
 			PRIMARY KEY (`ID`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		$this->AddTable("tbl_newsletter",$cSQL);
+
+		$this->AddField("tbl_newsletter", "Status", "varchar(2)", "0");
+		$this->AddField("tbl_blog", "SendNotif", "varchar(2)", "0");
+
     }
 }
 ?>

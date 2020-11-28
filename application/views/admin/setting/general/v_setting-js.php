@@ -41,6 +41,12 @@ function save_email(){
     saveCfg(cKey,cVal);
 }
 
+function save_email_sendnotif(){
+    var cKey = "msEmailSendNotif";
+    var cVal = $("#cEmailSendNotif").val();
+    saveCfg(cKey,cVal);
+}
+
 function save_deskripsi_singkat(){
     var cKey = "msDeskripsiSingkat";
     var cVal = $("#cDeskripsiSingkat").val();

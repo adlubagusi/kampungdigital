@@ -65,11 +65,12 @@ $route['admin/about-text']      = 'admin/about';
 $route['admin/about-struktur']  = 'admin/about/struktur';
 $route['admin/bidangusaha-list']    = 'admin/bidangusaha';
 $route['admin/bidangusaha-komentar']    = 'admin/komentar/bidangusaha';
+$route['admin/subscriber']    = 'admin/newsletter';
 
 //front end
 $route['c/(:any)']           = 'blog';
 $route['p/(:any)']           = 'blog/detail';
-
+$route['send-newsletter']    = 'admin/newsletter/save';
 // $route['business/(:any)']           = 'business/det';
 
 $route['404_override']       = '';
