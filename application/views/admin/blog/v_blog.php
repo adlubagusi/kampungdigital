@@ -155,7 +155,7 @@
         </div>
     </div>
 
-    <!--Modal Hapus Pengguna-->
+    <!--Modal Hapus Blog-->
     <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="modalHapusLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -172,6 +172,38 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary btn-flat" id="hapus">Hapus</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!--Modal Send Notif Blog-->
+    <div class="modal fade" id="modalSendNotif" tabindex="-1" role="dialog" aria-labelledby="modalSendNotifLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+                    <h4 class="modal-title" id="modalSendNotifLabel">Hapus Pengguna</h4>
+                </div>
+                <form class="form-horizontal" method="post" id="f_submit_sendnotif">
+                <div class="modal-body">
+                    <div id="divConfirm" class="form-group">   
+                        <div class="col-sm-12">
+                            <input type="hidden" id="nIDSendNotif" name="nIDSendNotif" value="0"/>
+                            <p>Anda akan mengirimkan notifikasi untuk postingan: <b><span id="cJudulSendNotif"></span></b> ?</p>
+                        </div>
+                    </div>
+                    <div id="divLoading" class="form-group" style="display:none;">
+                        <div class="col-sm-12" style="text-align:center;">
+                            <i class="fa fa-spinner fa-6 fa-spin" style="font-size:70px"></i>                    
+                            <p>Harap tunggu! Sedang mengirimkan notifikasi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-flat" id="sendnotif">Kirim</button>
                 </div>
                 </form>
             </div>

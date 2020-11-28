@@ -162,4 +162,34 @@
         </div>
         <!-- /.row -->
     </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Email Notifikasi</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input type="text" name="cEmailSendNotif" class="form-control" id="cEmailSendNotif" value="<?=$cEmailSendNotif?>" placeholder="Email" required/>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button type="submit" onclick="return save_email_sendnotif();" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Update</button>
+                            <!-- /.form-group -->
+                            </div>
+                        <!-- /.col -->
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                <!-- /.box -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
 </section>

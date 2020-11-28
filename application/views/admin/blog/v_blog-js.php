@@ -59,6 +59,39 @@
         }
         });
     }); 
+    
+    $('#f_submit_sendnotif').submit(function(e){
+        var table = $('#datatabel').DataTable();
+        e.preventDefault(); 
+        $("#divConfirm").css("display","none");
+        $("#divLoading").css("display","block");
+        $("#sendnotif").html('<i class="fa fa-spinner fa-spin"></i> Loading');
+        $("#sendnotif").prop('disabled', true);
+        $.ajax({
+            url:'<?php echo base_url();?>/admin/blog/sendnotif',
+            type:"post",
+            data:new FormData(this),
+            processData:false,
+            contentType:false,
+            cache:false,
+            async:false,
+            success: function(reply){
+                if(reply == "ok"){
+                    Swal.fire({
+                        icon: "success",
+                        title: "Notifikasi berhasil dikirim!",
+                    });  
+                    $("#modalSendNotif").modal('hide');
+                    table.ajax.reload();
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: reply,
+                    });  
+                }
+        }
+        });
+    }); 
 
     function blog_edit(id) {
         $("#nID").val("");
@@ -91,6 +124,19 @@
             }
         });
     }
+
+    function blog_sendnotif(id){
+        $("#modalSendNotif").modal('show');
+        $.ajax({
+            type: "GET",
+            url: base_url+"admin/blog/detail/"+id,
+            success: function(data) {
+                $("#nIDSendNotif").val(data.ID);
+                $("#cJudulSendNotif").html(data.Judul);
+            }
+        });
+    }
+
     function blog_show(id){
         $("#modalBlogShow").modal('show');
         $.ajax({
