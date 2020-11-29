@@ -7,6 +7,8 @@ class Blog extends CI_Controller{
 		$this->load->model('Blog_model');
 		$this->load->model('Kategori_model');
     $this->load->model('Socmed_model');
+    $this->load->model('Komentar_model');
+    $this->mdl = $this->Komentar_model;
 	}
 	function index(){
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
@@ -153,6 +155,9 @@ class Blog extends CI_Controller{
     $a['cData_kategori'] = $data_detail_blog['KeteranganKategori'];
     $a['cData_kategori_link'] = strtolower($a['cData_kategori']);
     $a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
+    $a['vaDataKomentar'] = $this->Blog_model->getDataKomentarBlog();
+    $a['vaDataKomentarReply'] = $this->Blog_model->getDataKomentarBlogReply();
+    $a['vaCountKomentar'] = $this->Blog_model->getCountDataKomentar();
     $a['p']  = "frontend/blog/v_blog_details";
     $this->load->view('frontend/v_index', $a);
   }
@@ -167,4 +172,34 @@ class Blog extends CI_Controller{
 		$this->Blog_model->sendMail($va);
 		echo ("Terima kasih telah menghubungi kami. Kami akan membalas pesan anda secepatnya");
 	}
+
+  public function detailReply()
+  {
+      //var def uri segment
+      $uri2 = $this->uri->segment(2);
+      $uri3 = $this->uri->segment(3);
+      $uri4 = $this->uri->segment(4);
+      $id   = $uri3;
+      $data = array();
+      $vaData = $this->mdl->getDetailKomentar($id,"blog");
+      if(count($vaData) > 0){
+          $dDate = date_2d($vaData['DateTime']);
+          $nTime = substr($vaData['DateTime'],11,5);
+          $vaData['Time'] = $dDate." ".$nTime;
+
+          //ambil data pesan balasan
+          if($vaData['Status'] >=2) $vaData['ReplyMsg'] = $this->getReplyMessage($id);
+          $data=$vaData;
+      }
+      j($data);
+  }
+
+  public function saveReply()
+	{
+
+		$va = $this->input->post();
+		$this->Blog_model->saveReply($va);
+		echo ("Terima kasih telah menghubungi kami. Kami akan membalas pesan anda secepatnya");
+	}
+
 }
