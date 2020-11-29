@@ -164,6 +164,49 @@ class Blog_model extends CI_Model{
 							mail($cReceiverEmail,$subjectMail,$message,$headers);
 					}
 			}
+	}
+
+	public function getDataKomentarBlog(){
+    $vaArray = [];
+    $cField = "tbl_komentar.*";
+		$cWhere = "Status = 1";
+    $dbData = $this->dbd->select("tbl_komentar",$cField,$cWhere);
+    while($dbRow = $this->dbd->getrow($dbData)){
+      $vaArray[] = $dbRow;
+    }
+    return $vaArray;
+  }
+
+	public function getDataKomentarBlogReply(){
+    $vaArray = [];
+    $cField = "tbl_komentar.*";
+		$cWhere = "Status = 2";
+    $dbData = $this->dbd->select("tbl_komentar",$cField,$cWhere);
+    while($dbRow = $this->dbd->getrow($dbData)){
+      $vaArray[] = $dbRow;
+    }
+    return $vaArray;
+  }
+
+	public function saveReply($va)
+	{
+			$cBlogId    = $va['nIDBlog'];
+			$cNama    	= $va['cName'];
+			$cEmail   	= $va['cEmail'];
+			$cMessage 	= $va['cMessageReply'];
+			$cStatus 		= "2";
+			$cParent 		= $va['nID'];
+
+			$vaInsert = array("Nama"=>$cNama, "Email"=>$cEmail, "Parent"=>$cParent, "Status"=>$cStatus, "Message"=>$cMessage, "BlogId"=>$cBlogId);
+			$this->dbd->insert("tbl_komentar",$vaInsert);
+	}
+
+	function getCountDataKomentar(){
+    $cField = "tbl_komentar.*";
+		$dbData = $this->dbd->select("tbl_komentar",$cField);
+		$nCount = $this->dbd->rows($dbData);
+
+		return $nCount;
   }
   
   public function sendMailToSubscriber($nIDBlog)

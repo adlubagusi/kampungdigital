@@ -49,7 +49,7 @@
       <!-- /.row -->
     </section>
 
-    
+
 
     <div class="modal fade" id="modalKomentar" tabindex="-1" role="dialog" aria-labelledby="modalKomentarLabel">
         <div class="modal-dialog" role="document">
@@ -59,7 +59,7 @@
                     <h3 class="modal-title" id="modalKomentarLabel"></h3>
                     <h5 class="modal-title" id="modalKomentarFromLabel">Email &nbsp;: <span id="komentarFromText"></span>  
                         <span class="mailbox-read-time pull-right" id="komentarTimeText"></span><br>
-                        Nama : <span id="komentarNamaReplyText"></span> 
+                        Nama : <span id="komentarNamaReplyText"></span>
                     </h5>
                 </div>
                 <form class="form-horizontal" method="post" id="f_komentar">
@@ -88,16 +88,16 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="modalKomentarShow" tabindex="-1" role="dialog" aria-labelledby="modalKomentarLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header mailbox-read-info">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                     <h3 class="modal-title" id="modalKomentarLabelShow"></h3>
-                    <h5 class="modal-title" id="modalKomentarFromLabelShow">Email &nbsp;: <span id="komentarFromTextShow"></span>  
+                    <h5 class="modal-title" id="modalKomentarFromLabelShow">Email &nbsp;: <span id="komentarFromTextShow"></span>
                         <span class="mailbox-read-time pull-right" id="komentarTimeTextShow"></span><br>
-                        Nama : <span id="komentarNamaReplyTextShow"></span> 
+                        Nama : <span id="komentarNamaReplyTextShow"></span>
                     </h5>
                 </div>
                 <form class="form-horizontal" method="post" id="f_komentar_show">
@@ -115,9 +115,9 @@
                         <div class="col-sm-12">
                             <div class="mailbox-read-info" style="padding: 10px 0;">
                                 <h3 id="cSubjectReplyShow"></h3>
-                                <h5>From: <span id="komentarFromReplyTextShow"></span> 
+                                <h5>From: <span id="komentarFromReplyTextShow"></span>
                                     <span class="mailbox-read-time pull-right" id="komentarTimeReplyTextShow"></span><br>
-                                    To: <span id="komentarToReplyTextShow"></span> 
+                                    To: <span id="komentarToReplyTextShow"></span>
                                 </h5>
                             </div>
                         </div>
@@ -168,9 +168,9 @@
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="reload_tabel()"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
                     <!-- <h3 class="modal-title" id="modalPublishLabel"></h3> -->
-                    <h5 class="modal-title" id="modalPublishFromLabeltPublish">Email &nbsp;: <span id="komentarFromTextPublish"></span>  
+                    <h5 class="modal-title" id="modalPublishFromLabeltPublish">Email &nbsp;: <span id="komentarFromTextPublish"></span>
                         <span class="mailbox-read-time pull-right" id="komentarTimeTextPublish"></span><br>
-                        Nama : <span id="komentarNamaReplyTextPublish"></span> 
+                        Nama : <span id="komentarNamaReplyTextPublish"></span>
                     </h5>
                 </div>
                 <form class="form-horizontal" method="post" id="f_submit_publish">
