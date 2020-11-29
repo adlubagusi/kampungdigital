@@ -16,6 +16,7 @@ class Setting extends CI_Controller{
         $a['title']      = "Pengaturan Umum";
         $a['cAlamat']    = getCfg("msAlamat");
         $a['cEmail']     = getCfg("msEmail");
+        $a['cEmailSendNotif'] = getCfg("msEmailSendNotif");
         $a['cNoTelp1']   = getCfg("msNoTelp1");
         $a['cNoTelp2']   = getCfg("msNoTelp2");
         $a['cDeskripsiSingkat'] = getCfg("msDeskripsiSingkat");

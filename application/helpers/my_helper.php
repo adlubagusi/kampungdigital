@@ -73,6 +73,7 @@ function gen_menu_admin(){
         ["icon"=>"fa-comments", "url"=>"bidangusaha-komentar", "text"=>"Komentar","count"=>true]       //
       ]],
       ["icon"=>"fa-envelope", "url"=>"inbox", "text"=>"Inbox","count"=>true],
+      ["icon"=>"fa-group", "url"=>"subscriber", "text"=>"Subscriber"],
       ["icon"=>"fa-gear", "url"=>"setting", "text"=>"Pengaturan", "submenu"=>[
           ["icon"=>"fa-gears", "url"=>"setting-general", "text"=>"Pengaturan Umum"],
           ["icon"=>"fa-facebook-square", "url"=>"setting-socmed", "text"=>"Pengaturan Sosmed"],
