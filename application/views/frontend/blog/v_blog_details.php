@@ -91,13 +91,13 @@
                       $cKomentar_id = $i['ID'];
                       $cKomentar_nama = $i['Nama'];
                       $cKomentar_email = $i['Email'];
+                      $cKomentar_parent = $i['Parent'];
                       $cKomentar_message = $i['Message'];
                       $cKomentar_status = $i['Status'];
                       $cKomentar_dateTime = $i["DateTime"];
                       $dDate = date_2d($cKomentar_dateTime);
                       $nTime = substr($cKomentar_dateTime,11,5);
                       $cKomentar_date = $dDate." ".$nTime;
-                      if($cKomentar_status == 1){
                   ?>
                   <div class="comment-list">
                       <div class="single-comment justify-content-between d-flex" style="margin-bottom: 20px;">
@@ -152,7 +152,6 @@
                       }?>
                   </div>
                   <?php
-                    }
                   }
                   ?>
 

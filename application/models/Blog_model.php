@@ -147,10 +147,10 @@ class Blog_model extends CI_Model{
 			if($cHost <> "localhost"){
           //ambil detail blog
           $vaBlog = $this->getDetailBlog($cBlogId);
-          
+
           $cSubject = "Komentar untuk ".$vaBlog['Judul'];
 					$cMail   = getCfg("msEmail","");
-					//$vaMail  = explode(";",$cMail); //hanya dipakai jika email instansi lebih dari 1 
+					//$vaMail  = explode(";",$cMail); //hanya dipakai jika email instansi lebih dari 1
 					//foreach($vaMail as $mail){
 							$cReceiverEmail = $cMail;
 							$subjectMail    = $cSubject ." Dari: ".$cNama;
@@ -173,7 +173,7 @@ class Blog_model extends CI_Model{
 	public function getDataKomentarBlog($nIDBlog){
     $vaArray = [];
     $cField = "tbl_komentar.*";
-		$cWhere = "BlogID = '$nIDBlog'";
+		$cWhere = "BlogID = '$nIDBlog' AND (Status = '1' or Status = '2') AND ISNULL(Parent)";
     $dbData = $this->dbd->select("tbl_komentar",$cField,$cWhere);
     while($dbRow = $this->dbd->getrow($dbData)){
       $vaArray[] = $dbRow;
@@ -184,7 +184,7 @@ class Blog_model extends CI_Model{
 	public function getDataKomentarBlogReply(){
     $vaArray = [];
     $cField = "tbl_komentar.*";
-		$cWhere = "Status = 2";
+		$cWhere = "Status = 1 OR Status = 2 OR Status = 4";
     $dbData = $this->dbd->select("tbl_komentar",$cField,$cWhere);
     while($dbRow = $this->dbd->getrow($dbData)){
       $vaArray[] = $dbRow;
@@ -198,7 +198,7 @@ class Blog_model extends CI_Model{
 			$cNama    	= $va['cName'];
 			$cEmail   	= $va['cEmail'];
 			$cMessage 	= $va['cMessageReply'];
-			$cStatus 		= "2";
+			$cStatus 		= "1";
 			$cParent 		= $va['nID'];
 
 			$vaInsert = array("Nama"=>$cNama, "Email"=>$cEmail, "Parent"=>$cParent, "Status"=>$cStatus, "Message"=>$cMessage, "BlogId"=>$cBlogId);

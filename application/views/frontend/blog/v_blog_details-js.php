@@ -44,6 +44,7 @@ $('#replyKomentar').submit(function(e){
         async:false,
         success: function(data){
             $("#modalKomentar").modal('hide');
+            location.reload();
     }
     });
 });
