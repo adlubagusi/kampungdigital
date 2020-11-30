@@ -89,11 +89,13 @@
                 $("#komentarNamaReplyTextShow").text(data.Nama);
 
                 //reply message
-                $("#cSubjectReplyShow").text(data.ReplyMsg.Subject);
-                $("#komentarFromReplyTextShow").text(data.ReplyMsg.Email);
-                $("#komentarToReplyTextShow").text(data.Email);
-                $("#komentarTimeReplyTextShow").text(data.ReplyMsg.Time);
-                $("#cMessageReplyShow").html(data.ReplyMsg.Message);
+                if(data.ReplyMsg.length>0){
+                    $("#cSubjectReplyShow").text(data.ReplyMsg.Subject);
+                    $("#komentarFromReplyTextShow").text(data.ReplyMsg.Email);
+                    $("#komentarToReplyTextShow").text(data.Email);
+                    $("#komentarTimeReplyTextShow").text(data.ReplyMsg.Time);
+                    $("#cMessageReplyShow").html(data.ReplyMsg.Message);
+                }
             }
             $("#nID").val(data.ID);
             $("#nIDBlog").val(data.BlogID);
