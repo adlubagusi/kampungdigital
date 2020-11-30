@@ -158,6 +158,7 @@ class Blog extends CI_Controller{
     $a['vaDataKomentar'] = $this->Blog_model->getDataKomentarBlog();
     $a['vaDataKomentarReply'] = $this->Blog_model->getDataKomentarBlogReply();
     $a['vaCountKomentar'] = $this->Blog_model->getCountDataKomentar();
+    $a['title'] = $data_detail_blog['Judul'];
     $a['p']  = "frontend/blog/v_blog_details";
     $this->load->view('frontend/v_index', $a);
   }
