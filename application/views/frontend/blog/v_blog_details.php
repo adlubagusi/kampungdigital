@@ -24,7 +24,7 @@
       <div class="col-lg-8">
           <div class="main_blog_details">
               <img class="img-fluid" src="<?=base_url()?>assets/images/blog/<?php echo $cData_Foto?>" alt="">
-              <a href="#"><h4><?php echo $cData_Judul?></h4></a>
+              <a href="#"><h4><?php echo $cData_Judul;?></h4></a>
               <div class="user_details">
                 <div class="float-left">
                   <a href="<?=base_url().'c/'.$cData_kategori_link?>"><?=$cData_kategori?></a>
@@ -92,10 +92,12 @@
                       $cKomentar_nama = $i['Nama'];
                       $cKomentar_email = $i['Email'];
                       $cKomentar_message = $i['Message'];
+                      $cKomentar_status = $i['Status'];
                       $cKomentar_dateTime = $i["DateTime"];
                       $dDate = date_2d($cKomentar_dateTime);
                       $nTime = substr($cKomentar_dateTime,11,5);
                       $cKomentar_date = $dDate." ".$nTime;
+                      if($cKomentar_status == 1){
                   ?>
                   <div class="comment-list">
                       <div class="single-comment justify-content-between d-flex" style="margin-bottom: 20px;">
@@ -151,6 +153,7 @@
                   </div>
                   <?php
                     }
+                  }
                   ?>
 
                   <!-- <div class="comment-list left-padding">
