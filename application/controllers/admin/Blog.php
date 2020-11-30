@@ -38,11 +38,16 @@ class Blog extends CI_Controller{
             $data_ok[] = "<img src=".base_url().'assets/images/blog/'.$d['Image']." style='width:100px;height:100px'>";
             $data_ok[] = $d['Judul'];
             $data_ok[] = $d['Kategori'];
-            $data_ok[] = '<div class="btn-group">
+            $data_ok[4] = '<div class="btn-group">
                         <a href="#" onclick="return blog_show('.$d['ID'].');" class="btn btn-success btn-xs"><i class="fa fa-eye" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Show</a>
                         <a href="#" onclick="return blog_edit('.$d['ID'].');" class="btn btn-info btn-xs"><i class="fa fa-pencil" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Edit</a>
                         <a href="#" onclick="return blog_hapus('.$d['ID'].');" class="btn btn-danger btn-xs"><i class="fa fa-times" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Hapus</a>
                      ';
+            if($d['SendNotif'] == 0){
+                $data_ok[4] .= '
+                    <a href="#" onclick="return blog_sendnotif('.$d['ID'].');" class="btn btn-primary btn-xs"><i class="fa fa-share" style="margin-left: 0px; color: #fff"></i> &nbsp;&nbsp;Kirim Notifikasi</a>
+                ';
+            }
      	   $data[] = $data_ok;
         }
         $json_data = array(
@@ -115,5 +120,17 @@ class Blog extends CI_Controller{
         $this->Blog_model->delete($nID);
         echo $this->session->set_flashdata('msg','success-hapus');
         
+    }
+
+    public function sendNotif()
+    {
+        $va   = $this->input->post();
+        $nIDBlog   = $va['nIDSendNotif'];
+        $vaData = $this->Blog_model->getDetailBlog($nIDBlog);
+        if(count($vaData) > 0){
+            $this->Blog_model->sendMailToSubscriber($nIDBlog);
+            $this->Blog_model->updateStatusNotif($nIDBlog);
+            echo "ok";
+        }
     }
 }

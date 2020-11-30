@@ -11,16 +11,14 @@
         </div>
         <div class="col-lg-4  col-md-6 col-sm-6">
           <div class="single-footer-widget">
-            <h6>Newsletter</h6>
-            <p>Stay update with our latest</p>
+            <h6>Buletin</h6>
+            <p>Tetap update dengan postingan terbaru kami</p>
             <div class="" id="mc_embed_signup">
 
-              <form target="_blank" novalidate="true" action=""
-                method="get" class="form-inline">
-
+              <form novalidate="true" id="f_newsletter" method="post" class="form-inline">
                 <div class="d-flex flex-row">
 
-                  <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
+                  <input id="cEmailNewsLetter" class="form-control" name="cEmail" placeholder="Masukkan Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
                     required="" type="email">
 
 

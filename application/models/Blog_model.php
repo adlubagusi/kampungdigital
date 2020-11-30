@@ -3,6 +3,7 @@ class Blog_model extends CI_Model{
 	public function __construct() {
       parent::__construct();
       $this->load->model('FuncDB_model');
+      $this->load->model('Newsletter_model');
       $this->dbd = $this->FuncDB_model;
   }
 
@@ -10,7 +11,7 @@ class Blog_model extends CI_Model{
   {
       $vaData = [];
       $vaArr  = [];
-      $cField = "b.ID, b.Judul, b.Image, b.DateTime, k.Keterangan as Kategori";
+      $cField = "b.ID, b.Judul, b.Image, b.DateTime, b.SendNotif, k.Keterangan as Kategori";
       $cWhere = "b.Judul like '%".$cSearch['value']."%'
                 OR Kategori like '%".$cSearch['value']."%'";
       $cJoin  = "left join tbl_kategori k on k.Kode=b.Kategori";
@@ -206,5 +207,70 @@ class Blog_model extends CI_Model{
 		$nCount = $this->dbd->rows($dbData);
 
 		return $nCount;
-	}
+  }
+  
+  public function sendMailToSubscriber($nIDBlog)
+  {
+    $cHost    = $_SERVER['HTTP_HOST'];
+    $cEmail = getCfg("msEmail");
+    // ambil data detail blog/postingan
+    $vaBlog = $this->getDetailBlog($nIDBlog);
+    // ambil data subscriber yang akan dikirimkan notifikasi postingan baru
+    $vaSubscriber = $this->Newsletter_model->getDataAllNewsletter("1");
+    
+    if($cHost <> "localhost"){
+
+      //perulangan untuk mengirimkan email ke semua subscriber aktif
+      foreach($vaSubscriber as $key=>$value){
+        $cReceiverEmail = $value['Email']; 
+        $subjectMail    = $vaBlog['Judul']." | Postingan terbaru Karang Taruna Sumbersari RW. 03"; 
+        $cLink          = base_url().'p/'.$vaBlog['Slug'];
+        $headers        = "MIME-Version: 1.0" . "\r\n";
+        $headers        .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers        .= 'From: <'.$cEmail.'>' . "\r\n";
+        $message = '
+                    <html>
+                        <body>
+                          <link rel="stylesheet" href="'.base_url().'assets/bootstrap/css/bootstrap.min.css">
+                          <div class="container">
+                            <div class="row">
+                              
+                              <div class="col-md-6 col-md-offset-3">
+                                <img src="'.base_url().'assets/images/blog/'.$vaBlog['Image'].'" style="width:100%;">
+                              </div>
+                              
+                              <div class="col-md-8 col-md-offset-2">
+                                <label style="margin: 0 auto">'.$vaBlog['Judul'].'</label>
+                                <p>'.substr($vaBlog['Deskripsi'],0,50).' ...</p>  
+                              </div>
+                              
+                              <div class="col-md-8 col-md-offset-2">
+                                <a class="btn btn-warning btn-flat" href="'.$cLink.'" target="_blank">
+                                  Baca Selengkapnya
+                                </a>
+                              </div>
+                              
+                              <div class="col-md-8 col-md-offset-2" style="margin-top:50px">
+                                <p>Untuk informasi atau bantuan lebih lanjut, hubungi '.getCfg("msNoTelp1").' atau <a href="'.base_url().'contact" target="_blank">'.$cEmail.'</a></p>
+                                <p>Hormat Kami,</p>
+                                <img src="'.base_url().'assets/images/logo-karang-taruna.png" style="width:75px;">
+                              </div>
+                          
+                            </div>
+                          </div>
+                        </body>
+                    </html>
+                ';
+        mail($cReceiverEmail,$subjectMail,$message,$headers);
+      }
+    }
+  }
+
+  public function updateStatusNotif($nIDBlog,$nStatus="1")
+  {
+      $vaUpd  = array('SendNotif' => $nStatus);
+      $cWhere = "ID='$nIDBlog'"; 
+      $this->dbd->update("tbl_blog",$vaUpd,$cWhere,"ID");
+      return 1;
+  }
 }
