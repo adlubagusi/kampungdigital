@@ -71,7 +71,7 @@ class Komentar_model extends CI_Model{
                     </html>
                 ";
                 
-                mail($cReceiverEmail,$subjectMail,$message,$headers);
+                //mail($cReceiverEmail,$subjectMail,$message,$headers);
             }
         }
     }
@@ -93,7 +93,7 @@ class Komentar_model extends CI_Model{
         $this->dbd->insert($cTable,$vaInsert);
 
         //update status komentar yang dibalas oleh admin menjadi '2'
-        $this->updateStatusKomentar($nIDParent,2);
+        $this->updateStatusKomentar($nIDParent,2,$cType);
 
         // Kirim email balasan kepada pengirim pesan.
         if($cHost <> "localhost"){
@@ -111,7 +111,7 @@ class Komentar_model extends CI_Model{
                 </html>
             ";
             
-            mail($cReceiverEmail,$subjectMail,$message,$headers);
+            //mail($cReceiverEmail,$subjectMail,$message,$headers);
             
         }
     }

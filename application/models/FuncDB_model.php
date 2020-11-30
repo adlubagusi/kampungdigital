@@ -305,7 +305,7 @@ class FuncDB_model extends CI_Model{
 			`Parent` int(11) DEFAULT NULL,
 			`DateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY (`ID`)
-		   ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin";
+		   ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1";
 		$this->AddTable('tbl_komentar',$cSQL);
 
 		$this->AddField("tbl_pengguna","pengguna_tampilhome","char(1)","","pengguna_divisi");

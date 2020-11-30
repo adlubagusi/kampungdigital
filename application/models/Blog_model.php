@@ -134,7 +134,7 @@ class Blog_model extends CI_Model{
 	{
 			$cBlogId    = $va['cBlogId'];
 			$cNama    = $va['cName'];
-			$cEmail   = $va['cEmail'];
+      $cEmail   = $va['cEmail'];
 			$cMessage = $va['cMessage'];
 			$cStatus = "0";
 			$cParent = null;
@@ -145,10 +145,14 @@ class Blog_model extends CI_Model{
 
 			// Send Email
 			if($cHost <> "localhost"){
+          //ambil detail blog
+          $vaBlog = $this->getDetailBlog($cBlogId);
+          
+          $cSubject = "Komentar untuk ".$vaBlog['Judul'];
 					$cMail   = getCfg("msEmail","");
-					$vaMail  = explode(";",$cMail);
-					foreach($vaMail as $mail){
-							$cReceiverEmail = $mail;
+					//$vaMail  = explode(";",$cMail); //hanya dipakai jika email instansi lebih dari 1 
+					//foreach($vaMail as $mail){
+							$cReceiverEmail = $cMail;
 							$subjectMail    = $cSubject ." Dari: ".$cNama;
 							$headers        = "MIME-Version: 1.0" . "\r\n";
 							$headers        .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -161,8 +165,8 @@ class Blog_model extends CI_Model{
 									</html>
 							";
 
-							mail($cReceiverEmail,$subjectMail,$message,$headers);
-					}
+							//mail($cReceiverEmail,$subjectMail,$message,$headers);
+					//}
 			}
 	}
 
@@ -262,7 +266,7 @@ class Blog_model extends CI_Model{
                         </body>
                     </html>
                 ';
-        mail($cReceiverEmail,$subjectMail,$message,$headers);
+        //mail($cReceiverEmail,$subjectMail,$message,$headers);
       }
     }
   }

@@ -94,6 +94,8 @@
 <script>
   var base_url = '<?= base_url()?>';
   getDataInbox();
+  getDataKomentarBlog();
+  getDataKomentarBidangUsaha();
 
   // interval function 
   setInterval(function(){
@@ -153,7 +155,7 @@
   function getDataKomentarBlog(){
     $.ajax({
         type: "GET",
-        url: base_url+"admin/komentar/countUnreadComment",
+        url: base_url+"admin/komentar/countUnreadComment/blog",
         success: function(reply) {
             // console.log(reply);
             $(".countblog-komentar").text(reply);
