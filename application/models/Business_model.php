@@ -74,7 +74,7 @@ class Business_model extends CI_Model{
 										</html>
 								";
 
-								mail($cReceiverEmail,$subjectMail,$message,$headers);
+								//mail($cReceiverEmail,$subjectMail,$message,$headers);
 						}
 				}
 		}
