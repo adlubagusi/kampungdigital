@@ -155,9 +155,10 @@ class Blog extends CI_Controller{
     $a['cData_kategori'] = $data_detail_blog['KeteranganKategori'];
     $a['cData_kategori_link'] = strtolower($a['cData_kategori']);
     $a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
-    $a['vaDataKomentar'] = $this->Blog_model->getDataKomentarBlog();
+    $a['vaDataKomentar'] = $this->Blog_model->getDataKomentarBlog($data_detail_blog['ID']);
     $a['vaDataKomentarReply'] = $this->Blog_model->getDataKomentarBlogReply();
-    $a['vaCountKomentar'] = $this->Blog_model->getCountDataKomentar();
+    $a['vaCountKomentar'] = $this->Blog_model->getCountDataKomentar($data_detail_blog['ID']);
+    $a['title'] = $data_detail_blog['Judul'];
     $a['p']  = "frontend/blog/v_blog_details";
     $this->load->view('frontend/v_index', $a);
   }

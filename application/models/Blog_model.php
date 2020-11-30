@@ -147,10 +147,10 @@ class Blog_model extends CI_Model{
 			if($cHost <> "localhost"){
           //ambil detail blog
           $vaBlog = $this->getDetailBlog($cBlogId);
-          
+
           $cSubject = "Komentar untuk ".$vaBlog['Judul'];
 					$cMail   = getCfg("msEmail","");
-					//$vaMail  = explode(";",$cMail); //hanya dipakai jika email instansi lebih dari 1 
+					//$vaMail  = explode(";",$cMail); //hanya dipakai jika email instansi lebih dari 1
 					//foreach($vaMail as $mail){
 							$cReceiverEmail = $cMail;
 							$subjectMail    = $cSubject ." Dari: ".$cNama;
@@ -170,10 +170,10 @@ class Blog_model extends CI_Model{
 			}
 	}
 
-	public function getDataKomentarBlog(){
+	public function getDataKomentarBlog($nIDBlog){
     $vaArray = [];
     $cField = "tbl_komentar.*";
-		$cWhere = "Status = 1";
+		$cWhere = "BlogID = '$nIDBlog' AND (Status = '1' or Status = '2') AND ISNULL(Parent)";
     $dbData = $this->dbd->select("tbl_komentar",$cField,$cWhere);
     while($dbRow = $this->dbd->getrow($dbData)){
       $vaArray[] = $dbRow;
@@ -184,7 +184,7 @@ class Blog_model extends CI_Model{
 	public function getDataKomentarBlogReply(){
     $vaArray = [];
     $cField = "tbl_komentar.*";
-		$cWhere = "Status = 2";
+		$cWhere = "Status = 1 OR Status = 2 OR Status = 4";
     $dbData = $this->dbd->select("tbl_komentar",$cField,$cWhere);
     while($dbRow = $this->dbd->getrow($dbData)){
       $vaArray[] = $dbRow;
@@ -198,21 +198,22 @@ class Blog_model extends CI_Model{
 			$cNama    	= $va['cName'];
 			$cEmail   	= $va['cEmail'];
 			$cMessage 	= $va['cMessageReply'];
-			$cStatus 		= "2";
+			$cStatus 		= "1";
 			$cParent 		= $va['nID'];
 
 			$vaInsert = array("Nama"=>$cNama, "Email"=>$cEmail, "Parent"=>$cParent, "Status"=>$cStatus, "Message"=>$cMessage, "BlogId"=>$cBlogId);
 			$this->dbd->insert("tbl_komentar",$vaInsert);
 	}
 
-	function getCountDataKomentar(){
+	function getCountDataKomentar($nIDBlog){
     $cField = "tbl_komentar.*";
-		$dbData = $this->dbd->select("tbl_komentar",$cField);
+		$cWhere = "BlogID = '$nIDBlog'";
+		$dbData = $this->dbd->select("tbl_komentar",$cField, $cWhere);
 		$nCount = $this->dbd->rows($dbData);
 
 		return $nCount;
   }
-  
+
   public function sendMailToSubscriber($nIDBlog)
   {
     $cHost    = $_SERVER['HTTP_HOST'];
@@ -221,13 +222,13 @@ class Blog_model extends CI_Model{
     $vaBlog = $this->getDetailBlog($nIDBlog);
     // ambil data subscriber yang akan dikirimkan notifikasi postingan baru
     $vaSubscriber = $this->Newsletter_model->getDataAllNewsletter("1");
-    
+
     if($cHost <> "localhost"){
 
       //perulangan untuk mengirimkan email ke semua subscriber aktif
       foreach($vaSubscriber as $key=>$value){
-        $cReceiverEmail = $value['Email']; 
-        $subjectMail    = $vaBlog['Judul']." | Postingan terbaru Karang Taruna Sumbersari RW. 03"; 
+        $cReceiverEmail = $value['Email'];
+        $subjectMail    = $vaBlog['Judul']." | Postingan terbaru Karang Taruna Sumbersari RW. 03";
         $cLink          = base_url().'p/'.$vaBlog['Slug'];
         $headers        = "MIME-Version: 1.0" . "\r\n";
         $headers        .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -238,28 +239,28 @@ class Blog_model extends CI_Model{
                           <link rel="stylesheet" href="'.base_url().'assets/bootstrap/css/bootstrap.min.css">
                           <div class="container">
                             <div class="row">
-                              
+
                               <div class="col-md-6 col-md-offset-3">
                                 <img src="'.base_url().'assets/images/blog/'.$vaBlog['Image'].'" style="width:100%;">
                               </div>
-                              
+
                               <div class="col-md-8 col-md-offset-2">
                                 <label style="margin: 0 auto">'.$vaBlog['Judul'].'</label>
-                                <p>'.substr($vaBlog['Deskripsi'],0,50).' ...</p>  
+                                <p>'.substr($vaBlog['Deskripsi'],0,50).' ...</p>
                               </div>
-                              
+
                               <div class="col-md-8 col-md-offset-2">
                                 <a class="btn btn-warning btn-flat" href="'.$cLink.'" target="_blank">
                                   Baca Selengkapnya
                                 </a>
                               </div>
-                              
+
                               <div class="col-md-8 col-md-offset-2" style="margin-top:50px">
                                 <p>Untuk informasi atau bantuan lebih lanjut, hubungi '.getCfg("msNoTelp1").' atau <a href="'.base_url().'contact" target="_blank">'.$cEmail.'</a></p>
                                 <p>Hormat Kami,</p>
                                 <img src="'.base_url().'assets/images/logo-karang-taruna.png" style="width:75px;">
                               </div>
-                          
+
                             </div>
                           </div>
                         </body>
@@ -273,7 +274,7 @@ class Blog_model extends CI_Model{
   public function updateStatusNotif($nIDBlog,$nStatus="1")
   {
       $vaUpd  = array('SendNotif' => $nStatus);
-      $cWhere = "ID='$nIDBlog'"; 
+      $cWhere = "ID='$nIDBlog'";
       $this->dbd->update("tbl_blog",$vaUpd,$cWhere,"ID");
       return 1;
   }
