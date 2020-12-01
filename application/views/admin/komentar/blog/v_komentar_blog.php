@@ -65,6 +65,7 @@
                 <form class="form-horizontal" method="post" id="f_komentar">
                 <div class="modal-body">
                     <input type="hidden" id="nID" name="nID" value="0">
+                    <input type="hidden" id="nIDParent" name="nIDParent" value="0">
                     <input type="hidden" id="nIDBlog" name="nIDBlog" value="0">
                     <div class="form-group" style="border-bottom:1px solid #f4f4f4;">
                         <div class="mailbox-read-message" id="messageText" style="padding: 5px 10px 30px 10px;">
