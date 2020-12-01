@@ -44,6 +44,6 @@ class Business extends CI_Controller{
 		$va = $this->input->post();
 		// print_r($va);
 		$this->Business_model->sendMail($va);
-		echo ("Terima kasih telah menghubungi kami. Kami akan membalas pesan anda secepatnya");
+		echo ("Komentar anda akan kami verifikasi terlebih dahulu, terima kasih.");
 	}
 }
