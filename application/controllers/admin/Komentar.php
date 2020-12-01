@@ -41,7 +41,7 @@ class Komentar extends CI_Controller{
             $vaStatus = $this->mdl->getStatusKomentar($d['ID'], $cType);
             $nStatus  = $vaStatus['Status'];
             $cStatus  = $vaStatus['Keterangan'];
-            
+            $cIconStatus = $this->getIconStatus($nStatus) ;           
             $cColor   = $this->getSpanColor($nStatus);
             $cLink    = ($cType == "blog") ? "p/".$d['Slug'] : "business/det/".$d['Kode'];
             $cTextJudul = '<a href="'.base_url().$cLink.'" target="_blank">'.$d['Judul'].'</label></a>';
@@ -60,11 +60,15 @@ class Komentar extends CI_Controller{
 
             $data_ok = array();
             $data_ok[] = '<span style="color:'.$cColor.'">' .$no++ .'</span>';
-            $data_ok[] = '<span style="color:'.$cColor.'">' .$d['Nama'] .'</span>';;
-            $data_ok[] = '<span style="color:'.$cColor.'">' .$d['Email'] .'</span>';;
-            $data_ok[] = '<span style="color:'.$cColor.'">' .$cTextJudul .'</span>';;
-            $data_ok[] = '<span style="color:'.$cColor.'">' .strtolower(date_2text(date_2d($d['DateTime']))) .'</span>';;
-            $data_ok[] = '<span style="color:'.$cColor.'">' .$cStatus .'</span>';;
+            $data_ok[] = '<span style="color:'.$cColor.'">' .$d['Nama'] .'</span>';
+            $data_ok[] = '<span style="color:'.$cColor.'">' .$d['Email'] .'</span>';
+            $data_ok[] = '<span style="color:'.$cColor.'">' .$cTextJudul .'</span>';
+            $data_ok[] = '<span style="color:'.$cColor.'">' .strtolower(date_2text(date_2d($d['DateTime']))) .'</span>';
+            if($cIconStatus == "R"){
+                $data_ok[] = '<button class="btn btn-success btn-icon btn-xs" data-toggle="tooltip" data-original-title="'.$cStatus.'">' .$cIconStatus .'</button>';
+            }else {
+                $data_ok[] = '<button class="btn btn-primary btn-icon btn-xs" data-toggle="tooltip" data-original-title="'.$cStatus.'">' .$cIconStatus .'</button>';
+            }
             $data_ok[] = $cBtnGroup;
             
             $data[] = $data_ok;
@@ -101,10 +105,11 @@ class Komentar extends CI_Controller{
     public function sendReply()
     {
         $va            = $this->input->post();
-        $nID           = $va['nID'];
+        $nIDParent     = $va['nIDParent'];
+        $nIDChild      = $va['nID'];
         $cMessageReply = $va['cMessageReply'];
         $nIDBlog       = $va['nIDBlog'];
-        $this->mdl->sendReply($cMessageReply,$nID,$nIDBlog,"blog");
+        $this->mdl->sendReply($cMessageReply,$nIDParent,$nIDBlog,"blog",$nIDChild);
         echo "ok";
     }
 
@@ -144,6 +149,19 @@ class Komentar extends CI_Controller{
             $cColor = "#dd4b39";
         }
         return $cColor;
+    }
+
+    public function getIconStatus($nStatus = 0)
+    {
+        $cIcon = "N";
+        if($nStatus == 1){
+            $cIcon = "P";
+        }else if($nStatus == 2){
+            $cIcon = "R";
+        }else if($nStatus == 3){
+            $cIcon = "D";
+        }
+        return $cIcon;
     }
     
     public function publish()

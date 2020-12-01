@@ -76,7 +76,7 @@ class Komentar_model extends CI_Model{
         }
     }
 
-    public function sendReply($cMessageReply,$nIDParent,$nID,$cType="")
+    public function sendReply($cMessageReply,$nIDParent,$nIDPost,$cType="",$nIDChild="")
     {
         $cTable   = ($cType == "blog") ? "tbl_komentar" : "tbl_komentar_bidang_usaha";
         $cIDTable = ($cType == "blog") ? "BlogID" : "BidangUsahaID";
@@ -89,11 +89,14 @@ class Komentar_model extends CI_Model{
         
         //simpan ke tbl_komentar dengan status '4'
         $vaInsert = array("Nama"=>$cNama, "Email"=>$cEmailFrom, "Status"=>4,
-                         "Message"=>$cMessage,"Parent"=>$nIDParent,$cIDTable=>$nID);
+                         "Message"=>$cMessage,"Parent"=>$nIDParent,$cIDTable=>$nIDPost);
         $this->dbd->insert($cTable,$vaInsert);
 
         //update status komentar yang dibalas oleh admin menjadi '2'
         $this->updateStatusKomentar($nIDParent,2,$cType);
+        if($nIDChild <> "") {
+            $this->updateStatusKomentar($nIDChild,2,$cType);
+        }
 
         // Kirim email balasan kepada pengirim pesan.
         if($cHost <> "localhost"){
