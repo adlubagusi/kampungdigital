@@ -66,8 +66,10 @@ class Komentar extends CI_Controller{
             $data_ok[] = '<span style="color:'.$cColor.'">' .strtolower(date_2text(date_2d($d['DateTime']))) .'</span>';
             if($cIconStatus == "R"){
                 $data_ok[] = '<button class="btn btn-success btn-icon btn-xs" data-toggle="tooltip" data-original-title="'.$cStatus.'">' .$cIconStatus .'</button>';
-            }else {
+            }else if($cIconStatus == "P"){
                 $data_ok[] = '<button class="btn btn-primary btn-icon btn-xs" data-toggle="tooltip" data-original-title="'.$cStatus.'">' .$cIconStatus .'</button>';
+            }else {
+                $data_ok[] = '<button class="btn btn-info btn-icon btn-xs" data-toggle="tooltip" data-original-title="'.$cStatus.'">' .$cIconStatus .'</button>';
             }
             $data_ok[] = $cBtnGroup;
             
