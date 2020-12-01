@@ -189,7 +189,6 @@ class Blog extends CI_Controller{
           $vaData['Time'] = $dDate." ".$nTime;
 
           //ambil data pesan balasan
-          if($vaData['Status'] >=2) $vaData['ReplyMsg'] = $this->getReplyMessage($id);
           $data=$vaData;
       }
       j($data);
