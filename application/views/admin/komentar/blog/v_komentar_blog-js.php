@@ -89,7 +89,7 @@
                 $("#komentarNamaReplyTextShow").text(data.Nama);
 
                 //reply message
-                if(data.ReplyMsg.length>0){
+                if(data.ReplyMsg){
                     $("#cSubjectReplyShow").text(data.ReplyMsg.Subject);
                     $("#komentarFromReplyTextShow").text(data.ReplyMsg.Email);
                     $("#komentarToReplyTextShow").text(data.Email);
