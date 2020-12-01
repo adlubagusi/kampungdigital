@@ -157,7 +157,10 @@ class Blog extends CI_Controller{
     $a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
     $a['vaDataKomentar'] = $this->Blog_model->getDataKomentarBlog($data_detail_blog['ID']);
     $a['vaDataKomentarReply'] = $this->Blog_model->getDataKomentarBlogReply();
-    $a['vaCountKomentar'] = $this->Blog_model->getCountDataKomentar($data_detail_blog['ID']);
+    $a['nCountKomentar'] = 0;
+    if(!empty($a['vaDataKomentar'])){
+      $a['nCountKomentar'] = $this->Blog_model->getCountDataKomentar($data_detail_blog['ID']);
+    } 
     $a['title'] = $data_detail_blog['Judul'];
     $a['p']  = "frontend/blog/v_blog_details";
     $this->load->view('frontend/v_index', $a);
@@ -199,7 +202,7 @@ class Blog extends CI_Controller{
 
 		$va = $this->input->post();
 		$this->Blog_model->saveReply($va);
-		echo ("Terima kasih telah menghubungi kami. Kami akan membalas pesan anda secepatnya");
+    echo ("Komentar anda akan kami verifikasi terlebih dahulu, terima kasih.");
 	}
 
 }
