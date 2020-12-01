@@ -171,7 +171,7 @@ class Blog extends CI_Controller{
     // $cKategori = getVal($cKategori, "Kode", "tbl_kategori","Keterangan"); //ambil Kode dari tbl_kategori where keterangan=cKategori
     // $cBlogID = getVal($cKategori, "ID", "tbl_blog","Keterangan");
 		$this->Blog_model->sendMail($va);
-		echo ("Terima kasih telah menghubungi kami. Kami akan membalas pesan anda secepatnya");
+		echo ("Komentar anda akan kami verifikasi terlebih dahulu, terima kasih.");
 	}
 
   public function detailReply()

@@ -198,7 +198,7 @@ class Blog_model extends CI_Model{
 			$cNama    	= $va['cName'];
 			$cEmail   	= $va['cEmail'];
 			$cMessage 	= $va['cMessageReply'];
-			$cStatus 		= "1";
+			$cStatus 		= "0";
 			$cParent 		= $va['nID'];
 
 			$vaInsert = array("Nama"=>$cNama, "Email"=>$cEmail, "Parent"=>$cParent, "Status"=>$cStatus, "Message"=>$cMessage, "BlogId"=>$cBlogId);
@@ -207,7 +207,7 @@ class Blog_model extends CI_Model{
 
 	function getCountDataKomentar($nIDBlog){
     $cField = "tbl_komentar.*";
-		$cWhere = "BlogID = '$nIDBlog'";
+		$cWhere = "BlogID = '$nIDBlog' AND Status = 1 OR Status = 2 OR Status = 4";
 		$dbData = $this->dbd->select("tbl_komentar",$cField, $cWhere);
 		$nCount = $this->dbd->rows($dbData);
 
