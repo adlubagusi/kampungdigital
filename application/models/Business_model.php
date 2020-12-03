@@ -78,5 +78,48 @@ class Business_model extends CI_Model{
 						}
 				}
 		}
+		public function getDataKomentarBlog($nIDBlog){
+			$vaArray = [];
+			$cField = "tbl_komentar_bidang_usaha.*";
+			$cWhere = "BidangUsahaId = '$nIDBlog' AND (Status = '1' or Status = '2') AND ISNULL(Parent)";
+			$dbData = $this->dbd->select("tbl_komentar_bidang_usaha",$cField,$cWhere);
+			while($dbRow = $this->dbd->getrow($dbData)){
+				$vaArray[] = $dbRow;
+			}
+			return $vaArray;
+		}
+
+		public function getDataKomentarBlogReply(){
+			$vaArray = [];
+			$cField = "tbl_komentar_bidang_usaha.*";
+			$cWhere = "Status = 1 OR Status = 2 OR Status = 4";
+			$dbData = $this->dbd->select("tbl_komentar_bidang_usaha",$cField,$cWhere);
+			while($dbRow = $this->dbd->getrow($dbData)){
+				$vaArray[] = $dbRow;
+			}
+			return $vaArray;
+		}
+
+		public function saveReply($va)
+		{
+				$cBlogId    = $va['nIDBlog'];
+				$cNama    	= $va['cName'];
+				$cEmail   	= $va['cEmail'];
+				$cMessage 	= $va['cMessageReply'];
+				$cStatus 		= "0";
+				$cParent 		= $va['nID'];
+
+				$vaInsert = array("Nama"=>$cNama, "Email"=>$cEmail, "Parent"=>$cParent, "Status"=>$cStatus, "Message"=>$cMessage, "BidangUsahaId"=>$cBlogId);
+				$this->dbd->insert("tbl_komentar_bidang_usaha",$vaInsert);
+		}
+
+		function getCountDataKomentar($nIDBlog){
+			$cField = "tbl_komentar_bidang_usaha.*";
+			$cWhere = "BidangUsahaId = '$nIDBlog' AND Status = 1 OR Status = 2 OR Status = 4";
+			$dbData = $this->dbd->select("tbl_komentar_bidang_usaha",$cField, $cWhere);
+			$nCount = $this->dbd->rows($dbData);
+
+			return $nCount;
+		}
 }
 ?>

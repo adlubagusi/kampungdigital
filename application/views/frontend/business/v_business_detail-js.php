@@ -59,4 +59,50 @@ function validSaving(){
     if(cMessage  === "") cError += "Pesan Harus Diisi<br>";
     return cError;
 }
+
+$('#replyKomentar').submit(function(e){
+    e.preventDefault();
+
+    var fd = new FormData(this);
+    $.ajax({
+        url:'<?php echo base_url();?>/business/saveReply',
+        type:"post",
+        data:fd,
+        processData:false,
+        contentType:false,
+        cache:false,
+        async:false,
+        success: function(data){
+            $("#modalKomentar").modal('hide');
+            location.reload();
+    }
+    });
+});
+
+function komentar_open(id) {
+    $.ajax({
+    type: "GET",
+    url: base_url+"business/detailReply/"+id,
+    success: function(data) {
+        console.log(data);
+        if(data.Status <= 2){
+            $("#modalKomentar").modal('show');
+            $("#modalKomentarLabel").text(data.Subject);
+            $("#komentarFromText").text(data.Email);
+            $("#messageText").text(data.Message);
+            $("#komentarTimeText").text(data.Time);
+            $("#komentarNamaReplyText").text(data.Nama);
+        }
+        $("#nID").val(data.ID);
+        $("#nIDBlog").val(data.BidangUsahaId);
+
+    }
+    });
+    return false;
+}
+
+function reload_tabel(){
+    var table = $('#datatabel').DataTable();
+    table.ajax.reload();
+}
 </script>
