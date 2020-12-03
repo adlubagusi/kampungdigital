@@ -6,6 +6,8 @@ class Business extends CI_Controller{
 		$this->Pengunjung_model->count_visitor();
 		$this->load->model('Business_model');
 		$this->load->model('Socmed_model');
+		$this->load->model('Komentar_model');
+    $this->mdl = $this->Komentar_model;
 	}
 	function index(){
 		$a['cAbout_Judul']     = getCfg("msAboutUs_Judul");
@@ -35,6 +37,9 @@ class Business extends CI_Controller{
 		$a['cData_Alamat'] = $data_detail_business['AlamatUsaha'];
 		$a['cData_Jenis'] = $data_jenis_business[0]['Keterangan'];
 		$a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
+		$a['vaDataKomentar'] = $this->Business_model->getDataKomentarBlog($data_detail_business['ID']);
+    $a['vaDataKomentarReply'] = $this->Business_model->getDataKomentarBlogReply();
+    $a['vaCountKomentar'] = $this->Business_model->getCountDataKomentar($data_detail_business['ID']);
     $a['p']  = "frontend/business/v_business_detail";
     $this->load->view('frontend/v_index', $a);
   }
@@ -45,5 +50,33 @@ class Business extends CI_Controller{
 		// print_r($va);
 		$this->Business_model->sendMail($va);
 		echo ("Komentar anda akan kami verifikasi terlebih dahulu, terima kasih.");
+	}
+
+	public function detailReply()
+  {
+      //var def uri segment
+      $uri2 = $this->uri->segment(2);
+      $uri3 = $this->uri->segment(3);
+      $uri4 = $this->uri->segment(4);
+      $id   = $uri3;
+      $data = array();
+      $vaData = $this->mdl->getDetailKomentar($id,"bidangUsaha");
+      if(count($vaData) > 0){
+          $dDate = date_2d($vaData['DateTime']);
+          $nTime = substr($vaData['DateTime'],11,5);
+          $vaData['Time'] = $dDate." ".$nTime;
+
+          //ambil data pesan balasan
+          $data=$vaData;
+      }
+      j($data);
+  }
+
+  public function saveReply()
+	{
+
+		$va = $this->input->post();
+		$this->Business_model->saveReply($va);
+		echo ("Terima kasih telah menghubungi kami. Kami akan membalas pesan anda secepatnya");
 	}
 }
