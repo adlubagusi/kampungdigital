@@ -85,7 +85,7 @@
             </div>
 
             <div class="comments-area">
-                  <h4><?php echo $vaCountKomentar;?> Comments</h4>
+                  <h4><?php echo $nCountKomentar;?> Comments</h4>
                   <?php
                   foreach ($vaDataKomentar as $key => $i) {
                       $cKomentar_id = $i['ID'];

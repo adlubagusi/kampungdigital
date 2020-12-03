@@ -95,8 +95,18 @@
                 $("#komentarTimeReplyTextShow").text(data.ReplyMsg.Time);
                 $("#cMessageReplyShow").html(data.ReplyMsg.Message);
             }
+            // jika komentar yang akan dibalas oleh admin adalah child dari suatu komentar,
+            // maka ambil ID Parent (komentar induk).
+            if(data.Parent == null){
+                $("#nIDParent").val(data.ID);
+            }else{
+                $("#nIDParent").val(data.Parent);
+                var cNama = data.Nama + "&nbsp;";
+                CKEDITOR.instances['cMessageReply'].setData(cNama);
+            }
+
             $("#nID").val(data.ID);
-            $("#nIDBidangUsaha").val(data.BidangUsahaID);
+            $("#nIDBidangUsaha").val(data.BidangUsahaId);
             
         }
         });

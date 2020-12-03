@@ -207,8 +207,8 @@ class Blog_model extends CI_Model{
 
 	function getCountDataKomentar($nIDBlog){
     $cField = "tbl_komentar.*";
-		$cWhere = "BlogID = '$nIDBlog' AND Status = 1 OR Status = 2 OR Status = 4";
-		$dbData = $this->dbd->select("tbl_komentar",$cField, $cWhere);
+		$cWhere = "BlogID = '$nIDBlog' AND (Status = 1 OR Status = 2 OR Status = 4)";
+    $dbData = $this->dbd->select("tbl_komentar",$cField, $cWhere);
 		$nCount = $this->dbd->rows($dbData);
 
 		return $nCount;
