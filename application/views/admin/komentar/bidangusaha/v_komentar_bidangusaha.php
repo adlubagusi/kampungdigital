@@ -65,7 +65,8 @@
                 <form class="form-horizontal" method="post" id="f_komentar">
                 <div class="modal-body">
                     <input type="hidden" id="nID" name="nID" value="0">
-                    <input type="hidden" id="nIDBidangUsaha" name="nIDBidangUsaha" value="0">
+                    <input type="text" id="nIDParent" name="nIDParent" value="0">
+                    <input type="text" id="nIDBidangUsaha" name="nIDBidangUsaha" value="0">
                     <div class="form-group" style="border-bottom:1px solid #f4f4f4;">
                         <div class="mailbox-read-message" id="messageText" style="padding: 5px 10px 30px 10px;">
                         </div>
@@ -144,7 +145,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                    <h4 class="modal-title" id="ModalHapusLabel">Hapus Pengguna</h4>
+                    <h4 class="modal-title" id="ModalHapusLabel">Hapus Komentar</h4>
                 </div>
                 <form class="form-horizontal" method="post" id="f_submit_hapus">
                 <div class="modal-body">

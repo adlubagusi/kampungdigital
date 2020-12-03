@@ -209,11 +209,12 @@ class Komentar extends CI_Controller{
     
     public function sendReplyb()
     {
-        $va             = $this->input->post();
-        $nID            = $va['nID'];
-        $cMessageReply  = $va['cMessageReply'];
-        $nIDBidangUsaha = $va['nIDBidangUsaha'];
-        $this->mdl->sendReply($cMessageReply,$nID,$nIDBidangUsaha,"bidangusaha");
+        $va            = $this->input->post();
+        $nIDParent     = $va['nIDParent'];
+        $nIDChild      = $va['nID'];
+        $cMessageReply = $va['cMessageReply'];
+        $nIDBidangUsaha       = $va['nIDBidangUsaha'];
+        $this->mdl->sendReply($cMessageReply,$nIDParent,$nIDBidangUsaha,"bidangusaha",$nIDChild);
         echo "ok";
     }
 

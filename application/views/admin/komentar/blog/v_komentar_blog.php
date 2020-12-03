@@ -145,7 +145,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                    <h4 class="modal-title" id="ModalHapusLabel">Hapus Pengguna</h4>
+                    <h4 class="modal-title" id="ModalHapusLabel">Hapus Komentar</h4>
                 </div>
                 <form class="form-horizontal" method="post" id="f_submit_hapus">
                 <div class="modal-body">

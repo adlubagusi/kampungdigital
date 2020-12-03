@@ -101,7 +101,7 @@
             // jika komentar yang akan dibalas oleh admin adalah child dari suatu komentar,
             // maka ambil ID Parent (komentar induk).
             if(data.Parent == null){
-                $("#nIDParent").val("0");
+                $("#nIDParent").val(data.ID);
             }else{
                 $("#nIDParent").val(data.Parent);
                 var cNama = data.Nama + "&nbsp;";
