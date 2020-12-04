@@ -78,10 +78,10 @@ class Business_model extends CI_Model{
 						}
 				}
 		}
-		public function getDataKomentarBlog($nIDBlog){
+		public function getDataKomentarBidangUsaha($nIDBidangUsaha){
 			$vaArray = [];
 			$cField = "tbl_komentar_bidang_usaha.*";
-			$cWhere = "BidangUsahaId = '$nIDBlog' AND (Status = '1' or Status = '2') AND ISNULL(Parent)";
+			$cWhere = "BidangUsahaId = '$nIDBidangUsaha' AND (Status = '1' or Status = '2') AND ISNULL(Parent)";
 			$dbData = $this->dbd->select("tbl_komentar_bidang_usaha",$cField,$cWhere);
 			while($dbRow = $this->dbd->getrow($dbData)){
 				$vaArray[] = $dbRow;
@@ -89,7 +89,7 @@ class Business_model extends CI_Model{
 			return $vaArray;
 		}
 
-		public function getDataKomentarBlogReply(){
+		public function getDataKomentarBidangUsahaReply(){
 			$vaArray = [];
 			$cField = "tbl_komentar_bidang_usaha.*";
 			$cWhere = "Status = 1 OR Status = 2 OR Status = 4";
@@ -113,9 +113,9 @@ class Business_model extends CI_Model{
 				$this->dbd->insert("tbl_komentar_bidang_usaha",$vaInsert);
 		}
 
-		function getCountDataKomentar($nIDBlog){
+		function getCountDataKomentar($nIDBidangUsaha){
 			$cField = "tbl_komentar_bidang_usaha.*";
-			$cWhere = "BidangUsahaId = '$nIDBlog' AND Status = 1 OR Status = 2 OR Status = 4";
+			$cWhere = "BidangUsahaId = '$nIDBidangUsaha' AND Status = 1 OR Status = 2 OR Status = 4";
 			$dbData = $this->dbd->select("tbl_komentar_bidang_usaha",$cField, $cWhere);
 			$nCount = $this->dbd->rows($dbData);
 

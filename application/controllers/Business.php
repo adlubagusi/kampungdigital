@@ -37,10 +37,11 @@ class Business extends CI_Controller{
 		$a['cData_Alamat'] = $data_detail_business['AlamatUsaha'];
 		$a['cData_Jenis'] = $data_jenis_business[0]['Keterangan'];
 		$a['vaDataSocmed'] = $this->Socmed_model->getDataSocmedAll();
-		$a['vaDataKomentar'] = $this->Business_model->getDataKomentarBlog($data_detail_business['ID']);
-    $a['vaDataKomentarReply'] = $this->Business_model->getDataKomentarBlogReply();
+		$a['vaDataKomentar'] = $this->Business_model->getDataKomentarBidangUsaha($data_detail_business['ID']);
+    $a['vaDataKomentarReply'] = $this->Business_model->getDataKomentarBidangUsahaReply();
     $a['vaCountKomentar'] = $this->Business_model->getCountDataKomentar($data_detail_business['ID']);
     $a['p']  = "frontend/business/v_business_detail";
+		$a['title']			   = "Bidang Usaha";
     $this->load->view('frontend/v_index', $a);
   }
 

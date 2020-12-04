@@ -23,7 +23,7 @@
     <div class="row">
       <div class="col-lg-12">
           <div class="main_blog_details">
-              <img class="img-fluid" src="<?=base_url()?>assets/images/bidangusaha/<?php echo $cData_Foto?>" alt="">
+              <img class="img-fluid" src="<?=base_url()?>assets/images/bidangusaha/<?php echo $cData_Foto?>" alt="" style="display: block;">
               <a href="#"><h4><?php echo $cData_Judul?></h4></a>
               <div class="user_details">
                 <div class="float-left">
