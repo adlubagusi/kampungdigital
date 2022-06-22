@@ -115,7 +115,8 @@ class Business_model extends CI_Model{
 
 		function getCountDataKomentar($nIDBidangUsaha){
 			$cField = "tbl_komentar_bidang_usaha.*";
-			$cWhere = "BidangUsahaId = '$nIDBidangUsaha' AND Status = 1 OR Status = 2 OR Status = 4";
+			$cWhere = "BidangUsahaId = '$nIDBidangUsaha' AND (Status = 1 OR Status = 2 OR Status = 4)";
+
 			$dbData = $this->dbd->select("tbl_komentar_bidang_usaha",$cField, $cWhere);
 			$nCount = $this->dbd->rows($dbData);
 
