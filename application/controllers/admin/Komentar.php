@@ -221,10 +221,12 @@ class Komentar extends CI_Controller{
     public function getReplyMessageb($nID)
     {
         $vaData = $this->mdl->getReplyMessage($nID,"bidangusaha");
-        $dDate = date_2d($vaData['DateTime']);
-        $nTime = substr($vaData['DateTime'],11,5);
-        $vaData['Time'] = $dDate." ".$nTime;
-        unset($vaData['DateTime']);
+        if(!empty($vaData)){
+            $dDate = date_2d($vaData['DateTime']);
+            $nTime = substr($vaData['DateTime'],11,5);
+            $vaData['Time'] = $dDate." ".$nTime;
+            unset($vaData['DateTime']);
+        }
         return $vaData;
     }
 
