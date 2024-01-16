@@ -10,8 +10,6 @@ application/logs/*
 
 composer.lock
 tmp/
-assets/
-template/
 theme/
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
